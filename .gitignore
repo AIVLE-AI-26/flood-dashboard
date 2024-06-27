@@ -1,4 +1,5 @@
 # hidden folder
+.cache/
 .config/
 .local/
 .ssh/
@@ -7,4 +8,5 @@
 .bash_history
 .bash_logout
 .bashrc
+.gitconfig
 .profile
