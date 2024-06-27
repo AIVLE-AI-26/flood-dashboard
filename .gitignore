@@ -1,0 +1,10 @@
+# hidden folder
+.config/
+.local/
+.ssh/
+
+# hidden file
+.bash_history
+.bash_logout
+.bashrc
+.profile
