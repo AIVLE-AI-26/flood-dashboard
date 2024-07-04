@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Safe City{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClithh9PS0DjOql1fbCszrEfPQcYtl0gU&callback=initMap" async defer></script>
+    <script>
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 35.1796, lng: 129.0756},  // 부산광역시의 위도와 경도
+                zoom: 12
+            });
+        }
+
+        function showFloodProneAreas() {
+            alert("침수취약지도를 보여줍니다.");
+        }
+
+        function showTrafficRoutes() {
+            alert("교통경로를 보여줍니다.");
+        }
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">
+            <h1>광주광역시</h1>
+        </div>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">로그아웃</a>
+            {% else %}
+                <a href="{% url 'login' %}">로그인</a>
+                <a href="{% url 'sighup' %}">회원가입</a>  <!-- 변경된 부분 -->
+            {% endif %}
+        </div>
+    </div>
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <input type="text" placeholder="검색...">
+                <h2>부산시 도시침수 통합정보시스템</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
+                    <li><a href="{% url 'about' %}">소개</a></li>
+                    <li><a href="{% url 'services' %}">서비스</a></li>
+                    <li><a href="{% url 'contact' %}">연락처</a></li>
+                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="content-container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Safe City. All rights reserved.</p>
+    </footer>
+</body>
+</html>

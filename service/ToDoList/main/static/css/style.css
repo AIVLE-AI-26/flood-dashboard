@@ -1,0 +1,173 @@
+/* 상단 바 스타일링 */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-bar .logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.top-bar .auth-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.top-bar .auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* 기본 스타일링 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+    margin-top: 60px; /* 상단 바 높이 */
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    height: calc(100vh - 60px); /* 상단 바 높이 제외 */
+    position: fixed;
+    top: 60px; /* 상단 바 높이 */
+    overflow-y: auto; /* 사이드 바 스크롤 */
+}
+
+.sidebar-header {
+    text-align: center;
+}
+
+.sidebar-header input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+    font-size: 16px;
+}
+
+.sidebar-header h2 {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.quick-links {
+    margin-top: 20px;
+}
+
+.quick-links h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links ul li {
+    margin-bottom: 10px;
+}
+
+.quick-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.quick-links ul li a:hover {
+    text-decoration: underline;
+}
+
+.content-container {
+    margin-left: 280px; /* 사이드 바 너비 + 여백 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 280px);
+}
+
+.map-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.map-controls button {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.map-controls button:hover {
+    background-color: #ddd;
+}
+
+.content {
+    flex: 1;
+}
+
+#map {
+    flex: 1;
+    height: calc(100vh - 60px); /* 상단 바 높이 제외 */
+}
+
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}
