@@ -1,0 +1,80 @@
+.sidebar {
+    transform: scale(0);
+}
+
+.content-container {
+    margin-left: 0px; /* 사이드 바 너비  */ /* W황인태 */
+}
+
+.form-container-login{
+    width: 500px;
+    height: 400px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 8px;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 2px solid gray;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+.form-container-login > h2{
+    font-size: 24px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.login-group {
+    width: 100%;
+    padding: 20px 0px;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.input-text {
+    flex-basis: 70%;
+    padding: 0 10px;
+}
+
+.input-text > input{
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+
+.login-btn {
+    flex: auto;
+    margin-bottom: 16px;
+    align-items: right;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+.form-container-signup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-text {
+    padding-right: 20px;
+    flex-basis: 70%;
+    font-size: 16px;
+    text-align: right;
+}
+
+.signup-btn {
+    flex: auto;
+    float: right;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
