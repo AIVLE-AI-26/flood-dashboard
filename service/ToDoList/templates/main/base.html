@@ -26,7 +26,7 @@
                 <a href="{% url 'logout' %}">로그아웃</a>
             {% else %}
                 <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'sighup' %}">회원가입</a>  <!-- 변경된 부분 -->
+                <a href="{% url 'signup' %}">회원가입</a>  <!-- 변경된 부분 -->
             {% endif %}
         </div>
     </div>
@@ -40,11 +40,9 @@
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'about' %}">소개</a></li>
-                    <li><a href="{% url 'services' %}">서비스</a></li>
+                    <li><a href="{% url 'board_list' %}">공지사항</a></li>
                     <li><a href="{% url 'rain' %}">강수량</a></li>
                     <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'contact' %}">연락처</a></li>
                     <li><a href="{% url 'chatbot' %}">챗봇</a></li>
                 </ul>
             </nav>

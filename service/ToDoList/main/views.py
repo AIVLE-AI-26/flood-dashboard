@@ -60,18 +60,18 @@ def get_geojson_data():
                 "geometry": {
                     "type": "Polygon",
                     "coordinates": [[
-                        [lng - 0.004, lat - 0.004],
-                        [lng - 0.004, lat + 0.004],
-                        [lng + 0.004, lat + 0.004],
-                        [lng + 0.004, lat - 0.004],
-                        [lng - 0.004, lat - 0.004]
+                        [lng - 0.001, lat - 0.001],
+                        [lng - 0.001, lat + 0.001],
+                        [lng + 0.001, lat + 0.001],
+                        [lng + 0.001, lat - 0.001],
+                        [lng - 0.001, lat - 0.001]
                     ]]
                 },
                 "properties": {
                     "fillColor": "#0000FF",
-                    "fillOpacity": 0.4,
+                    "fillOpacity": 0.2,
                     "strokeColor": "#0000FF",
-                    "strokeOpacity": 0.8,
+                    "strokeOpacity": 0,
                     "strokeWeight": 2
                 }
             }
