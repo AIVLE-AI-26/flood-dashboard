@@ -27,8 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'chatbot',
-    'sighup',
+    'signup',
     'login',
+    'board'
 ]
 
 MIDDLEWARE = [
@@ -65,7 +66,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main/static'),
     os.path.join(BASE_DIR, 'chatbot/static'),
-    os.path.join(BASE_DIR, 'sighup/static'),
+    os.path.join(BASE_DIR, 'signup/static'),
     os.path.join(BASE_DIR, 'login/static')
 ]
 

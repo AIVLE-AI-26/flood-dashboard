@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .top-bar {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 0;
+        }
+        .top-bar .logo h1 {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .auth-links {
+            padding-right: 20px;
+        }
+        .auth-links a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        .sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid #dee2e6;
+            padding: 15px;
+        }
+        .sidebar-header input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar nav ul li {
+            margin-bottom: 10px;
+        }
+        .sidebar nav ul li a {
+            text-decoration: none;
+            color: #495057;
+        }
+        .sidebar nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .content-container {
+            padding: 20px;
+        }
+        .content h2 {
+            margin-top: 0;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: white;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .btn-primary, .btn-secondary {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row top-bar">
+            <div class="col-md-6">
+                <div class="logo">
+                    <h1 class="h3">광주광역시</h1>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="auth-links">
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Join</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <aside class="col-md-3 sidebar">
+                <div class="sidebar-header">
+                    <input type="text" placeholder="검색...">
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'board_list' %}">공지사항</a></li>
+                        <li><a href="#">하천 수위</a></li>
+                        <li><a href="#">강수량</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="col-md-9 content-container">
+                <h2>공지사항</h2>
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">내용</th>
+                                <th scope="col">첨부 파일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.content }}</td>
+                                <td>
+                                    {% if post.file_name %}
+                                        <a href="{{ post.file_path }}">{{ post.file_name }}</a>
+                                    {% else %}
+                                        없음
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">등록된 게시물이 없습니다.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4">
+                    <a href="{% url 'board_write' %}" class="btn btn-primary">글쓰기</a>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
+                    <button onclick="history.back()" class="btn btn-secondary">뒤로 가기</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Safe City. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
