@@ -10,3 +10,13 @@
 .bashrc
 .gitconfig
 .profile
+
+# cache or package
+service/ToDoList/ToDoList/__pycache__/
+service/ToDoList/main/__pycache__/
+service/ToDoList/login/migrations/__pycache__/
+service/ToDoList/login/__pycache__/
+service/ToDoList/chatbot/__pycache__/
+service/ToDoList/chatbot/migrations/__pycache__/
+service/ToDoList/sighup/__pycache__/
+service/ToDoList/sighup/migrations/__pycache__/

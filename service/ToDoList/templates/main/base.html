@@ -6,17 +6,7 @@
     <title>{% block title %}Safe City{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClithh9PS0DjOql1fbCszrEfPQcYtl0gU&callback=initMap" async defer></script>
     <script>
-        var map;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 35.1796, lng: 129.0756},  // 부산광역시의 위도와 경도
-                zoom: 12
-            });
-        }
-
         function showFloodProneAreas() {
             alert("침수취약지도를 보여줍니다.");
         }
@@ -56,12 +46,32 @@
                 </ul>
             </nav>
         </aside>
+        {% block content %}
         <div class="content-container">
-            {% block content %}{% endblock %}
+            <main class="content">
+                <div class="map-controls">
+                    <button onclick="showFloodProneAreas()" id="bt1">침수취약지도</button>
+                    <button onclick="showTrafficRoutes()" id="bt2">교통경로</button>
+                    <button id="toggleButton">침수지역 확인</button>
+                    <button id="shelterButton">대피소 확인</button>
+                </div>
+                <div id="regionSelection" class="region-selection"> <!-- 구역 선택란 추가 -->
+                    <button class="region-button" id="all">광주전체</button>
+                    <button class="region-button" id="donggu">동구</button>
+                    <button class="region-button" id="seogu">서구</button>
+                    <button class="region-button" id="namgu">남구</button>
+                    <button class="region-button" id="bukgu">북구</button>
+                    <button class="region-button" id="gwangsangu">광산구</button>
+                </div>
+                <div id="map" style="width: 100%; height: calc(100vh - 40px);"></div>
+            </main>
         </div>
+        {% endblock %}
     </div>
     <footer>
         <p>&copy; 2024 Safe City. All rights reserved.</p>
     </footer>
+
+    <script src="{% static 'js/map.js' %}"></script>
 </body>
 </html>
