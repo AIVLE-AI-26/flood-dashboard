@@ -20,7 +20,7 @@
 
 .top-bar .logo h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 23px;
 }
 
 .top-bar .auth-links {
@@ -86,7 +86,7 @@ body {
 }
 
 .sidebar-header h2 {
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 10px;
 }
 
@@ -154,49 +154,56 @@ body {
     width: calc(100% - 20px);
 }
 
-.map-controls {
-    display: flex;
-    justify-content: center;
-}
 .map_m{
     position: absolute;
-    margin-left: 150px;
+    margin-top: 9px;
+    margin-left: 170px;
+    background-color: #ffffff; /* 박스 배경색 */
+    /*border: 3px solid #000000;  박스 테두리 */
+    border: none;
+    border-radius: 10px; /* 테두리 둥글기 설정 */
+    z-index: 900;
+    
 }
+
+
 .map_m2{
     position: absolute;
-    margin-left: 670px;
-    z-index: 1000;
-    margin-top: 25px;
+    margin-left: 760px;
+    z-index: 900;
+    margin-top: 10px;
 }
 
 .map-controls button {
-    /* position: absolute;
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    z-index: 1000; 
-    top : 50px;*/
-    
-    
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
+    background-color: #ffffff;               border: none; /* 테두리 제거 */
+
+    width: 130px; 
+    height: 40px; /* 박스의 높이 설정 */
+
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    z-index: 1000;
+    z-index: 900;
     cursor: pointer;
     margin-left: 10px;
-    margin-top: 11px;
+    margin:5px;
 }
 
 
 .map-controls button:hover {
-    background-color: #ddd;
+    background-color: #aaaeff;
+    color: #ffffff;
+}
+.region-button{
+    background-color: #ffffff;
+    border :#999999;
+    width: 100px; 
+    height: 30px; /* 박스의 높이 설정 */
+    border-radius: 5px;
+}
+.region-button:hover {
+    background-color: #999999;
 }
 
 .content {
@@ -269,7 +276,7 @@ footer {
     color: #666;
 }
 .river-data div:hover {
-    border: 2px solid #FF0000; /* 원하는 테두리 색상으로 변경 */
+    border: 2px solid #000dff; /* 원하는 테두리 색상으로 변경 */
 }
 
 
