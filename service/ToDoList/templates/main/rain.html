@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe City</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">
+            <h1>광주광역시</h1>
+        </div>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">로그아웃</a>
+            {% else %}
+                <a href="{% url 'login' %}">로그인</a>
+                <a href="{% url 'sighup' %}">회원가입</a>  <!-- 변경된 부분 -->
+            {% endif %}
+        </div>
+    </div>
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>광주광역시</h2>
+                <h3>도시침수 통합정보시스템</h3>
+                <input type="text" placeholder="검색...">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
+                    <li><a href="{% url 'about' %}">소개</a></li>
+                    <li><a href="{% url 'services' %}">서비스</a></li>
+                    <li><a href="{% url 'rain' %}">강수량</a></li>
+                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
+                    <li><a href="{% url 'contact' %}">연락처</a></li>
+                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="content-container">
+            <div class="chart-container">
+                <h2 class="chart-title">광산구</h2>
+                <canvas id="rainChart1" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2 class="chart-title">북구</h2>
+                <canvas id="rainChart2" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2 class="chart-title">서구</h2>
+                <canvas id="rainChart3" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2 class="chart-title">동구</h2>
+                <canvas id="rainChart4" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2 class="chart-title">남구</h2>
+                <canvas id="rainChart5" width="800" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Safe City. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Chart Drawing -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 각 차트에 대한 데이터 (임의의 예시 데이터)
+        const chartData1 = [10, 20, 15, 25, 30];
+        const chartData2 = [5, 15, 10, 20, 25];
+        const chartData3 = [8, 18, 12, 22, 27];
+        const chartData4 = [12, 22, 17, 27, 32];
+        const chartData5 = [7, 17, 13, 23, 28];
+
+        // 차트 그리기 함수
+        function drawChart(canvasId, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['월', '화', '수', '목', '금'],
+                    datasets: [{
+                        label: '강수량',
+                        data: data,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // 각 Canvas에 차트 그리기
+        drawChart('rainChart1', chartData1);
+        drawChart('rainChart2', chartData2);
+        drawChart('rainChart3', chartData3);
+        drawChart('rainChart4', chartData4);
+        drawChart('rainChart5', chartData5);
+    </script>
+</body>
+</html>
