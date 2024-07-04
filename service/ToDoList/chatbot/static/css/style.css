@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+.top-bar .logo h1 {
+    margin: 0;
+}
+
+.top-bar .auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.main-container {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    height: calc(100vh - 50px); /* Adjust height according to your needs */
+    box-sizing: border-box;
+    position: fixed; /* Fix sidebar position */
+}
+
+.sidebar-header {
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.content-container {
+    margin-left: 250px; /* Same as sidebar width */
+    padding: 20px;
+    width: calc(100% - 250px); /* Adjust width according to your needs */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center; /* Center align content */
+    align-items: center; /* Vertically center align content */
+    height: calc(100vh - 50px); /* Full height minus top-bar height */
+}
+
+.content {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px; /* Adjust width as needed */
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.map-controls {
+    margin-bottom: 10px;
+}
+
+#map {
+    height: 400px; /* Default height, you can adjust as needed */
+}
+
+.chatbot-container {
+    margin-top: 20px;
+    width: 100%; /* Full width */
+}
+
+#chatbot-form {
+    display: flex;
+    margin-top: 10px;
+}
+
+#chatbot-form input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#chatbot-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chatbot-response {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow-y: auto; /* Add scroll if content overflows */
+    height: 400px; /* Set a height for the chat window */
+}

@@ -1,0 +1,8 @@
+django==5.0.6
+langchain-openai
+langchain-community
+openai
+geopy
+faiss-cpu
+tiktoken
+rank_bm25
