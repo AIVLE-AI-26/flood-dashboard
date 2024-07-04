@@ -17,6 +17,12 @@ def services(request):
 def contact(request):
     return render(request, 'main/contact.html')
 
+def rain(request):
+    return render(request, 'main/rain.html')  
+
+def waterlevel(request):
+    return render(request, 'main/waterlevel.html')  
+
 
 def get_geojson_data():
     # 엑셀 파일 경로

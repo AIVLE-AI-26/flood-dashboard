@@ -1,20 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Safe City{% endblock %}</title>
-    {% load static %}
+    <title>Safe City</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script>
-        function showFloodProneAreas() {
-            alert("침수취약지도를 보여줍니다.");
-        }
 
-        function showTrafficRoutes() {
-            alert("교통경로를 보여줍니다.");
-        }
-    </script>
 </head>
 <body>
     <div class="top-bar">
@@ -49,36 +41,52 @@
                 </ul>
             </nav>
         </aside>
-        {% block content %}
-        <div class="content-container">
-            <main class="content">
-                <div class = 'map_m'>
-                    <div class="map-controls">
-                        <button onclick="showFloodProneAreas()" >침수취약지도</button>
-                        <button onclick="showTrafficRoutes()" >교통경로</button>
-                        <button id="toggleButton">침수지역 확인</button>
-                        <button id="shelterButton">대피소 확인</button>
+        <section class="river-level">
+            <h1>구별 하천 수위</h1>
+            
+            <div class ="horizontal-container">
+                <img src = "{% static "img/img_map.jpg"%}">
+                <div class="river-data">    
+                    <div>
+                        <h3>한강</h3>
+                        <p>현재 수위: 3.2m</p>
                     </div>
-                </div>
-                <div class = 'map_m2'>
-                    <div id="regionSelection" class="region-selection"> <!-- 구역 선택란 추가 -->
-                        <button class="region-button" id="all">광주전체</button>
-                        <button class="region-button" id="donggu">동구</button>
-                        <button class="region-button" id="seogu">서구</button>
-                        <button class="region-button" id="namgu">남구</button>
-                        <button class="region-button" id="bukgu">북구</button>
-                        <button class="region-button" id="gwangsangu">광산구</button>
+                    <div>
+                        <h3>낙동강</h3>
+                        <p>현재 수위: 2.8m</p>
                     </div>
+                    <div>
+                        <h3>금강</h3>
+                        <p>현재 수위: 4.5m</p>
+                    </div>
+                    
+                    <div>
+                        <h3>금강</h3>
+                        <p>현재 수위: 4.5m</p>
+                    </div>
+                    
+                    <div>
+                        <h3>한강</h3>
+                        <p>현재 수위: 3.2m</p>
+                    </div>
+                    <div>
+                        <h3>낙동강</h3>
+                        <p>현재 수위: 2.8m</p>
+                    </div>
+                    <div>
+                        <h3>금강</h3>
+                        <p>현재 수위: 4.5m</p>
+                    </div>
+                    
                 </div>
-                <div id="map" style="width: 100%; height: calc(100vh - 40px);"></div>
-            </main>
-        </div>
-        {% endblock %}
+                
+            </div>
+        </section>
     </div>
+
     <footer>
         <p>&copy; 2024 Safe City. All rights reserved.</p>
     </footer>
-
-    <script src="{% static 'js/map.js' %}"></script>
 </body>
 </html>
+
