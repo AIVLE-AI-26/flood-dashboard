@@ -1,50 +1,41 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인</title>
+    {% extends 'main/navbar.html' %}
+
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="top-bar">
-        <div class="logo">
-            <h1>광주광역시</h1>
-        </div>
-        <div class="auth-links">
-            <a href="{% url 'login' %}">로그인</a>
-            <a href="{% url 'sighup' %}">회원가입</a> <!-- 변경된 부분 -->
-        </div>
-    </div>
+    {% endblock %}
+    
+    {% block content %}
     <div class="form-container-login">
         <h2>로그인</h2>
         <form method="POST" class="needs-validation" novalidate>
             {% csrf_token %}
             <div class="login-group">
-                {{ form.username.label_tag }}
-                {{ form.username }}
-                <div class="invalid-feedback">
-                    아이디를 입력하세요.
+                <div class="input-text">
+                    <div class="login-form-field">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                        <div class="invalid-feedback">
+                            아이디를 입력하세요.
+                        </div>
+                    </div>
+                    <div class="login-form-field">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                        <div class="invalid-feedback">
+                            비밀번호를 입력하세요.
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="login-group">
-                {{ form.password.label_tag }}
-                {{ form.password }}
-                <div class="invalid-feedback">
-                    비밀번호를 입력하세요.
-                </div>
+                <button type="submit" class="login-btn">로그인</button>
             </div>
             <div class="form-container-signup">
-                <button type="submit" class="btn btn-primary login-btn">로그인</button>
+                <span class="signup-text">아이디가 없으신가요?</span>
+                <button class="signup-btn" onclick="location.href=">회원가입</button>
             </div>
         </form>
     </div>
-    <footer>
-        <p>&copy; 2024 Safe City. All rights reserved.</p>
-    </footer>
     <script>
         (function () {
             'use strict'
@@ -61,5 +52,4 @@
                 })
         })()
     </script>
-</body>
-</html>
+    {% endblock %}
