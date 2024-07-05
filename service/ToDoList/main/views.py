@@ -15,10 +15,7 @@ def services(request):
     return render(request, 'main/services.html')
 
 def contact(request):
-    return render(request, 'main/contact.html')
-
-def rain(request):
-    return render(request, 'main/rain.html')  
+    return render(request, 'main/contact.html') 
 
 def waterlevel(request):
     return render(request, 'main/waterlevel.html')  

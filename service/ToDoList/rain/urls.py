@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import rain_view
+from . import views
 
 urlpatterns = [
-    path('', rain_view, name='rain_view'),
+    path('', views.rain_view, name='rain'),
+    path('fetch-rainfall-data/', views.fetch_rainfall_data, name='fetch_rainfall_data'),
 ]

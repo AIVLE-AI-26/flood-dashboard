@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'chatbot',
     'signup',
     'login',
-    'board'
+    'board',
+    "rain",
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main/static'),
     os.path.join(BASE_DIR, 'chatbot/static'),
     os.path.join(BASE_DIR, 'signup/static'),
-    os.path.join(BASE_DIR, 'login/static')
+    os.path.join(BASE_DIR, 'login/static'),
+    os.path.join(BASE_DIR, 'rain/static')
 ]
 
 DATABASES = {
