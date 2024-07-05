@@ -8,4 +8,5 @@ urlpatterns = [
     path('signup/', include('signup.urls')),  # sighup 경로로 수정
     path('login/', include('login.urls')),
     path('board/', include('board.urls')),
+    path('rain/', include('rain.urls')),
 ]
