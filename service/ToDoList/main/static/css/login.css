@@ -1,80 +1,142 @@
+/* Sidebar style */
 .sidebar {
     transform: scale(0);
-}
-
-.content-container {
-    margin-left: 0px; /* 사이드 바 너비  */ /* W황인태 */
-}
-
-.form-container-login{
-    width: 500px;
-    height: 400px;
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 8px;
-    padding: 40px;
+  }
+  
+  /* Content container style */
+  .content-container {
+    margin-left: 0px;
+  }
+  
+  /* Background canvas style */
+  .background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #004d61, #007b83);
+  }
+  
+  /* Login form container style */
+  .form-container-login {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    height: 400px; /* height from the original .form-container-login */
+    margin: 100px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid gray; /* border from the original .form-container-login */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    border: 2px solid gray;
-    border-radius: 6px;
-    background-color: #ffffff;
-}
-
-.form-container-login > h2{
+  }
+  
+  /* Login form header style */
+  .form-container-login > h2 {
     font-size: 24px;
     text-align: center;
     color: #000000;
     margin-bottom: 20px;
-}
-
-.login-group {
+  }
+  
+  /* Login group style */
+  .login-group {
     width: 100%;
     padding: 20px 0px;
     display: flex;
     box-sizing: border-box;
-}
-
-.input-text {
+  }
+  
+  /* Input text style */
+  .input-text {
     flex-basis: 70%;
     padding: 0 10px;
-}
-
-.input-text > input{
+  }
+  
+  .input-text .login-form-field {
+    margin-bottom: 15px;
+  }
+  
+  .input-text .login-form-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .input-text .login-form-field input,
+  .input-text > input {
     width: 100%;
-    height: 48px;
-    font-size: 16px;
+    height: 48px; /* height from the original .input-text > input */
     padding: 0 10px;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    border-radius: 6px;
-    background-color: #F8F8F8;
-}
-
-.login-btn {
-    flex: auto;
-    margin-bottom: 16px;
-    align-items: right;
     font-size: 16px;
-    border-radius: 6px;
-    background-color: #ffffff;
-}
-
-.form-container-signup {
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px; /* border-radius from the original .input-text > input */
+    background-color: #F8F8F8;
+    box-sizing: border-box;
+  }
+  
+  .input-text .login-form-field input:focus {
+    border-color: #007b83;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 131, 0.5);
+  }
+  
+  /* Login button style */
+  .login-btn {
+    flex: auto;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    background: #007b83;
+    color: #fff;
+    border: none;
+    border-radius: 5px; /* border-radius from the original .login-btn */
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .login-btn:hover {
+    background: #005f61;
+  }
+  
+  /* Signup section style */
+  .form-container-signup {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.signup-text {
+    text-align: center; /* text-align from the original .form-container-signup */
+    margin-top: 20px; /* margin-top from the original .form-container-signup */
+  }
+  
+  .signup-text {
     padding-right: 20px;
     flex-basis: 70%;
     font-size: 16px;
     text-align: right;
-}
-
-.signup-btn {
+    margin-right: 10px; /* margin-right from the original .signup-text */
+  }
+  
+  .signup-btn {
     flex: auto;
     float: right;
-    font-size: 16px;
-    border-radius: 6px;
-    background-color: #ffffff;
-}
+    padding: 8px 16px;
+    font-size: 14px;
+    background: #f8f9fa;
+    color: #007b83;
+    border: 1px solid #007b83;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .signup-btn:hover {
+    background: #007b83;
+    color: #fff;
+  }
+  

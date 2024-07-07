@@ -1,18 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글쓰기</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="main-container">
+    <div class="container mt-5">
         <h2>글쓰기</h2>
-        <form action="{% url 'board_write' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'post_new' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <div class="form-group">
+                <label for="author">작성자</label>
+                <input type="text" class="form-control" id="author" name="author" required>
+            </div>
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" class="form-control" id="title" name="title" required>
@@ -25,9 +27,20 @@
                 <label for="file">파일 업로드</label>
                 <input type="file" class="form-control-file" id="file" name="file">
             </div>
+            <div class="form-group">
+                <label for="status">상태</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                    <option value="deleted">Deleted</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">글쓰기</button>
             <button onclick="history.back()" class="btn btn-secondary">뒤로 가기</button>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -166,20 +166,39 @@ body {
     
 }
 
-
-.map_m2{
+/* 드롭다운 CSS */
+#regionSelection {
+    display: none; /* 처음에는 보이지 않도록 설정 */
     position: absolute;
-    margin-left: 760px;
-    z-index: 900;
-    margin-top: 10px;
+    top: 0;
+    left: 300px; /* 대피소 버튼의 오른쪽에 위치시키기 위해 설정 (필요시 조정) */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.region-selection .region-button {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    width: 100px; /* 버튼 너비 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.region-selection .region-button:hover {
+    background-color: #f0f0f0;
+}
+
+.map-controls {
+    position: relative; /* 드롭다운 메뉴의 위치를 조정할 기준을 제공 */
 }
 
 .map-controls button {
-    background-color: #ffffff;               border: none; /* 테두리 제거 */
-
+    background-color: #ffffff;
+    border: none; /* 테두리 제거 */
     width: 130px; 
     height: 40px; /* 박스의 높이 설정 */
-
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -187,21 +206,22 @@ body {
     z-index: 900;
     cursor: pointer;
     margin-left: 10px;
-    margin:5px;
+    margin: 5px;
 }
-
 
 .map-controls button:hover {
     background-color: #aaaeff;
     color: #ffffff;
 }
-.region-button{
+
+.region-button {
     background-color: #ffffff;
-    border :#999999;
+    border: 1px solid #999999;
     width: 100px; 
     height: 30px; /* 박스의 높이 설정 */
     border-radius: 5px;
 }
+
 .region-button:hover {
     background-color: #999999;
 }
@@ -243,6 +263,7 @@ footer {
     font-size: 18px;
     margin-bottom: 10px;
 }
+
 /* 하천 수위 */
 .river-level {
     flex: 1;
@@ -252,33 +273,37 @@ footer {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
 .river-level h1 {
     margin-top: 0;
     font-size: 24px;
 }
+
 .river-data {
     padding: 20px;
-
 }
+
 .river-data div {
     padding: 10px;
     background-color: #f9f9f9;
     margin-bottom: 10px;
     border-radius: 4px;
 }
+
 .river-data h3 {
     margin-top: 0;
     margin-bottom: 5px;
     font-size: 18px;
 }
+
 .river-data p {
     margin: 0;
     color: #666;
 }
+
 .river-data div:hover {
     border: 2px solid #000dff; /* 원하는 테두리 색상으로 변경 */
 }
-
 
 .horizontal-container {
     display: flex;
