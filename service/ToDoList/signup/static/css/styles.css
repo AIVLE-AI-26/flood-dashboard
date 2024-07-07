@@ -1,0 +1,184 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.top-bar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98vw; /* 변경된 부분: 전체 viewport 너비로 설정 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.logo h1 {
+    margin: 0;
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+.form-container-login {
+    max-width: 500px;
+    width: 80%; /* 화면 너비의 80%로 조정 */
+    height: 80%;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    margin: auto; /* 중앙 정렬 */
+    margin-top: 60px; /* 상단 여백 설정 */
+    position: relative; /* 부모 요소로 설정 */
+    bottom: 0; /* 화면 하단으로 고정 */
+}
+.form-container-login form {
+    text-align: left; /* 폼 내부 요소 왼쪽 정렬 */
+}
+
+.login-group {
+    margin-bottom: 20px; /* 입력 그룹 간격을 크게 설정 */
+}
+
+.login-group label {
+    display: block;
+    margin-bottom: 8px; /* 라벨 간격을 줄임 */
+    font-weight: bold;
+}
+
+.login-group .form-control {
+    width: 100%;
+    padding: 12px; /* 패딩을 늘려 더 크게 만듦 */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* 입력 필드 간격을 더 크게 설정 */
+}
+
+.login-group .invalid-feedback {
+    color: #dc3545;
+    margin-top: 10px;
+}
+
+.form-container-signup {
+    text-align: center;
+}
+
+.login-btn {
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    padding: 10px 16px; /* 버튼 크기를 더 작게 설정 */
+    font-size: 16px; /* 폰트 사이즈를 작게 설정 */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto; /* 버튼 너비를 내용에 맞게 자동 조정 */
+}
+
+.login-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.login-group .form-control {
+    width: 100%;
+    padding: 8px; /* Reduced padding for a more compact look */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin: 0 auto; /* Center align the input fields */
+}
+
+.login-group .invalid-feedback {
+    color: #dc3545;
+    margin-top: 5px;
+    display: none; /* 기본적으로 오류 메시지를 숨김 */
+}
+
+.form-control:invalid {
+    border-color: #dc3545; /* 입력 필드가 유효하지 않을 때 빨간 테두리 설정 */
+}
+
+.form-control:invalid + .invalid-feedback {
+    display: block; /* 입력 필드가 유효하지 않을 때 오류 메시지 표시 */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.top-bar {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.auth-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.form-container-login {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-group {
+    margin-bottom: 20px;
+}
+
+.login-group label {
+    font-weight: bold;
+}
+
+.login-group .form-control {
+    width: 100%;
+    padding: 8px; /* Reduced padding for a more compact look */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin: 0 auto; /* Center align the input fields */
+}
+
+.login-group .invalid-feedback {
+    color: #dc3545;
+    margin-top: 5px;
+    display: none; /* 기본적으로 오류 메시지를 숨김 */
+}
+
+.login-btn {
+    width: 100%;
+}

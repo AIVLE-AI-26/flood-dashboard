@@ -6,41 +6,27 @@
     <title>{% block title %}Safe City{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script>
-        function showFloodProneAreas() {
-            alert("침수취약지도를 보여줍니다.");
-        }
-
-        function showTrafficRoutes() {
-            alert("교통경로를 보여줍니다.");
-        }
-    </script>
 </head>
 <body>
     <div class="top-bar">
         <div class="logo">
-            <h1><a href="" class="title-logo-link">광주광역시</a></h1>
+            <h1><a href="" class="title-logo-link">광주광역시 도시침수 통합정보시스템</a></h1>
         </div>
         <div class="auth-links">
             {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}">로그아웃</a>
             {% else %}
                 <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'signup' %}">회원가입</a>  <!-- 변경된 부분 -->
+                <a href="{% url 'signup' %}">회원가입</a>
             {% endif %}
         </div>
     </div>
     <div class="main-container">
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>광주광역시</h2>
-                <h3>도시침수 통합정보시스템</h3>
-                <input type="text" placeholder="검색...">
-            </div>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'board_list' %}">공지사항</a></li>
+                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
                     <li><a href="{% url 'rain' %}">강수량</a></li>
                     <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
                     <li><a href="{% url 'chatbot' %}">챗봇</a></li>
@@ -50,33 +36,27 @@
         {% block content %}
         <div class="content-container">
             <main class="content">
-                <div class = 'map_m'>
+                <div class="map_m">
                     <div class="map-controls">
-                        <button onclick="showFloodProneAreas()" >침수취약지도</button>
-                        <button onclick="showTrafficRoutes()" >교통경로</button>
-                        <button id="toggleButton">침수지역 확인</button>
-                        <button id="shelterButton">대피소 확인</button>
+                        <button id="toggleButton">침수예상 지역</button>
+                        <button id="shelterButton">대피소</button>
+                        <div id="regionSelection" class="region-selection">
+                            <button class="region-button" id="all">광주 전체</button>
+                            <button class="region-button" id="donggu">동구</button>
+                            <button class="region-button" id="seogu">서구</button>
+                            <button class="region-button" id="namgu">남구</button>
+                            <button class="region-button" id="bukgu">북구</button>
+                            <button class="region-button" id="gwangsangu">광산구</button>
+                        </div>
                     </div>
                 </div>
-                <div class = 'map_m2'>
-                    <div id="regionSelection" class="region-selection"> <!-- 구역 선택란 추가 -->
-                        <button class="region-button" id="all">광주전체</button>
-                        <button class="region-button" id="donggu">동구</button>
-                        <button class="region-button" id="seogu">서구</button>
-                        <button class="region-button" id="namgu">남구</button>
-                        <button class="region-button" id="bukgu">북구</button>
-                        <button class="region-button" id="gwangsangu">광산구</button>
-                    </div>
-                </div>
-                <div id="map" style="width: 100%; height: calc(100vh - 40px);"></div>
+                <div id="map" style="width: 100%; height: 100%;"></div>
             </main>
         </div>
         {% endblock %}
     </div>
-    <footer>
-        <p>&copy; 2024 Safe City. All rights reserved.</p>
-    </footer>
 
     <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'js/dropdown.js' %}"></script>
 </body>
 </html>

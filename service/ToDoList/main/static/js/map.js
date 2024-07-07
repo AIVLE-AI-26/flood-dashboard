@@ -12,7 +12,7 @@ let infoWindow;
 let geojsonData;
 let floodFeatures = [];
 let shelterMarkers = {
-    '광주전체': [],
+    '광주 전체': [],
     '동구': [],
     '서구': [],
     '남구': [],
@@ -21,7 +21,7 @@ let shelterMarkers = {
 };
 
 let regionStates = {
-    '광주전체': false,
+    '광주 전체': false,
     '동구': false,
     '서구': false,
     '남구': false,
@@ -65,7 +65,7 @@ function initMap() {
             });
 
             document.getElementById('all').addEventListener('click', () => {
-                toggleRegionMarkers('광주전체');
+                toggleRegionMarkers('광주 전체');
             });
             document.getElementById('donggu').addEventListener('click', () => {
                 toggleRegionMarkers('동구');
@@ -89,7 +89,7 @@ function toggleFloodAreas(geojsonData) {
     if (isFloodVisible) {
         floodFeatures.forEach(feature => map.data.remove(feature));
         floodFeatures = [];
-        document.getElementById('toggleButton').textContent = '침수지역 확인';
+        document.getElementById('toggleButton').textContent = '침수예상 지역';
     } else {
         geojsonData.features.forEach(feature => {
             if (feature.geometry.type === "Polygon") {
@@ -104,7 +104,7 @@ function toggleFloodAreas(geojsonData) {
             strokeOpacity: feature.getProperty('strokeOpacity'),
             strokeWeight: feature.getProperty('strokeWeight')
         }));
-        document.getElementById('toggleButton').textContent = '침수지역 숨기기';
+        document.getElementById('toggleButton').textContent = '침수예상 지역 숨기기';
     }
     isFloodVisible = !isFloodVisible;
 }
@@ -132,7 +132,7 @@ function addShelterMarkers(features) {
                 infoWindow.open(map, marker);
             });
 
-            shelterMarkers['광주전체'].push(marker);
+            shelterMarkers['광주 전체'].push(marker);
             if (feature.properties.region) {
                 shelterMarkers[feature.properties.region].push(marker);
             }

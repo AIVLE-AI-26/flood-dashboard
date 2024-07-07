@@ -11,7 +11,7 @@
 <body>
     <div class="top-bar">
         <div class="logo">
-            <h1>광주광역시</h1>
+            <h1>광주광역시 도시침수 통합정보시스템</h1>
         </div>
         <div class="auth-links">
             {% if user.is_authenticated %}
@@ -24,19 +24,12 @@
     </div>
     <div class="main-container">
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>광주광역시</h2>
-                <h3>도시침수 통합정보시스템</h3>
-                <input type="text" placeholder="검색...">
-            </div>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'about' %}">소개</a></li>
-                    <li><a href="{% url 'services' %}">서비스</a></li>
+                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
                     <li><a href="{% url 'rain' %}">강수량</a></li>
                     <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'contact' %}">연락처</a></li>
                     <li><a href="{% url 'chatbot' %}">챗봇</a></li>
                 </ul>
             </nav>
@@ -58,35 +51,12 @@
                     <div>
                         <h3>금강</h3>
                         <p>현재 수위: 4.5m</p>
-                    </div>
-                    
-                    <div>
-                        <h3>금강</h3>
-                        <p>현재 수위: 4.5m</p>
-                    </div>
-                    
-                    <div>
-                        <h3>한강</h3>
-                        <p>현재 수위: 3.2m</p>
-                    </div>
-                    <div>
-                        <h3>낙동강</h3>
-                        <p>현재 수위: 2.8m</p>
-                    </div>
-                    <div>
-                        <h3>금강</h3>
-                        <p>현재 수위: 4.5m</p>
-                    </div>
-                    
+                    </div>                
                 </div>
                 
             </div>
         </section>
     </div>
-
-    <footer>
-        <p>&copy; 2024 Safe City. All rights reserved.</p>
-    </footer>
 </body>
 </html>
 
