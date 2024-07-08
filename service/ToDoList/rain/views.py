@@ -4,11 +4,17 @@ import requests
 import xml.etree.ElementTree as ET
 import pandas as pd
 from datetime import datetime, timedelta
+from django.core.cache import cache
 
 # 공공데이터포털에서 발급받은 인증키 (Encoding된 키 사용)
 service_key = 'U5TMb2vWz5yYMTnePaPkAUBMk71makHiU1I1SjOcPC6MDSTQpVCygUlka/H5lFS97zg8esXtV6qKoUEPpox3EA=='
 
 def fetch_rainfall_data(request):
+    # 캐시에서 데이터 가져오기
+    cached_data = cache.get('rainfall_data')
+    if cached_data:
+        return JsonResponse(cached_data, safe=False)
+    
     # API 엔드포인트
     url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
     
@@ -98,8 +104,20 @@ def fetch_rainfall_data(request):
     
     filtered_data = df[df['fcst_date'] == today]
     
+    # 현재 시간과 일치하는 데이터
+    current_time = datetime.now().strftime('%H00')
+    current_data = {}
+    for location in locations.keys():
+        current_data[location] = filtered_data[(filtered_data['location'] == location) & (filtered_data['fcst_time'] == current_time)].to_dict(orient='records')
+    
+    # 캐시에 데이터 저장 (예: 10분 동안 캐시)    
+    cache.set('rainfall_data', {'all_data': filtered_data.to_dict(orient='records'), 'current_data': current_data}, timeout=600)
+    
     # JSON 응답으로 데이터 반환
-    return JsonResponse(filtered_data.to_dict(orient='records'), safe=False)
+    return JsonResponse({
+        'all_data': filtered_data.to_dict(orient='records'),
+        'current_data': current_data
+    }, safe=False)
 
 def rain_view(request):
     return render(request, 'rain/rain.html')
