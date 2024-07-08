@@ -246,24 +246,6 @@ footer {
     margin-top: auto;
 }
 
-/* 그래프 */
-.chart-container {
-    width: 48%;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f0f8ff;
-    float: left;
-    box-sizing: border-box;
-}
-
-.chart-title {
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
 /* 하천 수위 */
 .river-level {
     flex: 1;

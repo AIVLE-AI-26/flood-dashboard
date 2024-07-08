@@ -6,6 +6,7 @@
     <title>{% block title %}Safe City{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <div class="top-bar">
@@ -33,8 +34,8 @@
                 </ul>
             </nav>
         </aside>
-        {% block content %}
         <div class="content-container">
+        {% block content %}
             <main class="content">
                 <div class="map_m">
                     <div class="map-controls">
@@ -52,11 +53,12 @@
                 </div>
                 <div id="map" style="width: 100%; height: 100%;"></div>
             </main>
-        </div>
         {% endblock %}
+        </div>
     </div>
-
+    {% block extra_script %}
     <script src="{% static 'js/map.js' %}"></script>
+    {% endblock %}
     <script src="{% static 'js/dropdown.js' %}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const apiKey = 'AIzaSyClithh9PS0DjOql1fbCszrEfPQcYtl0gU';  // Google Maps API 키를 여기에 직접 삽입
+    // const apiKey = 'AIzaSyClithh9PS0DjOql1fbCszrEfPQcYtl0gU';  // Google Maps API 키를 여기에 직접 삽입
     const mapScript = document.createElement('script');
     mapScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
     mapScript.async = true;
