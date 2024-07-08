@@ -190,6 +190,11 @@ body {
     background-color: #f0f0f0;
 }
 
+.region-button.active {
+    background-color: #35397e; /* 원하는 활성화 색상으로 변경 */
+    color: white;
+}
+
 .map-controls {
     position: relative; /* 드롭다운 메뉴의 위치를 조정할 기준을 제공 */
 }
