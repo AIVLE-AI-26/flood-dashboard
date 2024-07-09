@@ -1,0 +1,79 @@
+.sidebar {
+    transform: scale(0);
+}
+
+.content-container {
+    margin-left: 0px; /* 사이드 바 너비  */ /* W황인태 */
+}
+
+.form-container-signup{
+    width: 60%;
+    height: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 8px;
+    padding: 30px;
+    box-sizing: border-box;
+    border: 2px solid gray;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+.form-container-signup > h2{
+    font-size: 24px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+.signup-container {
+    padding: 10px;
+}
+
+.signup-group {
+    width: 100%;
+    min-height: 75px;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.signup-group > input {
+    width: 70%;
+}
+
+.signup-group > label {
+    padding-right: 20px;
+    text-align: center;
+}
+
+.invalid-feedback {
+    margin: 0px;
+    text-align: center;
+}
+
+.input-text {
+    flex-basis: 80%;
+    padding: 0 10px;
+}
+
+.signup-bottom {
+    display: flex;
+    padding-right: 20px;
+    justify-content: flex-end;
+}
+
+.signup-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.signup-btn-container > button {
+    margin-top: 20px;
+    font-size: 16px;
+    width: 100px;
+    height: 40px;
+}
