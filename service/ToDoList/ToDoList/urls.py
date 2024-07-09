@@ -9,4 +9,5 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('board/', include('board.urls')),
     path('rain/', include('rain.urls')),
+    path('waterlevel/', include('waterlevel.urls')),
 ]
