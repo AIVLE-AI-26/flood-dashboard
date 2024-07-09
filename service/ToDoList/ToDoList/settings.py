@@ -69,7 +69,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'chatbot/static'),
     os.path.join(BASE_DIR, 'signup/static'),
     os.path.join(BASE_DIR, 'login/static'),
-    os.path.join(BASE_DIR, 'rain/static')
+    os.path.join(BASE_DIR, 'rain/static'),
+    os.path.join(BASE_DIR, 'waterlevel/static'),
 ]
 
 DATABASES = {
