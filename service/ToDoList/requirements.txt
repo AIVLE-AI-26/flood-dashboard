@@ -7,3 +7,4 @@ faiss-cpu
 tiktoken
 rank_bm25
 openpyxl
+scikit-learn==1.3.0

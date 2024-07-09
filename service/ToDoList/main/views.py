@@ -3,6 +3,7 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.conf import settings
+import joblib
 import os
 
 def home(request):
@@ -23,14 +24,28 @@ def waterlevel(request):
 
 def get_geojson_data():
     # 엑셀 파일 경로
-    excel_file_name = '광주광역시-침수피해현황_20231018.xlsx'
+    # excel_file_name = '광주광역시-침수피해현황_20231018.xlsx'
+    model_name = 'model.pkl'
+    csv_file_name2 = '광주_도로명.csv'
     excel_file_name2 = '광주광역시_대피소.xlsx'
-    excel_file_path = os.path.join(settings.DATA_DIR, excel_file_name)
+    # excel_file_path = os.path.join(settings.DATA_DIR, excel_file_name)
+    model_path = os.path.join(settings.DATA_DIR, model_name)
+    csv_file_path2 = os.path.join(settings.DATA_DIR, csv_file_name2)
     excel_file_path2 = os.path.join(settings.DATA_DIR, excel_file_name2)
     
     # 엑셀 파일을 읽어 데이터프레임으로 변환
-    df = pd.read_excel(excel_file_path)
+    model = joblib.load(model_path)
     df2 = pd.read_excel(excel_file_path2)
+    road_csv = pd.read_csv(csv_file_path2)
+
+    road_csv['강수량'] = 100
+    road_csv = road_csv.drop('침수피해여부',axis=1)
+    pred = model.predict(road_csv)
+    y_score = (pred > 0.9).astype(int)
+    df = road_csv['Latitude'][y_score.astype(bool)],road_csv['Longitude'][y_score.astype(bool)]
+    df = pd.DataFrame(df)
+    df=df.T
+
     
     # 위도와 경도가 포함된 열 이름을 정확히 확인하고 수정
     lat_column = 'Latitude'
@@ -110,3 +125,4 @@ def map_data_view(request):
 
 def map_view(request):
     return render(request, 'main/base.html')
+
