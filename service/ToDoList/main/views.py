@@ -18,7 +18,7 @@ def contact(request):
     return render(request, 'main/contact.html') 
 
 def waterlevel(request):
-    return render(request, 'main/waterlevel.html')  
+    return render(request, 'waterlevel/waterlevel.html')  
 
 
 def get_geojson_data():

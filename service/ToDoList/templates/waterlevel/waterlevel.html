@@ -6,7 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safe City</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    <style>
+        #map {
+            width: 70%;
+            height: 800px;
+            background: url("{% static 'img/waterlevelimg.jpg' %}") no-repeat center center;
+            background-size: contain;
+            position: relative;
+            margin: auto;
+        }
+        .map-marker {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.7); /* Red color */
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+        .info-container {
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        .info-container h3 {
+            margin-top: 0;
+        }
+        .info-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .highlight {
+            background-color: #ffc107;
+        }
+    </style>
 </head>
 <body>
     <div class="top-bar">
@@ -18,7 +58,7 @@
                 <a href="{% url 'logout' %}">로그아웃</a>
             {% else %}
                 <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'sighup' %}">회원가입</a>  <!-- 변경된 부분 -->
+                <a href="{% url 'signup' %}">회원가입</a>
             {% endif %}
         </div>
     </div>
@@ -44,45 +84,21 @@
         <section class="river-level">
             <h1>구별 하천 수위</h1>
             
-            <div class ="horizontal-container">
-                <img src = "{% static "img/img_map.jpg"%}">
-                <div class="river-data">    
-                    <div>
-                        <h3>한강</h3>
-                        <p>현재 수위: 3.2m</p>
-                    </div>
-                    <div>
-                        <h3>낙동강</h3>
-                        <p>현재 수위: 2.8m</p>
-                    </div>
-                    <div>
-                        <h3>금강</h3>
-                        <p>현재 수위: 4.5m</p>
-                    </div>
-                    
-                    <div>
-                        <h3>금강</h3>
-                        <p>현재 수위: 4.5m</p>
-                    </div>
-                    
-                    <div>
-                        <h3>한강</h3>
-                        <p>현재 수위: 3.2m</p>
-                    </div>
-                    <div>
-                        <h3>낙동강</h3>
-                        <p>현재 수위: 2.8m</p>
-                    </div>
-                    <div>
-                        <h3>금강</h3>
-                        <p>현재 수위: 4.5m</p>
-                    </div>
-                    
+            <div class="horizontal-container" style="display: flex;">
+                <div id="map"></div>
+                <div id="data-container" class="grid-container info-container" style="width: 30%;">
+                    <h3>하천 수위 정보</h3>
+                    <div id="waterlevel-info">관측소를 클릭하여 수위 정보를 확인하세요.</div>
                 </div>
-                
             </div>
         </section>
     </div>
+
+    <footer>
+        <p>&copy; 2024 Safe City. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/waterlevel.js' %}"></script>
 </body>
 </html>
-
