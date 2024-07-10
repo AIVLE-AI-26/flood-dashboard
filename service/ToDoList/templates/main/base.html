@@ -30,7 +30,7 @@
                     <li><a href="{% url 'post_list' %}">공지사항</a></li>
                     <li><a href="{% url 'rain' %}">강수량</a></li>
                     <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
+                    {% comment %} <li><a href="{% url 'chatbot' %}">챗봇</a></li> {% endcomment %}
                 </ul>
             </nav>
         </aside>
@@ -40,6 +40,13 @@
                 <div class="map_m">
                     <div class="map-controls">
                         <button id="toggleButton">침수예상 지역</button>
+                        <form method="post" action="{% url 'handle_button' %}">
+                            {% csrf_token %}
+                            <button type="submit" name="button_value" value="0">0</button>
+                            <button type="submit" name="button_value" value="50">1</button>
+                            <button type="submit" name="button_value" value="100">2</button>
+                            <button type="submit" name="button_value" value="150">3</button>
+                        </form>
                         <button id="shelterButton">대피소</button>
                         <div id="regionSelection" class="region-selection">
                             <button class="region-button" id="all">광주 전체</button>

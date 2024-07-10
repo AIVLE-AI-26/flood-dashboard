@@ -19,32 +19,54 @@ def contact(request):
     return render(request, 'main/contact.html') 
 
 def waterlevel(request):
-    return render(request, 'waterlevel/waterlevel.html')  
+    return render(request, 'waterlevel/waterlevel.html') 
+
+# model_path = r'C:\Users\User\Documents\KT-BIGP\flood-dashboard\service\ToDoList\data\model1.joblib'
+# model = joblib.load(model_path)
+
+# def get_coordinates(request):
+#     value = request.GET.get('value', None)
+#     if value is not None:
+#         value = float(value)  # 입력값을 실수로 변환
+#         # 기존 데이터를 복사하여 새로운 데이터 생성
+#         new_data = 광주.copy()
+#         new_data["강수량"] = value  # 임의의 강수량 설정
+
+    
+
+#         # 예측 수행
+#         y_pred_new = model.predict(new_data)
+
+#         # 예측 결과를 데이터프레임에 추가
+#         new_data['예측 침수여부'] = y_pred_new[:len(new_data)]  # 길이 맞추기
+
+#         # 예측된 침수 여부가 높은 지역 필터링 (예: 0.8 이상인 지역)
+#         flood_prone_areas = new_data[new_data['예측 침수여부'] >= 0.8]
+
+#         # 필터링된 지역의 위도와 경도 값을 추출
+#         locations = flood_prone_areas[['Latitude', 'Longitude']].dropna().to_dict(orient='records')
+#         locations = [{'lat': loc['Latitude'], 'lng': loc['Longitude']} for loc in locations]
+
+#         return JsonResponse({'locations': locations})
+#     return JsonResponse({'error': 'No value provided'}, status=400)
 
 
 def get_geojson_data():
     # 엑셀 파일 경로
     # excel_file_name = '광주광역시-침수피해현황_20231018.xlsx'
-    model_name = 'model.pkl'
-    csv_file_name2 = '광주_도로명.csv'
+    
+    csv_file_name3 = 'df.csv'
     excel_file_name2 = '광주광역시_대피소.xlsx'
     # excel_file_path = os.path.join(settings.DATA_DIR, excel_file_name)
-    model_path = os.path.join(settings.DATA_DIR, model_name)
-    csv_file_path2 = os.path.join(settings.DATA_DIR, csv_file_name2)
+    
+    csv_file_path3 = os.path.join(settings.DATA_DIR, csv_file_name3)
     excel_file_path2 = os.path.join(settings.DATA_DIR, excel_file_name2)
     
     # 엑셀 파일을 읽어 데이터프레임으로 변환
-    model = joblib.load(model_path)
-    df2 = pd.read_excel(excel_file_path2)
-    road_csv = pd.read_csv(csv_file_path2)
+    
+    df2 = pd.read_excel(excel_file_path2) 
+    df= pd.read_csv(csv_file_path3)
 
-    road_csv['강수량'] = 100
-    road_csv = road_csv.drop('침수피해여부',axis=1)
-    pred = model.predict(road_csv)
-    y_score = (pred > 0.9).astype(int)
-    df = road_csv['Latitude'][y_score.astype(bool)],road_csv['Longitude'][y_score.astype(bool)]
-    df = pd.DataFrame(df)
-    df=df.T
 
     
     # 위도와 경도가 포함된 열 이름을 정확히 확인하고 수정
@@ -125,4 +147,25 @@ def map_data_view(request):
 
 def map_view(request):
     return render(request, 'main/base.html')
+
+def handle_button(request):
+    csv_file_name = 'df.csv'
+    csv_file_name2 = '광주_도로명.csv'
+    csv_file_path = os.path.join(settings.DATA_DIR, csv_file_name)
+    csv_file_path2 = os.path.join(settings.DATA_DIR, csv_file_name2)
+    road_csv = pd.read_csv(csv_file_path2)
+    model_name = 'model.pkl'
+    model_path = os.path.join(settings.DATA_DIR, model_name)
+    model = joblib.load(model_path)
+    if request.method == 'POST':
+        button_value = request.POST.get('button_value')
+        road_csv['강수량'] = int(button_value) 
+        road_csv = road_csv.drop('침수피해여부',axis=1)
+        pred = model.predict(road_csv)
+        y_score = (pred > 0.9).astype(int)
+        df = road_csv['Latitude'][y_score.astype(bool)],road_csv['Longitude'][y_score.astype(bool)]
+        df = pd.DataFrame(df)
+        df=df.T
+        df.to_csv(csv_file_path,index=False)
+        return render(request, 'main/base.html')
 
