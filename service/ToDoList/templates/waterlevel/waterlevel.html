@@ -1,104 +1,24 @@
-<!DOCTYPE html>
+{% extends 'main/navbar.html' %}
+
 {% load static %}
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe City</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <style>
-        #map {
-            width: 70%;
-            height: 800px;
-            background: url("{% static 'img/waterlevelimg.jpg' %}") no-repeat center center;
-            background-size: contain;
-            position: relative;
-            margin: auto;
-        }
-        .map-marker {
-            position: absolute;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 0, 0, 0.7); /* Red color */
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid white;
-        }
-        .info-container {
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 10px;
-            margin-top: 20px;
-            max-height: 800px;
-            overflow-y: auto;
-        }
-        .info-container h3 {
-            margin-top: 0;
-        }
-        .info-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .highlight {
-            background-color: #ffc107;
-        }
-    </style>
-</head>
-<body>
-    <div class="top-bar">
-        <div class="logo">
-            <h1>광주광역시</h1>
-        </div>
-        <div class="auth-links">
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">로그아웃</a>
-            {% else %}
-                <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'signup' %}">회원가입</a>
-            {% endif %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/waterlevel.css' %}">
+<title>회원가입</title>
+{% endblock %}
+
+{% block content %}
+<div class="waterlevel-container">
+    <div class="title-waterlevel">
+        <h1>구별 하천 수위</h1>
+    </div>
+    <div class="horizontal-container">
+        <div id="map"></div>
+        <div id="data-container" class="grid-container info-container">
+            <h3>하천 수위 정보</h3>
+            <div id="waterlevel-info">관측소를 클릭하여 수위 정보를 확인하세요.</div>
         </div>
     </div>
-    <div class="main-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>광주광역시</h2>
-                <h3>도시침수 통합정보시스템</h3>
-                <input type="text" placeholder="검색...">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'about' %}">소개</a></li>
-                    <li><a href="{% url 'services' %}">서비스</a></li>
-                    <li><a href="{% url 'rain' %}">강수량</a></li>
-                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'contact' %}">연락처</a></li>
-                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <section class="river-level">
-            <h1>구별 하천 수위</h1>
-            
-            <div class="horizontal-container" style="display: flex;">
-                <div id="map"></div>
-                <div id="data-container" class="grid-container info-container" style="width: 30%;">
-                    <h3>하천 수위 정보</h3>
-                    <div id="waterlevel-info">관측소를 클릭하여 수위 정보를 확인하세요.</div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Safe City. All rights reserved.</p>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/waterlevel.js' %}"></script>
-</body>
-</html>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/waterlevel.js' %}"></script>
+{% endblock %}
