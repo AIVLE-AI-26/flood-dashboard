@@ -7,13 +7,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block styles %}
-
+    
     {% endblock %}
 </head>
 <body>
     <div class="top-bar">
         <div class="logo">
-            <h1><a href="../" class="title-logo-link">광주광역시 도시침수 통합정보시스템</a></h1>
+            <h1><a href="{% url 'home' %}" class="title-logo-link">광주광역시 도시침수 통합정보시스템</a></h1>
         </div>
         <div class="auth-links">
             {% if user.is_authenticated %}
@@ -29,19 +29,20 @@
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
+                    <li><a href="{% url 'about' %}">소개</a></li>
+                    <li><a href="{% url 'services' %}">서비스</a></li>
                     <li><a href="{% url 'rain' %}">강수량</a></li>
                     <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
+                    <li><a href="{% url 'contact' %}">연락처</a></li>
+                    {% comment %} <li><a href="{% url 'chatbot' %}">챗봇</a></li> {% endcomment %}
                 </ul>
             </nav>
         </aside>
+        <div class="content-container">
         {% block content %}
         
         {% endblock %}
+        </div>
     </div>
-    
-
-    <script src="{% static 'js/map.js' %}"></script>
 </body>
 </html>
