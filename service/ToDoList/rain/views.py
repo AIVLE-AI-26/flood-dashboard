@@ -1,15 +1,17 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-import requests
+import aiohttp
+import asyncio
 import xml.etree.ElementTree as ET
 import pandas as pd
 from datetime import datetime, timedelta
 from django.core.cache import cache
+import time
 
 # 공공데이터포털에서 발급받은 인증키 (Encoding된 키 사용)
 service_key = 'U5TMb2vWz5yYMTnePaPkAUBMk71makHiU1I1SjOcPC6MDSTQpVCygUlka/H5lFS97zg8esXtV6qKoUEPpox3EA=='
 
-def fetch_rainfall_data(request):
+async def fetch_rainfall_data(request):
     # 캐시에서 데이터 가져오기
     cached_data = cache.get('rainfall_data')
     if cached_data:
@@ -42,44 +44,52 @@ def fetch_rainfall_data(request):
         '광산구': (57, 74)
     }
 
-    # 데이터를 저장할 리스트 초기화
-    all_data = []
-
-    # 각 지역에 대해 API 요청 보내기
-    for location_name, (nx, ny) in locations.items():
+    async def fetch_location_data(location_name, nx, ny):
         params = common_params.copy()
         params['nx'] = nx
         params['ny'] = ny
         
-        # GET 요청 보내기
-        response = requests.get(url, params=params)
-        
-        # 응답 확인
-        if response.status_code == 200:
-            print(f"API 요청 성공: {location_name}")
-            # XML 응답 파싱
-            root = ET.fromstring(response.content)
-            
-            # XML 데이터 파싱
-            for item in root.findall('.//item'):
-                category = item.find('category').text if item.find('category') is not None else ''
-                
-                # category가 'PCP'인 경우에만 데이터를 추가 (PCP : 1시간 강수량)
-                if category == 'PCP':
-                    base_date = item.find('baseDate').text if item.find('baseDate') is not None else '' # baseDate : 발표일자
-                    fcst_date = item.find('fcstDate').text if item.find('fcstDate') is not None else '' # fcstDate : 예보일자
-                    fcst_time = item.find('fcstTime').text if item.find('fcstTime') is not None else '' # fcstTime : 예보시각
-                    fcst_value = item.find('fcstValue').text if item.find('fcstValue') is not None else '' # fcstValue : 예보 값
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                if response.status == 200:
+                    print(f"API 요청 성공: {location_name}")
+                    root = ET.fromstring(await response.text())
+                    location_data = []
                     
-                    all_data.append({
-                        'location': location_name,
-                        'base_date': base_date,
-                        'fcst_date': fcst_date,
-                        'fcst_time': fcst_time,
-                        'fcst_value': fcst_value
-                    })
-        else:
-            print(f"Error: {response.status_code}, location: {location_name}")
+                    for item in root.findall('.//item'):
+                        category = item.find('category').text if item.find('category') is not None else ''
+                        
+                        if category == 'PCP':
+                            base_date = item.find('baseDate').text if item.find('baseDate') is not None else ''
+                            fcst_date = item.find('fcstDate').text if item.find('fcstDate') is not None else ''
+                            fcst_time = item.find('fcstTime').text if item.find('fcstTime') is not None else ''
+                            fcst_value = item.find('fcstValue').text if item.find('fcstValue') is not None else ''
+                            
+                            location_data.append({
+                                'location': location_name,
+                                'base_date': base_date,
+                                'fcst_date': fcst_date,
+                                'fcst_time': fcst_time,
+                                'fcst_value': fcst_value
+                            })
+                    return location_data
+                else:
+                    print(f"Error: {response.status}, location: {location_name}")
+                    return []
+
+    all_data = []
+    
+    start_time = time.time()  # 시작 시간 기록
+    
+    # 모든 요청을 비동기로 실행
+    tasks = [fetch_location_data(location_name, nx, ny) for location_name, (nx, ny) in locations.items()]
+    results = await asyncio.gather(*tasks)
+    
+    for result in results:
+        all_data.extend(result)
+
+    end_time = time.time()  # 종료 시간 기록
+    print(f"비동기 방식 로딩 시간: {end_time - start_time}초")  # 로딩 시간 출력
 
     # 데이터프레임으로 변환
     df = pd.DataFrame(all_data)
@@ -121,3 +131,7 @@ def fetch_rainfall_data(request):
 
 def rain_view(request):
     return render(request, 'rain/rain.html')
+
+# Django view에서 비동기 함수를 실행할 수 있게 수정
+def fetch_rainfall_data_view(request):
+    return asyncio.run(fetch_rainfall_data(request))
