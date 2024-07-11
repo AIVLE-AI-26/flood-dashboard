@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const apiKey = 'AIzaSyClithh9PS0DjOql1fbCszrEfPQcYtl0gU';  // Google Maps API 키를 여기에 직접 삽입
+    const apiKey = 'AIzaSyD2WVmbg5rwpXUBfhH3CYLWQv8STSAKAW0';  // Google Maps API 키를 여기에 직접 삽입
     const mapScript = document.createElement('script');
     mapScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
     mapScript.async = true;
@@ -9,13 +9,68 @@ document.addEventListener('DOMContentLoaded', (event) => {
     markerClustererScript.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
     markerClustererScript.async = true;
     document.head.appendChild(markerClustererScript);
+
+    // 폼 버튼 클릭 이벤트 처리
+    document.querySelectorAll('.rainfall-button').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const buttonValue = this.getAttribute('data-value');
+            toggleRainfallFeature(buttonValue, this);
+        });
+    });
+
+    // 침수예상 버튼 클릭 이벤트 처리
+    document.getElementById('toggleButton').addEventListener('click', function(event) {
+        const rainfallButtons = document.getElementById('rainfall-buttons');
+        if (rainfallButtons.style.display === 'none' || rainfallButtons.style.display === '') {
+            rainfallButtons.style.display = 'block';
+        } else {
+            rainfallButtons.style.display = 'none';
+        }
+    });
+
+    // 과거 침수예상 버튼 클릭 이벤트 처리
+    document.getElementById('past-flooding').addEventListener('click', function(event) {
+        togglePastFlooding();
+    });
 });
 
+let activeButton = null;
+
+function setActiveButton(button) {
+    if (activeButton && activeButton !== button) {
+        activeButton.classList.remove('active');  // 기존 활성화된 버튼의 active 클래스 제거
+    }
+    if (button.classList.contains('active')) {
+        button.classList.remove('active');  // 이미 활성화된 버튼을 다시 클릭하면 비활성화
+        activeButton = null;
+    } else {
+        button.classList.add('active');  // 버튼 활성화
+        activeButton = button;
+    }
+}
+
+function toggleRainfallFeature(buttonValue, button) {
+    if (button === activeButton) {
+        removeRainfallFeature();
+        setActiveButton(null);
+    } else {
+        removeRainfallFeature();
+        setActiveButton(button);
+        submitRainfallForm(buttonValue);
+    }
+}
+
+function removeRainfallFeature() {
+    floodFeatures.forEach(feature => map.data.remove(feature));
+    floodFeatures = [];
+}
+
 let map;
-let isFloodVisible = false;
+let isPastFloodingVisible = false;
 let infoWindow;
 let geojsonData;
 let floodFeatures = [];
+let pastFloodFeatures = [];
 let shelterMarkers = {
     '광주 전체': [],
     '동구': [],
@@ -55,7 +110,6 @@ function initMap() {
         .then(response => response.json())
         .then(data => {
             geojsonData = data;
-            console.log("GeoJSON Data:", geojsonData);
             addShelterMarkers(geojsonData.features);
 
             // 클러스터 스타일 설정
@@ -148,16 +202,64 @@ function initMap() {
         });
 }
 
-function toggleFloodAreas(geojsonData) {
-    if (isFloodVisible) {
-        floodFeatures.forEach(feature => map.data.remove(feature));
-        floodFeatures = [];
-        document.getElementById('toggleButton').textContent = '침수예상 지역';
+
+function submitRainfallForm(buttonValue) {
+    fetch(`/handle_button/?button_value=${buttonValue}`)
+        .then(response => response.json())
+        .then(data => {
+            updateFloodAreas(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function addFloodAreas(geojsonData) {
+    geojsonData.features.forEach(feature => {
+        if (feature.geometry.type === "Polygon") {
+            const floodFeature = map.data.addGeoJson(feature);
+            floodFeatures.push(floodFeature[0]);
+        }
+    });
+
+    map.data.setStyle(feature => ({
+        fillColor: feature.getProperty('fillColor'),
+        fillOpacity: feature.getProperty('fillOpacity'),
+        strokeColor: feature.getProperty('strokeColor'),
+        strokeOpacity: feature.getProperty('strokeOpacity'),
+        strokeWeight: feature.getProperty('strokeWeight')
+    }));
+}
+
+function updateFloodAreas(geojsonData) {
+    floodFeatures.forEach(feature => map.data.remove(feature));
+    floodFeatures = [];
+
+    geojsonData.features.forEach(feature => {
+        if (feature.geometry.type === "Polygon") {
+            const floodFeature = map.data.addGeoJson(feature);
+            floodFeatures.push(floodFeature[0]);
+        }
+    });
+
+    map.data.setStyle(feature => ({
+        fillColor: feature.getProperty('fillColor'),
+        fillOpacity: feature.getProperty('fillOpacity'),
+        strokeColor: feature.getProperty('strokeColor'),
+        strokeOpacity: feature.getProperty('strokeOpacity'),
+        strokeWeight: feature.getProperty('strokeWeight')
+    }));
+}
+
+function togglePastFlooding() {
+    if (isPastFloodingVisible) {
+        pastFloodFeatures.forEach(feature => map.data.remove(feature));
+        pastFloodFeatures = [];
     } else {
         geojsonData.features.forEach(feature => {
-            if (feature.geometry.type === "Polygon") {
-                const floodFeature = map.data.addGeoJson(feature);
-                floodFeatures.push(floodFeature[0]);
+            if (feature.geometry.type === "Polygon" && feature.properties.fillColor === '#FF0000') {
+                const pastFloodFeature = map.data.addGeoJson(feature);
+                pastFloodFeatures.push(pastFloodFeature[0]);
             }
         });
         map.data.setStyle(feature => ({
@@ -167,9 +269,8 @@ function toggleFloodAreas(geojsonData) {
             strokeOpacity: feature.getProperty('strokeOpacity'),
             strokeWeight: feature.getProperty('strokeWeight')
         }));
-        document.getElementById('toggleButton').textContent = '침수예상 지역 숨기기';
     }
-    isFloodVisible = !isFloodVisible;
+    isPastFloodingVisible = !isPastFloodingVisible;
 }
 
 function addShelterMarkers(features) {
@@ -288,4 +389,32 @@ function getButtonId(region) {
         case '광주 전체': return 'all';
         default: return '';
     }
+}
+
+function setActiveButton(button) {
+    if (button === activeButton) {
+        activeButton.classList.remove('active');  // 기존 활성화된 버튼의 active 클래스 제거
+        activeButton = null;
+    } else {
+        if (activeButton) {
+            activeButton.classList.remove('active');  // 기존 활성화된 버튼의 active 클래스 제거
+        }
+        activeButton = button;
+        activeButton.classList.add('active');  // 새로운 버튼에 active 클래스 추가
+    }
+}
+
+function toggleRainfallFeature(buttonValue, button) {
+    if (button.classList.contains('active')) {
+        removeRainfallFeature();
+        setActiveButton(button);
+    } else {
+        submitRainfallForm(buttonValue);
+        setActiveButton(button);
+    }
+}
+
+function removeRainfallFeature() {
+    floodFeatures.forEach(feature => map.data.remove(feature));
+    floodFeatures = [];
 }
