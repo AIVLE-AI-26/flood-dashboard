@@ -12,11 +12,18 @@
 .profile
 
 # cache or package
-service/ToDoList/ToDoList/__pycache__/
-service/ToDoList/main/__pycache__/
-service/ToDoList/login/migrations/__pycache__/
-service/ToDoList/login/__pycache__/
+service/ToDoList/board/__pycache__/
+service/ToDoList/board/migrations/__pycache__/
 service/ToDoList/chatbot/__pycache__/
 service/ToDoList/chatbot/migrations/__pycache__/
-service/ToDoList/sighup/__pycache__/
-service/ToDoList/sighup/migrations/__pycache__/
+service/ToDoList/login/__pycache__/
+service/ToDoList/login/migrations/__pycache__/
+service/ToDoList/main/__pycache__/
+service/ToDoList/main/migrations/__pycache__/
+service/ToDoList/rain/__pycache__/
+service/ToDoList/rain/migrations/__pycache__/
+service/ToDoList/signup/__pycache__/
+service/ToDoList/signup/migrations/__pycache__/
+service/ToDoList/ToDoList/__pycache__/
+service/ToDoList/waterlevel/__pycache__/
+service/ToDoList/waterlevel/migrations/__pycache__/
