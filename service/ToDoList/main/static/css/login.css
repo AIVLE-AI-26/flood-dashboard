@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(135deg, #004d61, #007b83);
+  background: linear-gradient(180deg, #2c3e50,#3b536b, #004d52);
 }
 
 /* Login form container style */
@@ -46,7 +46,7 @@
 /* Login group style */
 .login-group {
   width: 100%;
-  padding: 20px 0px;
+  padding: 20px 15px;
   display: flex;
   box-sizing: border-box;
 }
@@ -89,11 +89,13 @@
 /* Login button style */
 .login-btn {
   flex: auto;
-  width: 100%;
+  width: 20%;
   padding: 10px;
-  margin-bottom: 16px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
   font-size: 16px;
-  background: #007b83;
+  background: #2c3e50;
   color: #fff;
   border: none;
   border-radius: 5px; /* border-radius from the original .login-btn */
@@ -125,7 +127,7 @@
 .signup-btn {
   flex: auto;
   float: right;
-  padding: 8px 16px;
+  padding: 8px 10px;
   font-size: 14px;
   background: #f8f9fa;
   color: #007b83;
@@ -133,6 +135,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
+  width: 100px;
 }
 
 .signup-btn:hover {

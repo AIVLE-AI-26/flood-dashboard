@@ -1,46 +1,58 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글 수정</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
-        .main-container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            border-bottom: 2px solid #343a40;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.75rem;
-        }
-        .btn {
-            margin-right: 10px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <body>
-    <div class="container main-container">
-        <h2>글 수정</h2>
-        <form action="{% url 'post_edit' pk=post.pk %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">저장</button>
-            <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-secondary">취소</a>
-        </form>
+    <div class="top-bar">
+        <div class="logo">
+            <h1>광주광역시 도시침수 통합정보시스템</h1>
+        </div>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">로그아웃</a>
+            {% else %}
+                <a href="{% url 'login' %}">로그인</a>
+                <a href="{% url 'signup' %}">회원가입</a>  <!-- 변경된 부분 -->
+            {% endif %}
+        </div>
     </div>
+    <div class="main-container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
+                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
+                    <li><a href="{% url 'rain' %}">강수량</a></li>
+                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
+                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="notice">
+            <h2>글 수정</h2>
+            <form action="{% url 'post_edit' pk=post.pk %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+                <div class = "button-container">
+                    <div class ='button-left'>
+                        <button type="submit" class="btn btn-secondary">저장</button>
+                        <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-secondary">취소</a>
+                    </div>
+                </div>
+            </form>
+        </div>
 
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+

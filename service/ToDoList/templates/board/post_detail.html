@@ -1,72 +1,87 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title }}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
-        .main-container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            border-bottom: 2px solid #343a40;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.75rem;
-        }
-        .text-muted {
-            font-size: 0.875rem;
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-        .post-content {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .btn {
-            margin-right: 10px;
-        }
-        .btn-info {
-            background-color: #17a2b8;
-            border-color: #17a2b8;
-        }
-        .btn-info:hover {
-            background-color: #138496;
-            border-color: #117a8b;
-        }
-    </style>
+    <title>공지사항</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <div class="container main-container">
-        <h2>{{ post.title }}</h2>
-        <p class="text-muted">작성자: {{ post.author }} | 작성일: {{ post.created_at|date:"Y-m-d H:i" }} | 조회수: {{ post.views }}</p>
-        <div class="post-content">{{ post.content|linebreaks }}</div>
-        {% if post.file %}
-        <div class="mt-3">
-            <a href="{{ post.file.url }}" class="btn btn-info">첨부 파일 다운로드</a>
+    <div class="top-bar">
+        <div class="logo">
+            <h1>광주광역시 도시침수 통합정보시스템</h1>
         </div>
-        {% endif %}
-        <div class="mt-4">
-            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-secondary">수정</a>
-            <a href="{% url 'post_list' %}" class="btn btn-secondary">목록으로 돌아가기</a>
-            <form action="{% url 'post_delete' pk=post.pk %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
-            </form>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">로그아웃</a>
+            {% else %}
+                <a href="{% url 'login' %}">로그인</a>
+                <a href="{% url 'signup' %}">회원가입</a>  <!-- 변경된 부분 -->
+            {% endif %}
         </div>
+    </div>
+    <div class="main-container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
+                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
+                    <li><a href="{% url 'rain' %}">강수량</a></li>
+                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
+                    {% comment %} <li><a href="{% url 'chatbot' %}">챗봇</a></li> {% endcomment %}
+                </ul>
+            </nav>
+        </aside>
+        <div class="notice">
+                <table class="notice2">
+                    <h2>제목:{{post.title}}</h2>
+                    <thead class="notice3">
+                        <tr>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
+                            <th scope="col">조회수</th>
+                        </tr>
+                    </thead>
+                    <tr>
+
+                        <td>{{ post.author }}</td>
+                        <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
+                        <td>{{ post.views }}</td>
+                    </tr>
+                </table>
+                <tbody>
+                <div class="post-content">내용:{{ post.content|linebreaks }}</div>
+                
+                
+                <div class="mt-4">
+                    <div class='button-container' style="display: flex; justify-content: space-between;">
+                        <div class='button-left'>
+                            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-secondary">수정</a>
+                            <a href="{% url 'post_list' %}" class="btn btn-list">목록으로 돌아가기</a>
+                            {% if post.file %}
+                            <div class="mt-3">
+                                <a href="{{ post.file.url }}" class="btn btn-info">첨부 파일 다운로드</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class='button-right'>
+                            <form action="{% url 'post_delete' pk=post.pk %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+
+
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+

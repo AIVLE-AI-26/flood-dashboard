@@ -60,7 +60,7 @@ body {
 }
 
 .sidebar {
-    width: 190px;
+    width: 170px;
     background-color: #2c3e50;
     color: white;
     padding: 20px;
@@ -102,7 +102,7 @@ body {
 }
 
 .sidebar nav ul li {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .sidebar nav ul li a {
@@ -147,7 +147,7 @@ body {
 }
 
 .content-container {
-    margin-left: 230px; /* 사이드 바 너비 + 여백 */
+    margin-left: 210px; /* 사이드 바 너비 + 여백 */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -343,4 +343,250 @@ footer {
 .rainfall-button {
     background-color: white; /* 비활성화된 버튼 색상 */
     color: black;
+}
+.text-muted{
+    background-color: #f4f4f4;
+}
+/* 테이블 스타일 */
+.notice {
+    margin-left: 210px; /* 사이드 바 너비 + 여백 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    padding : 20px;
+    font-size: 20px;
+}
+.notice-box{
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+table.notice2 {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+thead.notice3 {
+    background-color: #f4f4f4;
+}
+
+thead.notice3 th {
+    padding: 12px;
+    border-bottom: 2px solid #dddddd;
+}
+table, tbody, th, td {
+    color: #000000 !important; /* 텍스트 색상을 흰색으로 설정하고 우선순위를 높임 */
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+th, td {
+    padding: 12px;
+}
+
+th {
+    font-weight: bold;
+}
+
+a.post-title {
+    color: #2a7ae2;
+    text-decoration: none;
+}
+
+a.post-title:hover {
+    text-decoration: underline;
+}
+.btn {
+    background-color: #2c3e50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 70px;
+    min-height: 30px;
+    padding-top: 10px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+.button-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+
+    justify-content: space-between;
+}
+.button-left {
+    display: flex; /* 왼쪽 버튼 그룹을 플렉스로 설정하여 내부 요소들을 수평 정렬 */
+    padding-right: 15px;
+}
+.button-left a {
+    margin-right: 10px; /* 왼쪽 버튼들 사이 여백 추가 */
+}
+.button-right {
+    display: flex; /* 오른쪽 버튼 그룹을 플렉스로 설정하여 내부 요소들을 수평 정렬 */
+}
+.button-right form {
+    margin: 0; /* 폼의 기본 마진 제거 */
+}
+
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label Styles */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    background-color: #f4f4f4;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+/* Input, Textarea and Select Styles */
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* File Input Styles */
+input[type="file"] {
+    padding: 5px;
+}
+
+
+.btn-primary {
+    background-color: #2c3e50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding-top: 0px;
+    width: 90px;
+    height: 40px;
+}
+
+.btn-primary:hover {
+    background-color: #007bff;
+}
+.btn-secondary {
+    display: flex; /* Flexbox 컨테이너로 만듭니다 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    background-color: #2c3e50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-height: 40px;
+    min-width: 90px;
+    padding-top: 0px;
+    margin-right:5px;
+}
+.btn-list{
+    display: flex; /* Flexbox 컨테이너로 만듭니다 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    background-color: #2c3e50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-height: 40px;
+    min-width: 170px;
+    padding-top: 0px;
+}
+.btn-danger{
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding-top: 0px;
+    min-height: 40px;
+    min-width: 80px;
+}
+.btn-danger:hover{
+    background-color: #2c3e50;
+
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+.btn-info{    
+    display: flex; /* Flexbox 컨테이너로 만듭니다 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    background-color: #0080ff;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-height: 40px;
+    min-width: 170px;
+    padding-top: 0px;
+}
+
+.btn-info:hover{
+    background-color: #666666;
+
 }
