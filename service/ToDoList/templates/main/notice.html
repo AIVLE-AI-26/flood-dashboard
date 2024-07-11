@@ -1,84 +1,45 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항</title>
-    {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% endcomment %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends 'main/navbar.html' %}
 
-<body>
-    <div class="top-bar">
-        <div class="logo">
-            <h1>광주광역시 도시침수 통합정보시스템</h1>
+{% block content %}
+<div class="notice">
+    <h2>공지사항</h2>
+    <table class="notice2">
+        <thead class="notice3">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+                <th scope="col">조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td scope="row">{{ forloop.counter }}</td>
+                <td>
+                    <a href="{% url 'post_detail' pk=post.pk %}" class="post-title">{{ post.title }}</a>
+                </td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
+                <td>{{ post.views }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">등록된 게시물이 없습니다.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="button-container">
+        <div class ='button-left'>
+            <a href="{% url 'home' %}" class="btn btn-secondary">홈</a>
+            <a href="{% url 'post_new' %}" class="btn btn-secondary">글쓰기</a>
         </div>
-        <div class="auth-links">
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">로그아웃</a>
-            {% else %}
-                <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'signup' %}">회원가입</a>  <!-- 변경된 부분 -->
-            {% endif %}
-        </div>
-    </div>
-    <div class="main-container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
-                    <li><a href="{% url 'rain' %}">강수량</a></li>
-                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <div class="notice">
-            <h2>공지사항</h2>
-            <table class="notice2">
-                <thead class="notice3">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">작성일</th>
-                        <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for post in posts %}
-                    <tr>
-                        <td scope="row">{{ forloop.counter }}</td>
-                        <td>
-                            <a href="{% url 'post_detail' pk=post.pk %}" class="post-title">{{ post.title }}</a>
-                        </td>
-                        <td>{{ post.author }}</td>
-                        <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
-                        <td>{{ post.views }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="5">등록된 게시물이 없습니다.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="button-container">
-                <div class ='button-left'>
-                    <a href="{% url 'home' %}" class="btn btn-secondary">홈</a>
-                    <a href="{% url 'post_new' %}" class="btn btn-secondary">글쓰기</a>
-                </div>
-
-            </div>
-        </div>
-
 
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
-</html>
-
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

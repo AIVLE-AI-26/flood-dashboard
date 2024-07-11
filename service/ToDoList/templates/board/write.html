@@ -1,78 +1,43 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends 'main/navbar.html' %}
 
-<body>
-    <div class="top-bar">
-        <div class="logo">
-            <h1>광주광역시 도시침수 통합정보시스템</h1>
+{% block content %}
+<div class="notice">
+    <h2>공지사항</h2>
+    <form action="{% url 'post_new' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="author">작성자</label>
+            <input type="text" class="form-control" id="author" name="author" required>
         </div>
-        <div class="auth-links">
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">로그아웃</a>
-            {% else %}
-                <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'signup' %}">회원가입</a>  <!-- 변경된 부분 -->
-            {% endif %}
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" name="title" required>
         </div>
-    </div>
-    <div class="main-container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
-                    <li><a href="{% url 'rain' %}">강수량</a></li>
-                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <div class="notice">
-            <h2>공지사항</h2>
-            <form action="{% url 'post_new' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="author">작성자</label>
-                    <input type="text" class="form-control" id="author" name="author" required>
-                </div>
-                <div class="form-group">
-                    <label for="title">제목</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="content">내용</label>
-                    <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="file">파일 업로드</label>
-                    <input type="file" class="form-control-file" id="file" name="file">
-                </div>
-                <div class="form-group">
-                    <label for="status">상태</label>
-                    <select class="form-control" id="status" name="status" required>
-                        <option value="draft">Draft</option>
-                        <option value="published">Published</option>
-                        <option value="deleted">Deleted</option>
-                    </select>
-                </div>
-                <div class="button-container">
-                    <button type="submit" class="btn btn-primary">글쓰기</button>
-                    <button onclick="history.back()" class="btn btn-secondary">뒤로 가기</button>
-                </div>
-            </form>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
         </div>
+        <div class="form-group">
+            <label for="file">파일 업로드</label>
+            <input type="file" class="form-control-file" id="file" name="file">
+        </div>
+        <div class="form-group">
+            <label for="status">상태</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+                <option value="deleted">Deleted</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">글쓰기</button>
+            <button onclick="history.back()" class="btn btn-secondary">뒤로 가기</button>
+        </div>
+    </form>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+{% endblock %}
