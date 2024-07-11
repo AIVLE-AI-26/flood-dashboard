@@ -5,27 +5,41 @@
 .content-container {
     margin-left: 0px; /* 사이드 바 너비  */ /* W황인태 */
 }
-
+.background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(180deg, #2c3e50,#3b536b, #004d52);
+}
 .form-container-signup{
-    width: 60%;
+    width: 40%;
     height: 80%;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 8px;
-    padding: 30px;
     box-sizing: border-box;
     border: 2px solid gray;
-    border-radius: 6px;
-    background-color: #ffffff;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+
 }
 
 .form-container-signup > h2{
     font-size: 24px;
-    text-align: center;
+    text-align: left;
     color: rgb(0, 0, 0);
     margin-bottom: 20px;
+    margin-left:40px;
+    margin-top:25px;
 }
+.form-controll{
+    width: 400px;
+    height: 500px;
 
+}
 .signup-container {
     padding: 10px;
 }
@@ -33,20 +47,21 @@
 .signup-group {
     width: 100%;
     min-height: 75px;
-    padding: 0 20px;
-    display: flex;
+    padding: 5px 20px;
+    /* display: flex; */
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
+    margin: 0 auto; /* 가로 중앙 정렬 */
+
 }
 
 .signup-group > input {
-    width: 70%;
+    width: 90%;
 }
 
 .signup-group > label {
-    padding-right: 20px;
-    text-align: center;
+    text-align: left; /* 왼쪽 정렬 (기본값) */
 }
 
 .invalid-feedback {
@@ -76,4 +91,14 @@
     font-size: 16px;
     width: 100px;
     height: 40px;
+}
+.custom-input {
+    width: 200px; /* 원하는 너비 값으로 조정 */
+    height: 40px; /* 원하는 높이 값으로 조정 */
+    font-size: 16px; /* 원하는 글꼴 크기로 조정 */
+    border-radius: 2px;
+    border-width: 2px;
+    border-color: #efefef;
+    /* box-shadow: 1px 1px 2px 1px #3b536b;  */
+    /* 추가적인 스타일링 옵션을 여기에 추가할 수 있습니다 */
 }

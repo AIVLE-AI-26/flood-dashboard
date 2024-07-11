@@ -16,23 +16,29 @@
           <div class="login-form-field">
             {{ form.username.label_tag }}
             {{ form.username }}
-            <div class="invalid-feedback">
-              아이디를 입력하세요.
-            </div>
+            
           </div>
           <div class="login-form-field">
             {{ form.password.label_tag }}
             {{ form.password }}
-            <div class="invalid-feedback">
-              비밀번호를 입력하세요.
-            </div>
+            
           </div>
         </div>
         <button type="submit" class="login-btn">로그인</button>
       </div>
+      <div class="not-input">
+      {% if messages %}
+        <div class="login-feedback">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %} 
+      </div>
       <div class="form-container-signup">
+      
         <span class="signup-text">아이디가 없으신가요?</span>
-        <button type="button" class="signup-btn" onclick="location.href='{% url 'terms' %}'">회원가입</button> <!-- 수정된 부분 -->
+        <button class="signup-btn" onclick="location.href='/signup/'">회원가입</button>
       </div>
     </form>
   </div>
