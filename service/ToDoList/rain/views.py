@@ -94,7 +94,7 @@ async def fetch_rainfall_data(request):
     # 데이터프레임으로 변환
     df = pd.DataFrame(all_data)
 
-    # 'fcst_value' 컬럼의 값 수정 
+    # 'fcst_value' 컬럼의 값 수정
     def clean_fcst_value(value):
         if value == '강수없음':
             return 0.0
