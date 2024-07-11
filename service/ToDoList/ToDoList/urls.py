@@ -10,5 +10,6 @@ urlpatterns = [
     path('board/', include('board.urls')),
     path('rain/', include('rain.urls')),
     path('waterlevel/', include('waterlevel.urls')),
+    path('terms/', include('terms.urls')),
     
 ]
