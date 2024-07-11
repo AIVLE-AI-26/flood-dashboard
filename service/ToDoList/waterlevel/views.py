@@ -2,6 +2,15 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import requests
 from datetime import datetime
+import pandas as pd
+import requests
+import xml.etree.ElementTree as ET
+import pandas as pd
+from datetime import datetime, timedelta
+import joblib
+import json
+from django.conf import settings
+import os
 
 # 관측소 코드와 이름, 위도 및 경도 매핑
 observatories = {
@@ -28,6 +37,7 @@ def fetch_water_level_data(obscd):
     today = datetime.today().strftime('%Y%m%d')  # 오늘 날짜를 'YYYYMMDD' 형식으로 가져옴
     params = {
         'obscd': obscd,
+        
         'startdt': today,  # 오늘 날짜로 설정
         'enddt': today,    # 오늘 날짜로 설정
         'output': 'json'
@@ -47,12 +57,135 @@ def get_waterlevel_data(request):
         data = fetch_water_level_data(code)
         if data:
             latest_data = data[-1]  # 리스트에서 최신 데이터 선택
+            latest_data['obscd'] = code
             latest_data['obsnm'] = info['name']  # 관측소 이름을 데이터에 추가
             latest_data['lat'] = info['lat']  # 관측소의 위도
             latest_data['lng'] = info['lng']  # 관측소의 경도
-            latest_data['홍수주의보'] = info['홍수주의보']  # 관측소의 위도
+            latest_data['홍수주의보'] = info['홍수주의보'] 
             latest_data['홍수경보'] = info['홍수경보']
             all_data.append(latest_data)
+    service_key = 'U5TMb2vWz5yYMTnePaPkAUBMk71makHiU1I1SjOcPC6MDSTQpVCygUlka/H5lFS97zg8esXtV6qKoUEPpox3EA=='
 
+    # API 엔드포인트
+    url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
+
+    base_date = datetime.now() - timedelta(days=1)
+    base_date = base_date.strftime('%Y%m%d') # 어제 23시 기준으로 3일치 강수량 데이터 호출
+
+    # Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+    # 요청 파라미터 공통 부분
+    common_params = {
+        'serviceKey': service_key, 
+        'pageNo': '1', 
+        'numOfRows': '1000', 
+        'dataType': 'XML', 
+        'base_date': base_date, 
+        'base_time': '2300'
+    }
+
+    # 각 지역별 (nx, ny) 좌표
+    locations = {
+        '광주광역시': (58, 74),
+        # '동구': (60, 74),
+        # '서구': (59, 74),
+        # '남구': (59, 73),
+        # '북구': (59, 75),
+        # '광산구': (57, 74)
+    }
+
+    # 데이터를 저장할 리스트 초기화
+    all_data1= []
+
+    # 각 지역에 대해 API 요청 보내기
+    for location_name, (nx, ny) in locations.items():
+        params = common_params.copy()
+        params['nx'] = nx
+        params['ny'] = ny
         
+        # GET 요청 보내기
+        response = requests.get(url, params=params)
+        
+        # 응답 확인
+        if response.status_code == 200:
+            print(f"API 요청 성공: {location_name}")
+            # XML 응답 파싱
+            root = ET.fromstring(response.content)
+            
+            # XML 데이터 파싱
+            for item in root.findall('.//item'):
+                category = item.find('category').text if item.find('category') is not None else ''
+                
+                # category가 'PCP'인 경우에만 데이터를 추가 (PCP : 1시간 강수량)
+                if category == 'PCP':
+                    # base_date = item.find('baseDate').text if item.find('baseDate') is not None else '' # baseDate : 발표일자
+                    # base_time = item.find('baseTime').text if item.find('baseTime') is not None else '' # baseDate : 발표시각
+                    fcst_date = item.find('fcstDate').text if item.find('fcstDate') is not None else '' # fcstDate : 예보일자
+                    fcst_time = item.find('fcstTime').text if item.find('fcstTime') is not None else '' # fcstTime : 예보시각
+                    fcst_value = item.find('fcstValue').text if item.find('fcstValue') is not None else '' # fcstValue : 예보 값
+                    
+                    all_data1.append({
+                        'location': location_name,
+                        # 'base_date': base_date,
+                        #'base_time': base_time,
+                        'fcst_date': fcst_date,
+                        'fcst_time': fcst_time,
+                        #'nx': nx,
+                        #'ny': ny,
+                        'fcst_value': fcst_value
+                    })
+        else:
+            print(f"Error: {response.status_code}, location: {location_name}")
+
+    # 데이터프레임으로 변환
+    df = pd.DataFrame(all_data1)
+    df['fcst_value'] = df['fcst_value'].apply(clean_fcst_value)
+    df[df['fcst_date'] == '20240711']
+    
+    df['time'] = df['fcst_time'].str[:2]
+    df['date'] = df['fcst_date']+ df['time']
+    df1 = df[['fcst_value',	'date']]
+    df1 = pd.DataFrame(df1)
+    all = pd.DataFrame(all_data)
+    data = pd.merge(all,df1,left_on='ymdh',right_on='date',how='left')
+    data = data[['ymdh',	'wl',	'obscd','홍수주의보'	,'홍수경보','fcst_value']]
+    model_path = os.path.join(settings.DATA_DIR, 'model_wl.pkl')
+    model_info = joblib.load(model_path)
+    model_wl = model_info['model']
+    model_columns = model_info['columns']
+    data = data.rename(columns={'홍수주의보':'주의보초과', '홍수경보':'경보초과', 'fcst_value':'rf'})
+    pred = model_wl.predict(data)
+    
+    all_data=[]
+    i = 0
+    for code, info in observatories.items():
+        data = fetch_water_level_data(code)
+        if data:
+            
+            latest_data = data[-1]  # 리스트에서 최신 데이터 선택
+            latest_data['obsnm'] = info['name']  # 관측소 이름을 데이터에 추가
+            latest_data['obscd'] = code
+            latest_data['lat'] = info['lat']  # 관측소의 위도
+            latest_data['lng'] = info['lng']  # 관측소의 경도
+            latest_data['홍수주의보'] = info['홍수주의보'] 
+            latest_data['홍수경보'] = info['홍수경보']
+            latest_data['홍수확률']= pred[i]
+            all_data.append(latest_data)
+            i +=1
     return JsonResponse(all_data, safe=False)
+
+def clean_fcst_value(value):
+    # null, '-', '강수없음'인 경우 0.0으로 변환
+    if value == '강수없음':
+        return 0.0
+    # '1 미만'인 경우 1.0으로 변환
+    if value == '1mm 미만':
+        return 1.0
+    # '30.0~50.0mm' 범주인 경우 30.0으로 변환
+    if value == '30.0~50.0mm':
+        return 30.0
+    # '50.0mm 이상' 범주인 경우 50.0으로 변환
+    if value == '50.0mm 이상':
+        return 50.0
+    # 'mm'를 제거하고 숫자로 변환
+    if 'mm' in value:
+        return float(value.replace('mm', ''))
