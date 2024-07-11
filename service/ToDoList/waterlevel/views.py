@@ -139,7 +139,7 @@ def get_waterlevel_data(request):
     # 데이터프레임으로 변환
     df = pd.DataFrame(all_data1)
     df['fcst_value'] = df['fcst_value'].apply(clean_fcst_value)
-    df[df['fcst_date'] == '20240711']
+    # df[df['fcst_date'] == '20240711']
     
     df['time'] = df['fcst_time'].str[:2]
     df['date'] = df['fcst_date']+ df['time']

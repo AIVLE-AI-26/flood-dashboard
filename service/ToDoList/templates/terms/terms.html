@@ -1,14 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>Terms and Conditions</title>
+    <meta charset="UTF-8">
+    <title>Privacy Policy</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'terms.css' %}">
+    <style>
+        /* 추가된 CSS */
+        .section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+
+        .section-content {
+            margin-bottom: 10px; /* 섹션 내용 간격 설정 */
+        }
+
+        .section input[type=checkbox] {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .agree-label {
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
-    <h2>Terms and Conditions</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Agree and Continue</button>
-    </form>
+    <div class="container">
+        <h2>Privacy Policy</h2>
+        <div id="policy-content">
+            <div class="section">
+                <h3>Information Collection</h3>
+                <div class="section-content">
+                    <p>
+                        1. 개인정보의 처리 목적<br>
+                        2. 개인정보의 처리 및 보유 기간<br>
+                        3. 개인정보의 제3자 제공에 관한 사항 (해당되는 경우에만 정함)<br>
+                        4. 개인정보의 파기절차 및 파기방법(법 제21조제1항 단서에 따라 개인정보를 보존<br>
+                        하여야 하는 경우에는 그 보존근거와 보존하는 개인정보 항목)<br>
+                        5. 개인정보처리의 위탁에 관한 사항 (해당되는 경우에만 정함)<br>
+                        6. 정보주체와 법정대리인의 권리 · 의무 및 그 행사방법에 관한 사항<br>
+                        7. 개인정보 보호책임자의 성명 또는 개인정보 보호업무 및 관련 고충사항을 처리하는<br>
+                        부서의 명칭과 전화번호 등 연락처<br>
+                        8. 인터넷 접속정보파일 등 개인정보를 자동으로 수집하는 장치의 설치·운영 및 그<br>
+                        거부에 관한 사항 (해당되는 경우에만 정함)<br>
+                        9. 처리하는 개인정보의 항목<br>
+                        10. 개인정보의 안전성 확보조치에 관한 사항<br>
+                        11. 개인정보 처리방침의 변경에 관한 사항<br>
+                        12. 개인정보의 열람청구를 접수 · 처리하는 부서<br>
+                        13. 정보주체의 권익침해에 대한 구제방법<br>
+                        14. 가명정보를 처리하는 경우 가명정보 처리에 관한 사항(해당되는 경우에만 작성)<br>
+                        - 가명정보의 처리 목적<br>
+                        - 가명정보의 처리 및 보유 기간<br>
+                        - 가명정보의 제3자 제공에 관한 사항(해당되는 경우에만 작성)<br>
+                        - 가명정보 처리의 위탁에 관한 사항(해당되는 경우에만 작성)<br>
+                        - 가명처리하는 개인정보의 항목<br>
+                        - 법 제28조의4에 따른 가명정보의 안전성 확보조치에 관한 사항<br>
+                        15. 국내대리인을 지정한 경우 국내대리인의 성명(법인의 경우 그 명칭 및 대표자의 성명),<br>
+                        주소(법인의 경우 영업소 소재지), 전화번호 및 전자우편 주소 (해당되는 경우에만 작성)<br>
+                        16. 추가적인 이용·제공 관련 영 제14조의2 제1항 각 호의 고려사항에 대한 판단기준<br>
+                        (해당되는 경우에만 작성)<br>
+                        17. 영상정보처리기기 운영 · 관리에 관한 사항<br>
+                        (「개인정보 보호법」 제25조제7항에 따른 '영상정보처리기기 운영 · 관리방침'을 개인정보처리방침에 포함하여 정하는 경우)<br>
+                        18. 그 밖에 개인정보처리자가 개인정보 처리 기준 및 보호조치 등에 관하여 자율적으로 개인정보 처리방침에 포함하여 정한 사항<br>
+                    </p>
+                    <input type="checkbox" id="agree1" name="agree1" required><label class="agree-label" for="agree1"> 동의함</label>
+                </div>
+            </div>
+            <div class="section">
+                <h3>개인정보 수집 및 이용 동의</h3>
+                <div class="section-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>수집 목적</th>
+                                <th>수집 항목</th>
+                                <th>수집 근거</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>회원 식별 및 회원제 서비스 제공</td>
+                                <td>아이디, 비밀번호</td>
+                                <td>개인정보 보호법 제15조 제1항</td>
+                            </tr>
+                            <tr>
+                                <td>고객 상담 및 AS관리</td>
+                                <td>전화번호</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>서비스 변경사항 및 고지사항 전달</td>
+                                <td>이메일</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="note">* 귀하는 OOOO 서비스 이용에 필요한 최소한의 개인정보 수집·이용에 동의하지 않을 수 있으나, 동의를 거부할 경우 회원제 서비스 이용이 불가합니다.</p>
+                <input type="checkbox" id="agree2" name="agree2" required><label class="agree-label" for="agree2"> 동의함</label>
+                </div>
+            </div>
+            <div class="section">
+                <h3>홍보 및 마케팅에 관한 동의</h3>
+                <div class="section-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>수집 목적</th>
+                                <th>수집 항목</th>
+                                <th>보유기간</th>
+                                <th>동의 여부 (선택)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>월 매거진 발송(월1회)</td>
+                                <td>이메일</td>
+                                <td>수집일로부터 1년</td>
+                                <td><input type="checkbox" id="marketing1" name="marketing1"><label for="marketing1"> 동의함</label></td>
+                            </tr>
+                            <tr>
+                                <td>SMS를 통한 이벤트 참여 기회 제공</td>
+                                <td>휴대전화번호</td>
+                                <td>수집일로부터 6개월</td>
+                                <td><input type="checkbox" id="marketing2" name="marketing2"><label for="marketing2"> 동의함</label></td>
+                            </tr>
+                            <tr>
+                                <td>관심 상품 관련 쿠폰 제공</td>
+                                <td>주소</td>
+                                <td>'OO몰' 온라인 가입일 까지</td>
+                                <td><input type="checkbox" id="marketing3" name="marketing3"><label for="marketing3"> 동의함</label></td>
+                            </tr>
+                            <tr>
+                                <td>사용자 행태 분석을 통한 맞춤형 광고 제공</td>
+                                <td>사용자 접속기록, 접속기록, 열어본 페이지 등</td>
+                                <td>수집일로부터 3개월</td>
+                                <td><input type="checkbox" id="marketing4" name="marketing4"><label for="marketing4"> 동의함</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="note">* 귀하는 개인정보 수집·이용에 동의하지 않을 권리가 있으며, 동의를 거부할 경우에는 거부한 내용 관련 서비스를 받을 수 없습니다.</p>
+                    <input type="checkbox" id="agree3" name="agree3"><label class="agree-label" for="agree3"> 동의함</label>
+                </div>
+            </div>
+            <div class="section">
+                <h3>개인정보 제3자 제공 동의</h3>
+                <div class="section-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>제공받는 자</th>
+                                <th>제공 목적</th>
+                                <th>제공 항목</th>
+                                <th>보유기간</th>
+                                <th>제공 동의 (선택)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>OO 멤버스</td>
+                                <td>통합 멤버십 포인트 적립</td>
+                                <td>ID</td>
+                                <td>'OO몰' 온라인 가입일 까지</td>
+                                <td><input type="checkbox" id="thirdparty1" name="thirdparty1"><label for="thirdparty1"> 동의함</label></td>
+                            </tr>
+                            <tr>
+                                <td>OO카드사</td>
+                                <td>이벤트 참여 기회 제공</td>
+                                <td>성명, 이메일, 휴대전화번호</td>
+                                <td>제공 동의 후 OO일 까지</td>
+                                <td><input type="checkbox" id="thirdparty2" name="thirdparty2"><label for="thirdparty2"> 동의함</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="note">* 귀하는 개인정보 수집·이용에 동의하지 않을 권리가 있으며, 동의를 거부할 경우에는 거부한 내용 관련 서비스를 받을 수 없습니다.</p>
+                    <input type="checkbox" id="agree4" name="agree4"><label class="agree-label" for="agree4"> 동의함</label>
+                </div>
+            </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <input type="checkbox" name="agree" id="agree" required>
+                <label for="agree">I have read and agree to the Privacy Policy</label>
+            </div>
+            <button type="submit">Agree and Continue</button>
+        </form>
+    </div>
 </body>
 </html>
