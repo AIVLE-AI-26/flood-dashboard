@@ -170,7 +170,7 @@ body {
 #regionSelection {
     display: none; /* 처음에는 보이지 않도록 설정 */
     position: absolute;
-    top: 0;
+    top: 50px;
     left: 300px; /* 대피소 버튼의 오른쪽에 위치시키기 위해 설정 (필요시 조정) */
     background-color: white;
     border: 1px solid #ccc;
@@ -296,4 +296,51 @@ footer {
     display: flex;
     align-items: center; /* 수직 가운데 정렬 */
     justify-content: center; /* 수평 가운데 정렬 */
+}
+
+.chatbot-icon-link {
+    position: absolute;
+    bottom: 170px; /* 말풍선 꼬리와의 위치 조정 */
+    left: 110px; /* 왼쪽에 위치 */
+    cursor: pointer;
+    transform: translateX(-50%); /* 말풍선 꼬리와 정렬 */
+}
+
+.chatbot-icon {
+    width: 90px; /* 적절한 크기로 조정 */
+    height: 90px; /* 적절한 크기로 조정 */
+}
+
+/* 침수예상지역 버튼 css */
+#rainfall-buttons {
+    display: none;
+}
+
+#rainfall-buttons {
+    display: none; /* 처음에는 보이지 않도록 설정 */
+    position: absolute;
+    top: 50px;
+    left: 160px; /* 대피소 버튼의 오른쪽에 위치시키기 위해 설정 (필요시 조정) */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.RainfallButtons .rainfall-button {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    width: 100px; /* 버튼 너비 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.rainfall-button.active {
+    background-color: #35397e; /* 원하는 활성화 색상으로 변경 */
+    color: white;
+}
+
+.rainfall-button {
+    background-color: white; /* 비활성화된 버튼 색상 */
+    color: black;
 }

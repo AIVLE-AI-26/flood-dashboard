@@ -21,6 +21,57 @@ def contact(request):
 def waterlevel(request):
     return render(request, 'waterlevel/waterlevel.html') 
 
+def create_geojson(features):
+    geojson = {
+        "type": "FeatureCollection",
+        "features": features
+    }
+    return geojson
+
+def create_polygon_feature(lat, lng, fill_color, fill_opacity=0.2, stroke_color=None, stroke_opacity=0, stroke_weight=2):
+    if stroke_color is None:
+        stroke_color = fill_color
+    feature = {
+        "type": "Feature",
+        "geometry": {
+            "type": "Polygon",
+            "coordinates": [[
+                [lng - 0.001, lat - 0.001],
+                [lng - 0.001, lat + 0.001],
+                [lng + 0.001, lat + 0.001],
+                [lng + 0.001, lat - 0.001],
+                [lng - 0.001, lat - 0.001]
+            ]]
+        },
+        "properties": {
+            "fillColor": fill_color,
+            "fillOpacity": fill_opacity,
+            "strokeColor": stroke_color,
+            "strokeOpacity": stroke_opacity,
+            "strokeWeight": stroke_weight
+        }
+    }
+    return feature
+
+def create_point_feature(lat, lng, title, address, capacity, region, marker_color="#FF0000"):
+    feature = {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [lng, lat]
+        },
+        "properties": {
+            "markerColor": marker_color,
+            "markerSize": "medium",
+            "markerSymbol": "circle",
+            "title": title,
+            "address": address,
+            "capacity": capacity,
+            "region": region
+        }
+    }
+    return feature
+
 # model_path = r'C:\Users\User\Documents\KT-BIGP\flood-dashboard\service\ToDoList\data\model1.joblib'
 # model = joblib.load(model_path)
 
@@ -52,66 +103,39 @@ def waterlevel(request):
 
 
 def get_geojson_data():
-    # 엑셀 파일 경로
-    # excel_file_name = '광주광역시-침수피해현황_20231018.xlsx'
-    
     csv_file_name3 = 'df.csv'
+    excel_file_name = '광주광역시-침수피해현황_20231018.xlsx'
     excel_file_name2 = '광주광역시_대피소.xlsx'
-    # excel_file_path = os.path.join(settings.DATA_DIR, excel_file_name)
     
     csv_file_path3 = os.path.join(settings.DATA_DIR, csv_file_name3)
+    excel_file_path = os.path.join(settings.DATA_DIR, excel_file_name)
     excel_file_path2 = os.path.join(settings.DATA_DIR, excel_file_name2)
     
-    # 엑셀 파일을 읽어 데이터프레임으로 변환
-    
+    df3 = pd.read_excel(excel_file_path) 
     df2 = pd.read_excel(excel_file_path2) 
-    df= pd.read_csv(csv_file_path3)
+    df = pd.read_csv(csv_file_path3)
 
-
-    
-    # 위도와 경도가 포함된 열 이름을 정확히 확인하고 수정
     lat_column = 'Latitude'
     lng_column = 'Longitude'
-    shelter_name_column = '대피소 명칭'  # 대피소 명칭 컬럼명
-    address_column = '주소'  # 주소 컬럼명
-    capacity_column = '최대 수용 인원'  # 최대 수용 인원 컬럼명
-    region_column = '구'  # 구 컬럼명
+    shelter_name_column = '대피소 명칭'
+    address_column = '주소'
+    capacity_column = '최대 수용 인원'
+    region_column = '구'
     
-    # GeoJSON 형식의 데이터 초기화
-    geojson = {
-        "type": "FeatureCollection",
-        "features": []
-    }
+    features = []
     
-    # 각 행을 반복하여 GeoJSON 형식으로 변환 (df1)
+    for index, row in df3.iterrows():
+        lat = row[lat_column]
+        lng = row[lng_column]
+        if pd.notnull(lat) and pd.notnull(lng):
+            features.append(create_polygon_feature(lat, lng, fill_color="#FF0000"))
+    
     for index, row in df.iterrows():
         lat = row[lat_column]
         lng = row[lng_column]
         if pd.notnull(lat) and pd.notnull(lng):
-            # 각 지점을 중심으로 하는 사각형 다각형 생성
-            feature = {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [[
-                        [lng - 0.001, lat - 0.001],
-                        [lng - 0.001, lat + 0.001],
-                        [lng + 0.001, lat + 0.001],
-                        [lng + 0.001, lat - 0.001],
-                        [lng - 0.001, lat - 0.001]
-                    ]]
-                },
-                "properties": {
-                    "fillColor": "#0000FF",
-                    "fillOpacity": 0.2,
-                    "strokeColor": "#0000FF",
-                    "strokeOpacity": 0,
-                    "strokeWeight": 2
-                }
-            }
-            geojson["features"].append(feature)
-    
-    # 각 행을 반복하여 GeoJSON 형식으로 변환 (df2)
+            features.append(create_polygon_feature(lat, lng, fill_color="#0000FF"))
+
     for index, row in df2.iterrows():
         lat = row[lat_column]
         lng = row[lng_column]
@@ -120,26 +144,11 @@ def get_geojson_data():
         capacity = row[capacity_column]
         region = row[region_column]
         if pd.notnull(lat) and pd.notnull(lng):
-            # 마커 생성
-            feature = {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [lng, lat]
-                },
-                "properties": {
-                    "markerColor": "#FF0000",
-                    "markerSize": "medium",
-                    "markerSymbol": "circle",
-                    "title": shelter_name,  # 대피소 명칭 설정
-                    "address": address,  # 주소 설정
-                    "capacity": capacity,  # 최대 수용 인원 설정
-                    "region": region  # 구 설정
-                }
-            }
-            geojson["features"].append(feature)
+            features.append(create_point_feature(lat, lng, shelter_name, address, capacity, region))
+            
+    print(df3)
     
-    return geojson
+    return create_geojson(features)
 
 def map_data_view(request):
     geojson_data = get_geojson_data()
@@ -149,23 +158,28 @@ def map_view(request):
     return render(request, 'main/base.html')
 
 def handle_button(request):
-    csv_file_name = 'df.csv'
-    csv_file_name2 = '광주_도로명.csv'
-    csv_file_path = os.path.join(settings.DATA_DIR, csv_file_name)
-    csv_file_path2 = os.path.join(settings.DATA_DIR, csv_file_name2)
-    road_csv = pd.read_csv(csv_file_path2)
-    model_name = 'model.pkl'
-    model_path = os.path.join(settings.DATA_DIR, model_name)
-    model = joblib.load(model_path)
-    if request.method == 'POST':
-        button_value = request.POST.get('button_value')
-        road_csv['강수량'] = int(button_value) 
-        road_csv = road_csv.drop('침수피해여부',axis=1)
+    button_value = request.GET.get('button_value')
+    if button_value is not None:
+        model_path = os.path.join(settings.DATA_DIR, 'model.pkl')
+        road_csv_path = os.path.join(settings.DATA_DIR, '광주_도로명.csv')
+        model = joblib.load(model_path)
+        
+        road_csv = pd.read_csv(road_csv_path)
+        road_csv['강수량'] = int(button_value)
+        road_csv = road_csv.drop('침수피해여부', axis=1)
+        
         pred = model.predict(road_csv)
         y_score = (pred > 0.9).astype(int)
-        df = road_csv['Latitude'][y_score.astype(bool)],road_csv['Longitude'][y_score.astype(bool)]
-        df = pd.DataFrame(df)
-        df=df.T
-        df.to_csv(csv_file_path,index=False)
-        return render(request, 'main/base.html')
-
+        df = road_csv[['Latitude', 'Longitude']][y_score.astype(bool)]
+        
+        features = []
+        
+        for _, row in df.iterrows():
+            lat = row['Latitude']
+            lng = row['Longitude']
+            if pd.notnull(lat) and pd.notnull(lng):
+                features.append(create_polygon_feature(lat, lng, fill_color="#0000FF"))
+        
+        return JsonResponse(create_geojson(features))
+    
+    return JsonResponse({'error': 'No value provided'}, status=400)
