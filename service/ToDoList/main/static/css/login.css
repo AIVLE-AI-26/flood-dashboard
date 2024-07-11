@@ -26,7 +26,7 @@
   width: 100%;
   max-width: 400px;
   height: 400px; /* height from the original .form-container-login */
-  margin: 100px auto;
+  margin: 120px auto;
   padding: 20px;
   background: rgba(255, 255, 255, 0.9);
   border: 2px solid gray; /* border from the original .form-container-login */
@@ -46,7 +46,7 @@
 /* Login group style */
 .login-group {
   width: 100%;
-  padding: 20px 15px;
+  padding: 10px 0px;
   display: flex;
   box-sizing: border-box;
 }
@@ -54,11 +54,11 @@
 /* Input text style */
 .input-text {
   flex-basis: 70%;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 .input-text .login-form-field {
-  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .input-text .login-form-field label {
@@ -69,15 +69,12 @@
 
 .input-text .login-form-field input,
 .input-text > input {
-  width: 100%;
-  height: 48px; /* height from the original .input-text > input */
-  padding: 0 10px;
-  font-size: 16px;
-  margin-bottom: 16px;
-  border: 1px solid #ddd;
-  border-radius: 6px; /* border-radius from the original .input-text > input */
-  background-color: #F8F8F8;
-  box-sizing: border-box;
+  width: 200px; /* 원하는 너비 값으로 조정 */
+  height: 40px; /* 원하는 높이 값으로 조정 */
+  font-size: 16px; /* 원하는 글꼴 크기로 조정 */
+  border-radius: 2px;
+  border-width: 2px;
+  border-color: #efefef;
 }
 
 .input-text .login-form-field input:focus {
@@ -89,11 +86,11 @@
 /* Login button style */
 .login-btn {
   flex: auto;
-  width: 20%;
+  width: 40%;
   padding: 10px;
   margin-top: 50px;
-  margin-bottom: 50px;
-
+  margin-bottom: 80px;
+  margin-left: 20px;
   font-size: 16px;
   background: #2c3e50;
   color: #fff;
@@ -113,11 +110,11 @@
   justify-content: space-between;
   align-items: center;
   text-align: center; /* text-align from the original .form-container-signup */
-  margin-top: 20px; /* margin-top from the original .form-container-signup */
+  margin: 20px
 }
 
 .signup-text {
-  padding-right: 20px;
+  padding-right: 30px;
   flex-basis: 70%;
   font-size: 16px;
   text-align: right;
@@ -141,4 +138,10 @@
 .signup-btn:hover {
   background: #007b83;
   color: #fff;
+}
+.not-input{
+  padding-left: 20px;
+  color: #ff0000;
+  font-size: 20px;
+  margin-top:0px;
 }

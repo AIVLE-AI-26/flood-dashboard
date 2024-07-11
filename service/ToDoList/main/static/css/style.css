@@ -469,13 +469,11 @@ label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
-    background-color: #f4f4f4;
     font-size: 20px;
     margin-left: 5px;
 }
 
 /* Input, Textarea and Select Styles */
-input[type="text"],
 textarea,
 select {
     width: 100%;
