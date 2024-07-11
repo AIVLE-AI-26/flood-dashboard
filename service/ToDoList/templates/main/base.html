@@ -1,3 +1,4 @@
+{% extends 'main/navbar.html' %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,79 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Safe City{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <div class="top-bar">
-        <div class="logo">
-            <h1><a href="" class="title-logo-link">광주광역시 도시침수 통합정보시스템</a></h1>
-        </div>
-        <div class="auth-links">
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">로그아웃</a>
-            {% else %}
-                <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'terms' %}">회원가입</a>
-            {% endif %}
-        </div>
-    </div>
-    <div class="main-container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
-                    <li><a href="{% url 'rain' %}">강수량</a></li>
-                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a onclick="openModal()">챗봇</a></li>
-                    <li><a onclick="openModal()" class="chatbot-icon-link">
-                        <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon">
-                    </a></li>
-                </ul>
-            </nav>
-        </aside>
-        <div class="content-container">
-        {% block content %}
-            <main class="content">
-                <div class="map_m">
-                    <div class="map-controls">
-                        <button id="past-flooding">과거침수 지역</button>
-                        <button id="toggleButton">침수예상 지역</button>
-                        <div id="rainfall-buttons" class="RainfallButtons">
-                            <button class="rainfall-button" data-value="0">0mm</button>
-                            <button class="rainfall-button" data-value="50">50mm</button>
-                            <button class="rainfall-button" data-value="100">100mm</button>
-                            <button class="rainfall-button" data-value="150">150mm</button>
-                        </div>
-                        <button id="shelterButton">대피소</button>
-                        <div id="regionSelection" class="region-selection">
-                            <button class="region-button" id="all">광주 전체</button>
-                            <button class="region-button" id="donggu">동구</button>
-                            <button class="region-button" id="seogu">서구</button>
-                            <button class="region-button" id="namgu">남구</button>
-                            <button class="region-button" id="bukgu">북구</button>
-                            <button class="region-button" id="gwangsangu">광산구</button>
-                        </div>
+    {% block content %}
+        <main class="content">
+            <div class="map_m">
+                <div class="map-controls">
+                    <button id="past-flooding">과거침수 지역</button>
+                    <button id="toggleButton">침수예상 지역</button>
+                    <div id="rainfall-buttons" class="RainfallButtons">
+                        <button class="rainfall-button" data-value="0">0mm</button>
+                        <button class="rainfall-button" data-value="50">50mm</button>
+                        <button class="rainfall-button" data-value="100">100mm</button>
+                        <button class="rainfall-button" data-value="150">150mm</button>
+                    </div>
+                    <button id="shelterButton">대피소</button>
+                    <div id="regionSelection" class="region-selection">
+                        <button class="region-button" id="all">광주 전체</button>
+                        <button class="region-button" id="donggu">동구</button>
+                        <button class="region-button" id="seogu">서구</button>
+                        <button class="region-button" id="namgu">남구</button>
+                        <button class="region-button" id="bukgu">북구</button>
+                        <button class="region-button" id="gwangsangu">광산구</button>
                     </div>
                 </div>
-                <div id="map" style="width: 100%; height: 100%;"></div>
-            </main>
-        {% endblock %}
-        </div>
-    </div>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe>
-        </div>
-    </div>
+            </div>
+            <div id="map" style="width: 100%; height: 100%;"></div>
+        </main>
+    {% endblock %}
     {% block extra_script %}
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <script src="{% static 'js/map.js' %}"></script>
-    {% endblock %}
     <script src="{% static 'js/dropdown.js' %}"></script>
-    <script src="{% static 'js/modal.js' %}"></script>
+    {% endblock %}
 </body>
 </html>

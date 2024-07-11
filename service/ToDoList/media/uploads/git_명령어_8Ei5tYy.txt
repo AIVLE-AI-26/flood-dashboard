@@ -1,0 +1,21 @@
+git status
+
+git remote -v
+git add .
+
+git commit -m "[문서] README 수정
+- readme.md 수정"
+ 
+git push origin main
+
+* 깃허브에서 sync fork하고 pull 실행!
+git log
+git pull origin main
+
+<Aborting 일어났을때>
+git status => 빨간색 뜨는거 확인
+git restore 빨간색 뜨는거 => git restore main/__pycache__/views.cpython-311.pyc
+한줄씩 넣어서 한 후에 git status로 다시 확인
+
+git stash : 작업 도중 변경된 파일 임시 저장
+git stash drop : 임시저장한거 다 날림

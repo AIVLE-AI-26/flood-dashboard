@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'main/navbar.html' %}
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safe City</title>
     {% load static %}
-    {% block extra_head %}
+    {% block styles %}
     <link rel="stylesheet" href="{% static 'css/rain.css' %}">
     {% endblock %}
 </head>
