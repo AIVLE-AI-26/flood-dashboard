@@ -146,8 +146,6 @@ def get_geojson_data():
         if pd.notnull(lat) and pd.notnull(lng):
             features.append(create_point_feature(lat, lng, shelter_name, address, capacity, region))
             
-    print(df3)
-    
     return create_geojson(features)
 
 def map_data_view(request):

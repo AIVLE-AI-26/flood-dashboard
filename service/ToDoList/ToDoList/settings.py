@@ -73,6 +73,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'rain/static'),
     os.path.join(BASE_DIR, 'waterlevel/static'),
     os.path.join(BASE_DIR, 'terms/static'),
+
 ]
 
 DATABASES = {
@@ -99,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "ASIA/Seoul"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -110,7 +111,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
