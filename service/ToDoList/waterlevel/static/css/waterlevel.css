@@ -20,8 +20,10 @@
 }
 
 #map {
-    width: 800px;
-    height: 700px;
+    max-width: 800px;
+    max-height: 700px;
+    min-width: 800px;
+    min-height: 700px;
     background: url("../img/waterlevelimg.jpg") no-repeat center center;
     background-size: contain;
     position: relative;
