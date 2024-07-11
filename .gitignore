@@ -11,6 +11,9 @@
 .gitconfig
 .profile
 
+# critical data
+service/ToDoList/db.sqlite3
+
 # cache or package
 service/ToDoList/board/__pycache__/
 service/ToDoList/board/migrations/__pycache__/
