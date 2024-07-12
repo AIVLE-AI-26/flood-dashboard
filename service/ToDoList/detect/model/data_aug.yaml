@@ -1,0 +1,6 @@
+train: D:/KT_AIVLE/yolov9/dataset_aug/train/images
+val: D:/KT_AIVLE/yolov9/dataset/valid/images
+test: D:/KT_AIVLE/yolov9/dataset/test/images
+
+nc: 12
+names: ['0', '1', '15', '16', '17', '2', '3', '4', '5', '6', '7', '8']
