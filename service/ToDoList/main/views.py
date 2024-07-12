@@ -5,6 +5,11 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 import joblib
 import os
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.contrib.auth.forms import UserChangeForm
+from .forms import EditProfileForm
+from django.contrib.auth import update_session_auth_hash
 
 def home(request):
     return render(request, 'main/home.html')
@@ -71,36 +76,6 @@ def create_point_feature(lat, lng, title, address, capacity, region, marker_colo
         }
     }
     return feature
-
-# model_path = r'C:\Users\User\Documents\KT-BIGP\flood-dashboard\service\ToDoList\data\model1.joblib'
-# model = joblib.load(model_path)
-
-# def get_coordinates(request):
-#     value = request.GET.get('value', None)
-#     if value is not None:
-#         value = float(value)  # 입력값을 실수로 변환
-#         # 기존 데이터를 복사하여 새로운 데이터 생성
-#         new_data = 광주.copy()
-#         new_data["강수량"] = value  # 임의의 강수량 설정
-
-    
-
-#         # 예측 수행
-#         y_pred_new = model.predict(new_data)
-
-#         # 예측 결과를 데이터프레임에 추가
-#         new_data['예측 침수여부'] = y_pred_new[:len(new_data)]  # 길이 맞추기
-
-#         # 예측된 침수 여부가 높은 지역 필터링 (예: 0.8 이상인 지역)
-#         flood_prone_areas = new_data[new_data['예측 침수여부'] >= 0.8]
-
-#         # 필터링된 지역의 위도와 경도 값을 추출
-#         locations = flood_prone_areas[['Latitude', 'Longitude']].dropna().to_dict(orient='records')
-#         locations = [{'lat': loc['Latitude'], 'lng': loc['Longitude']} for loc in locations]
-
-#         return JsonResponse({'locations': locations})
-#     return JsonResponse({'error': 'No value provided'}, status=400)
-
 
 def get_geojson_data():
     csv_file_name3 = 'df.csv'
@@ -181,3 +156,26 @@ def handle_button(request):
         return JsonResponse(create_geojson(features))
     
     return JsonResponse({'error': 'No value provided'}, status=400)
+
+@login_required
+def profile(request):
+    return render(request, 'main/profile.html')
+
+@login_required
+def delete_account(request):
+    user = request.user
+    user.delete()
+    logout(request)
+    return redirect('home')
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, request.user)  # 비밀번호 변경 후 세션 유지
+            return redirect('profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+    return render(request, 'main/edit_profile.html', {'form': form})

@@ -1,0 +1,7 @@
+{% extends 'main/navbar.html' %}
+{% block content %}
+    <h2>내 정보 조회</h2>
+    <p>사용자 이름: {{ user.username }}</p>
+    <p>이메일: {{ user.email }}</p>
+    <a href="{% url 'edit_profile' %}" class="btn">회원 정보 수정</a>
+{% endblock %}
