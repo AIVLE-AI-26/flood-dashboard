@@ -8,3 +8,4 @@ tiktoken
 rank_bm25
 openpyxl
 scikit-learn==1.3.0
+ultralytics==8.0.199

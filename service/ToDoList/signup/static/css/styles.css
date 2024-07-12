@@ -36,7 +36,7 @@ body {
 .auth-links a:hover {
     text-decoration: underline;
 }
-.form-container-login {
+.form-container-signup {
     max-width: 500px;
     width: 80%; /* 화면 너비의 80%로 조정 */
     height: 80%;
@@ -50,21 +50,21 @@ body {
     position: relative; /* 부모 요소로 설정 */
     bottom: 0; /* 화면 하단으로 고정 */
 }
-.form-container-login form {
+.form-container-signup form {
     text-align: left; /* 폼 내부 요소 왼쪽 정렬 */
 }
 
-.login-group {
+.signup-group {
     margin-bottom: 20px; /* 입력 그룹 간격을 크게 설정 */
 }
 
-.login-group label {
+.signup-group label {
     display: block;
     margin-bottom: 8px; /* 라벨 간격을 줄임 */
     font-weight: bold;
 }
 
-.login-group .form-control {
+.signup-group .form-control {
     width: 100%;
     padding: 12px; /* 패딩을 늘려 더 크게 만듦 */
     border-radius: 4px;
@@ -73,7 +73,7 @@ body {
     margin-bottom: 10px; /* 입력 필드 간격을 더 크게 설정 */
 }
 
-.login-group .invalid-feedback {
+.signup-group .invalid-feedback {
     color: #dc3545;
     margin-top: 10px;
 }
@@ -82,7 +82,7 @@ body {
     text-align: center;
 }
 
-.login-btn {
+.signup-btn {
     background-color: #007bff; /* Blue color */
     color: white;
     border: none;
@@ -94,11 +94,11 @@ body {
     width: auto; /* 버튼 너비를 내용에 맞게 자동 조정 */
 }
 
-.login-btn:hover {
+.signup-btn:hover {
     background-color: #c82333; /* Darker red on hover */
 }
 
-.login-group .form-control {
+.signup-group .form-control {
     width: 100%;
     padding: 8px; /* Reduced padding for a more compact look */
     border-radius: 4px;
@@ -107,7 +107,7 @@ body {
     margin: 0 auto; /* Center align the input fields */
 }
 
-.login-group .invalid-feedback {
+.signup-group .invalid-feedback {
     color: #dc3545;
     margin-top: 5px;
     display: none; /* 기본적으로 오류 메시지를 숨김 */
@@ -147,7 +147,7 @@ body {
     text-decoration: underline;
 }
 
-.form-container-login {
+.form-container-signup {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -156,15 +156,15 @@ body {
     margin: 0 auto;
 }
 
-.login-group {
+.signup-group {
     margin-bottom: 20px;
 }
 
-.login-group label {
+.signup-group label {
     font-weight: bold;
 }
 
-.login-group .form-control {
+.signup-group .form-control {
     width: 100%;
     padding: 8px; /* Reduced padding for a more compact look */
     border-radius: 4px;
@@ -173,12 +173,21 @@ body {
     margin: 0 auto; /* Center align the input fields */
 }
 
-.login-group .invalid-feedback {
+.signup-group .invalid-feedback {
     color: #dc3545;
     margin-top: 5px;
     display: none; /* 기본적으로 오류 메시지를 숨김 */
 }
 
-.login-btn {
+.signup-btn {
     width: 100%;
+}
+
+.signup-btn .select {
+    width: 91%;
+    height: 40px;
+    padding: 1px 2px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
