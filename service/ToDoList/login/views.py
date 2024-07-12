@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import LoginForm
 from django.contrib import messages
 
+
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
@@ -17,7 +18,8 @@ def login_view(request):
             messages.error(request, '아이디 혹은 비밀번호가 틀렸습니다.')
     else:
         form = LoginForm()
-    return render(request, 'login/login.html', {'form': form, 'messages' : messages.get_messages(request)})
+    return render(request, 'login/login.html', {'form': form, 'messages': messages.get_messages(request)})
+
 
 def logout_view(request):
     logout(request)
