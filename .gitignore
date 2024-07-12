@@ -27,6 +27,10 @@ service/ToDoList/rain/__pycache__/
 service/ToDoList/rain/migrations/__pycache__/
 service/ToDoList/signup/__pycache__/
 service/ToDoList/signup/migrations/__pycache__/
+service/ToDoList/sighup/__pycache__/
+service/ToDoList/sighup/migrations/__pycache__/
+service/ToDoList/terms/__pycache__/
+service/ToDoList/terms/migrations/__pycache__/
 service/ToDoList/ToDoList/__pycache__/
 service/ToDoList/waterlevel/__pycache__/
 service/ToDoList/waterlevel/migrations/__pycache__/
