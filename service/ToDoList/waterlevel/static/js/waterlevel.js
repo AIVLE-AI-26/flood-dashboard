@@ -2,24 +2,30 @@ document.addEventListener('DOMContentLoaded', function() {
     var mapContainer = document.getElementById('map');
     var infoContainer = document.getElementById('waterlevel-info');
 
+    const apiKey = 'AIzaSyClithh9PS0DjOql1fbCszrEfPQcYtl0gU';
+    const mapScript = document.createElement('script');
+    mapScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+    mapScript.async = true;
+    document.head.appendChild(mapScript);
+
     // 관측소의 위치와 수위를 표시할 데이터 (중앙으로 모이도록 설정)
     var observatories = [
-        // { name: '담양군(광주댐)', x: 711, y: 278, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(극락교)', x: 382, y: 389, wl: '0.00' ,fl : '0'},
-        // { name: '광주광역시(벽진동)', x: 422, y: 401, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(설월교)', x: 593, y: 402, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(승용교)', x: 271, y: 523, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(신운교)', x: 517, y: 320, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(어등대교)', x: 376, y: 338, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(용산교)', x: 512, y: 171, wl: '0.00',fl : '0' },
-        { name: '광주광역시(용진교)', x: 218, y: 224, wl: '0.00',fl : '0'},
-        { name: '광주광역시(우제교)', x: 625, y: 399, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(유촌교)', x: 447, y: 324, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(장록교)', x: 298, y: 392, wl: '0.00',fl : '0' },
-        { name: '광주광역시(천교)', x: 551, y: 358, wl: '0.00' ,fl : '0'},
-        { name: '광주광역시(첨단대교)', x: 447, y: 219, wl: '0.00',fl : '0' },
-        { name: '광주광역시(평림교)', x: 100, y: 327, wl: '0.00',fl : '0' },
-        { name: '광주광역시(풍영정천2교)', x: 357, y: 314, wl: '0.00' ,fl : '0'},
+        {name: '담양군(광주댐)', 'lat': 35.1893218064162, 'lng': 126.98387745098, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(용산교)', 'lat': 35.2405799574413, 'lng': 126.888496612547, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(첨단대교)', 'lat': 35.2175, 'lng': 126.856944, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(유촌교)', 'lat': 35.167116, 'lng': 126.856710, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(풍영정천2교)', 'lat': 35.171876, 'lng': 126.813981, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(어등대교)', 'lat': 35.16, 'lng': 126.82305555555556, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(신운교)', 'lat': 35.16861111111111, 'lng': 126.89083333333333, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(우제교)', 'lat': 35.13138888888889, 'lng': 126.94250000000001, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(설월교)', 'lat': 35.129444444444445, 'lng': 126.92750000000001, wl: '0.00' ,fl : '0'},
+        // {'name': '광주광역시(벽진동)', 'lat': 35.13, 'lng': 126.845, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(장록교)', 'lat': 35.134166666666665, 'lng': 126.785, wl: '0.00' ,fl : '0'},  
+        {name: '광주광역시(평림교)', 'lat': 35.165277777777774, 'lng': 126.69, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(천교)', 'lat': 35.151111111111106, 'lng': 126.90722222222223, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(용진교)', 'lat': 35.21527777777778, 'lng': 126.74666666666667, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(승용교)', 'lat': 35.071111111111115, 'lng': 126.77222222222223, wl: '0.00' ,fl : '0'},
+        {name: '광주광역시(극락교)', 'lat': 35.13583333333333, 'lng': 126.82583333333334, wl: '0.00' ,fl : '0'},
     ];
 
     // 전체 수위 데이터를 오른쪽 패널에 표시
@@ -31,30 +37,34 @@ document.addEventListener('DOMContentLoaded', function() {
         infoContainer.appendChild(listItem);
     });
     
-
-    // 지도에 마커 표시
-    observatories.forEach(function(obs) {
-        var marker = document.createElement('div');
-        marker.className = 'map-marker';
-        marker.style.left = obs.x + 'px';
-        marker.style.top = obs.y + 'px';
-        marker.setAttribute('data-name', obs.name);
-        marker.setAttribute('data-wl', obs.wl);
-        mapContainer.appendChild(marker);
-
-        marker.addEventListener('click', function() {
-            // 오른쪽 패널에서 해당 관측소 정보 강조
-            var items = document.querySelectorAll('.info-item');
-            items.forEach(function(item) {
-                item.classList.remove('highlight');
-                if (item.getAttribute('data-name') === obs.name) {
-                    item.classList.add('highlight');
-                }
-            });
-            // 알림 창으로도 정보 표시
-            alert(`${obs.name}\n현재 수위: ${obs.wl}m`);
+    // 지도 표시
+    window.initMap = function() {
+        var map = new google.maps.Map(mapContainer, {
+            zoom: 13,
+            center: { lat: 35.1595, lng: 126.8526 },
+            gestureHandling: 'greedy'
         });
-    });
+
+        // 지도에 마커 표시
+        observatories.forEach(function(obs) {
+            var marker = new google.maps.Marker({
+                position: { lat: obs.lat, lng: obs.lng },
+                map: map,
+                title: obs.name
+            });
+
+            marker.addListener('click', function() {
+                var items = document.querySelectorAll('.info-item');
+                items.forEach(function(item) {
+                    item.classList.remove('highlight');
+                    if (item.getAttribute('data-name') === obs.name) {
+                        item.classList.add('highlight');
+                    }
+                });
+                alert(`${obs.name}\n현재 수위: ${obs.wl}m`);
+            });
+        });
+    };
 
     // 수위 데이터를 갱신하는 함수
     function fetchWaterLevelData() {

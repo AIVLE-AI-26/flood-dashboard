@@ -17,17 +17,14 @@
 
 .horizontal-container {
     display: flex;
+    flex: 1;
+    align-items: flex-start;
 }
 
 #map {
-    max-width: 800px;
-    max-height: 700px;
-    min-width: 800px;
-    min-height: 700px;
-    background: url("../img/waterlevelimg.jpg") no-repeat center center;
-    background-size: contain;
-    position: relative;
-    margin: auto;
+    /* background: url("../img/waterlevelimg.jpg") no-repeat center center;
+    background-size: contain; */
+    color: #f5f5f5;
 }
 
 .map-marker {
@@ -44,8 +41,9 @@
 .info-container {
     background: #f5f5f5;
     border-radius: 10px;
-    height: 700px;
     overflow-y: auto;
+    width: 300px;
+    max-height: 600px;
 }
 
 .info-container h3 {
