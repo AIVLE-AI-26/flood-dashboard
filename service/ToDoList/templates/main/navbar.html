@@ -16,10 +16,17 @@
         </div>
         <div class="auth-links">
             {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="dropbtn">{{ user.username }}님</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'profile' %}">내 정보 조회</a>
+                        <a href="{% url 'delete_account' %}" class="delete-account-link">회원 탈퇴</a>
+                    </div>
+                </div>
                 <a href="{% url 'logout' %}">로그아웃</a>
             {% else %}
                 <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'terms' %}">회원가입</a>  <!-- 변경된 부분 -->
+                <a href="{% url 'terms' %}">회원가입</a>
             {% endif %}
         </div>
     </div>
@@ -49,7 +56,21 @@
             <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe>
         </div>
     </div>
-    {% block extra_script %}{% endblock %}
+    {% block extra_script %}
     <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteLink = document.querySelector('.delete-account-link');
+            if (deleteLink) {
+                deleteLink.addEventListener('click', function (event) {
+                    const confirmation = confirm('정말 탈퇴하시겠습니까?');
+                    if (!confirmation) {
+                        event.preventDefault();
+                    }
+                });
+            }
+        });
+    </script>
+    {% endblock %}
 </body>
 </html>

@@ -1,0 +1,10 @@
+{% extends 'main/navbar.html' %}
+{% block content %}
+    <h2>회원 정보 수정</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">수정</button>
+    </form>
+    <a href="{% url 'profile' %}" class="btn btn-secondary">취소</a>
+{% endblock %}
