@@ -30,9 +30,8 @@ INSTALLED_APPS = [
     'signup',
     'login',
     'board',
-    'rain',
+    "rain",
     'terms',
-    'detect',
 ]
 
 MIDDLEWARE = [
@@ -74,7 +73,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'rain/static'),
     os.path.join(BASE_DIR, 'waterlevel/static'),
     os.path.join(BASE_DIR, 'terms/static'),
-    os.path.join(BASE_DIR, 'detect/static'),
+
 ]
 
 DATABASES = {
