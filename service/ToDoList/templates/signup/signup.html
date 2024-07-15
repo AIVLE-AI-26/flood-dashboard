@@ -11,58 +11,48 @@
 <div class="form-container-signup">
     <h2>회원가입</h2>
     <div class="signup-container">
-      <form method="POST" class="needs-validation" novalidate>
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="signup-group">
-            <label class="signup-label" for="{{ form.username.id_for_label }}">아이디</label>
-            {{ form.username }}
-            <div class="invalid-feedback">
-                {% if form.username.errors %}
+        <form method="POST" class="needs-validation">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="signup-group">
+                <label class="signup-label" for="{{ form.username.id_for_label }}">아이디</label>
+                {{ form.username }}
+                <div class="invalid-feedback d-block">
                     {{ form.username.errors }}
-                {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="signup-group">
-            <label for="{{ form.password1.id_for_label }}">비밀번호</label>
-            {{ form.password1 }}
-            <div class="invalid-feedback">
-                {% if form.password1.errors %}
+            <div class="signup-group">
+                <label for="{{ form.password1.id_for_label }}">비밀번호</label>
+                {{ form.password1 }}
+                <div class="invalid-feedback d-block">
                     {{ form.password1.errors }}
-                {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="signup-group">
-            <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
-            {{ form.password2 }}
-            <div class="invalid-feedback">
-                {% if form.password2.errors %}
+            <div class="signup-group">
+                <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
+                {{ form.password2 }}
+                <div class="invalid-feedback d-block">
                     {{ form.password2.errors }}
-                {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="signup-group">
-            <label for="{{ form.email.id_for_label }}">이메일</label>
-            {{ form.email }}
-            <div class="invalid-feedback">
-                {% if form.email.errors %}
+            <div class="signup-group">
+                <label for="{{ form.email.id_for_label }}">이메일</label>
+                {{ form.email }}
+                <div class="invalid-feedback d-block">
                     {{ form.email.errors }}
-                {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="signup-group">
-            <label for="{{ form.role.id_for_label }}">사용자 유형</label>
-            {{ form.role }}
-            <div class="invalid-feedback">
-                {% if form.role.errors %}
+            <div class="signup-group">
+                <label for="{{ form.role.id_for_label }}">사용자 유형</label>
+                {{ form.role }}
+                <div class="invalid-feedback d-block">
                     {{ form.role.errors }}
-                {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="signup-btn-container">
-            <button type="submit" class="btn btn-primary login-btn">회원가입</button>
-        </div>
-      </form>
+            <div class="signup-btn-container">
+                <button type="submit" class="btn btn-primary login-btn">회원가입</button>
+            </div>
+        </form>
     </div>
 </div>
 <script>
