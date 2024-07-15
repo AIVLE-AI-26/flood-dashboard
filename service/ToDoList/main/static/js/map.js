@@ -335,24 +335,42 @@ function toggleRegionMarkers(region, buttonId) {
             });
         }
     } else {
-        // 다른 구역 버튼을 눌렀을 때 "광주 전체"를 비활성화
         if (regionStates['광주 전체']) {
+            // "광주 전체"가 활성화된 상태에서 특정 구역 버튼을 누르면 해당 구역을 제외한 다른 모든 구역 마커만 보이기
             if (markerCluster) markerCluster.clearMarkers();
             regionStates['광주 전체'] = false;
             const allButton = document.getElementById('all');
             if (allButton) {
                 allButton.classList.remove('active');
             }
-        }
 
-        if (regionStates[region]) {
-            if (markerCluster) markerCluster.removeMarkers(shelterMarkers[region]);
-            regionStates[region] = false;
-            button.classList.remove('active');
+            Object.keys(regionStates).forEach(r => {
+                if (r !== region && r !== '광주 전체') {
+                    if (markerCluster) markerCluster.addMarkers(shelterMarkers[r]);
+                    regionStates[r] = true;
+                    const btn = document.getElementById(getButtonId(r));
+                    if (btn) {
+                        btn.classList.add('active');
+                    }
+                } else {
+                    regionStates[r] = false;
+                    const btn = document.getElementById(getButtonId(r));
+                    if (btn) {
+                        btn.classList.remove('active');
+                    }
+                }
+            });
         } else {
-            if (markerCluster) markerCluster.addMarkers(shelterMarkers[region]);
-            regionStates[region] = true;
-            button.classList.add('active');
+            if (regionStates[region]) {
+                if (markerCluster) markerCluster.removeMarkers(shelterMarkers[region]);
+                regionStates[region] = false;
+                button.classList.remove('active');
+            } else {
+                // 특정 구역 버튼을 눌렀을 때 해당 구역을 비활성화하고 다른 모든 구역을 활성화
+                if (markerCluster) markerCluster.addMarkers(shelterMarkers[region]);
+                regionStates[region] = true;
+                button.classList.add('active');
+            }
         }
     }
 

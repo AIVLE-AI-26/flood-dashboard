@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import FileResponse, Http404, HttpResponse
+from urllib.parse import quote
 from .models import Post
 from .forms import PostForm
 from mimetypes import guess_type
@@ -46,7 +47,8 @@ def download_file(request, pk):
 
     try:
         response = FileResponse(open(file_path, 'rb'), content_type=file_type)
-        response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
+        encoded_file_name = quote(os.path.basename(file_path))
+        response['Content-Disposition'] = f'attachment; filename*=UTF-8\'\'{encoded_file_name}'
         return response
     except FileNotFoundError:
         raise Http404("File not found")
