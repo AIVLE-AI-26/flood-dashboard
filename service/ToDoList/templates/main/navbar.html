@@ -83,17 +83,140 @@
                         <a href="{% url 'terms' %}" class="auth-link collapsed-only">
                             <img src="{% static 'img/signup.png' %}" alt="Signup" class="auth-icon">
                         </a>
-                        <a href="{% url 'login' %}" class="menuButton expanded-only">로그인</a>
-                        <a href="{% url 'terms' %}" class="menuButton expanded-only">회원가입</a>
+                        <a href="javascript:void(0)" onclick="openLoginModal()">로그인</a>
+                        <a href="javascript:void(0)" onclick="openTermsModal()">회원가입</a>
                     </div>
                 {% endif %}
             </div>
             <!-- //bottom -->
         </div>
     </aside>
-
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <iframe id="loginIframe" src="{% url 'login' %}" title="Login" class="login-iframe"></iframe>
+        </div>
+    </div>
+    
+    <!-- Signup Modal -->
+    <div id="signupModal" class="signup-modal">
+        <div class="signup-modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <iframe id="signupIframe" src="{% url 'signup' %}" title="Signup" class="signup-iframe"></iframe>
+        </div>
+    </div>
+    <div id="termsModal" class="terms-modal">
+        <div class="terms-modal-content">
+            <span class="close" onclick="closeTermsModal()">&times;</span>
+            <iframe id="termsIframe" src="{% url 'terms' %}" title="Terms" class="terms-iframe"></iframe>
+            <button onclick="acceptTermsAndOpenSignup()">이용약관 동의</button>
+        </div>
+    </div>
     <script src="{% static 'js/modal.js' %}"></script>
     <script src="{% static 'js/sidebar-toggle.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteLink = document.querySelector('.delete-account-link');
+            if (deleteLink) {
+                deleteLink.addEventListener('click', function (event) {
+                    const confirmation = confirm('정말 탈퇴하시겠습니까?');
+                    if (!confirmation) {
+                        event.preventDefault();
+                    }
+                });
+            }
+        });
+        
+        function openLoginModal() {
+            const loginModal = document.getElementById("loginModal");
+            if (loginModal) {
+                console.log("Opening login modal");
+                loginModal.style.display = "block";
+            }
+        }
+        
+        function closeLoginModal() {
+            const loginModal = document.getElementById("loginModal");
+            if (loginModal) {
+                console.log("Closing login modal");
+                loginModal.style.display = "none";
+            }
+        }
+        
+        function openSignupModal() {
+            const signupModal = document.getElementById("signupModal");
+            if (signupModal) {
+                console.log("Opening signup modal");
+                signupModal.style.display = "block";
+            }
+        }
+        
+        function closeSignupModal() {
+            const signupModal = document.getElementById("signupModal");
+            if (signupModal) {
+                console.log("Closing signup modal");
+                signupModal.style.display = "none";
+            }
+        }
+        
+        function openTermsModal() {
+            const termsModal = document.getElementById("termsModal");
+            if (termsModal) {
+                console.log("Opening terms modal");
+                termsModal.style.display = "block";
+            }
+        }
+        
+        function closeTermsModal() {
+            const termsModal = document.getElementById("termsModal");
+            if (termsModal) {
+                console.log("Closing terms modal");
+                termsModal.style.display = "none";
+            }
+        }
+        
+        function acceptTermsAndOpenSignup() {
+            console.log("Accepted terms and opening signup modal");
+            closeTermsModal();
+            openSignupModal();
+        }
+        
+        function openChatbotModal() {
+            const chatbotModal = document.getElementById("chatbotModal");
+            if (chatbotModal) {
+                console.log("Opening chatbot modal");
+                chatbotModal.style.display = "block";
+            }
+        }
+        
+        function closeChatbotModal() {
+            const chatbotModal = document.getElementById("chatbotModal");
+            if (chatbotModal) {
+                console.log("Closing chatbot modal");
+                chatbotModal.style.display = "none";
+            }
+        }
+        
+        // 모달 외부 클릭 시 모달 닫기
+        window.onclick = function(event) {
+            const loginModal = document.getElementById("loginModal");
+            if (loginModal && event.target === loginModal) {
+                loginModal.style.display = "none";
+            }
+            const chatbotModal = document.getElementById("chatbotModal");
+            if (chatbotModal && event.target === chatbotModal) {
+                chatbotModal.style.display = "none";
+            }
+            const signupModal = document.getElementById("signupModal");
+            if (signupModal && event.target === signupModal) {
+                signupModal.style.display = "none";
+            }
+            const termsModal = document.getElementById("termsModal");
+            if (termsModal && event.target === termsModal) {
+                termsModal.style.display = "none";
+            }
+        }
+    </script>
     {% block extra_script %}{% endblock %}
 </body>
 </html>
