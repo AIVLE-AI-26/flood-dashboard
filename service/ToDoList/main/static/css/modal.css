@@ -1,4 +1,3 @@
-/* 모달 배경 스타일 */
 .modal {
     display: none;
     position: fixed;
@@ -13,7 +12,6 @@
     padding-top: 60px;
 }
 
-/* 모달 콘텐츠 스타일 */
 .modal-content {
     position: relative;
     background-color: #fefefe;
@@ -22,10 +20,10 @@
     border: 1px solid #fefefe;
     width: 60%;
     max-width: 500px;
-    height: 70%; /* 세로 길이를 늘림 */
+    height: 70%;
     border-radius: 15px;
-    left: -25%; /* 왼쪽으로 이동 */
-    transform: translateX(-10%); /* 모달이 너무 왼쪽으로 치우치지 않게 조정 */
+    left: -25%;
+    transform: translateX(150%);
     top: 20px;
 }
 
@@ -36,22 +34,19 @@
     border-style: solid;
 }
 
-/* 말풍선 꼬리 (왼쪽 아래 방향) */
 .modal-content::after {
-    border-width: 50px;
-    border-color: #fefefe transparent transparent transparent;
+    border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
+    border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
     bottom: 15px;
-    left: -40px;
+    right: -40px;
 }
 
 .modal-content::before {
-    border-width: 50px;
-    border-color: #fefefe transparent transparent transparent;
+    border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
+    border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
     bottom: 15px;
-    left: -40px;
+    right: -40px;
 }
-
-/* 닫기 버튼 스타일 */
 .close {
     color: #aaa;
     float: right;
@@ -66,7 +61,6 @@
     cursor: pointer;
 }
 
-/* 챗봇 iframe 스타일 */
 iframe {
     width: 100%;
     height: 500px;

@@ -10,44 +10,10 @@
     {% block styles %}{% endblock %}
 </head>
 <body>
-    <div class="top-bar">
-        <div class="logo">
-            <h1><a href="{% url 'home' %}" class="title-logo-link">광주광역시 도시침수 통합정보시스템</a></h1>
-        </div>
-        <div class="auth-links">
-            {% if user.is_authenticated %}
-                <div class="dropdown">
-                    <button class="dropbtn">{{ user.username }}님</button>
-                    <div class="dropdown-content">
-                        <a href="{% url 'profile' %}">내 정보 조회</a>
-                        <a href="{% url 'delete_account' %}" class="delete-account-link">회원 탈퇴</a>
-                    </div>
-                </div>
-                <a href="{% url 'logout' %}">로그아웃</a>
-            {% else %}
-                <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'terms' %}">회원가입</a>
-            {% endif %}
-        </div>
-    </div>
     <div class="main-container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
-                    <li><a href="{% url 'rain' %}">강수량</a></li>
-                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a onclick="openModal()" class="chatbot-icon-link">
-                        <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon">
-                    </a></li>
-                </ul>
-            </nav>
-        </aside>
         <div class="content-container">
-        {% block content %}
-        
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
     <div id="myModal" class="modal">
@@ -57,21 +23,77 @@
         </div>
     </div>
 
+    <aside id="overlay-sidebar" class="overlay-sidebar active">
+        <div class="inner">
+            <!-- head -->
+            <div class="head">
+                <div class="logoArea">
+                    <h1>광주광역시<br>침수대응시스템</h1>
+                </div>
+                <button type="button" class="btnSidebarToggle" aria-label="열기/닫기" aria-expanded="true">&lt;</button>
+            </div>
+            <!-- //head -->
+    
+            <!-- bottom -->
+            <div class="bottom">
+                <ul class="menuList">
+                    <li class="menuItem">
+                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'home' %}'">
+                            <span class="icon"><img src="{% static 'img/home.png' %}" alt="Home" class="icon-img"></span>
+                            <span class="menuText">메인 페이지</span>
+                        </button>
+                    </li>
+                    <li class="menuItem">
+                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'post_list' %}'">
+                            <span class="icon"><img src="{% static 'img/campaign.png' %}" alt="Campaign" class="icon-img"></span>
+                            <span class="menuText">공지사항</span>
+                        </button>
+                    </li>
+                    <li class="menuItem">
+                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'rain' %}'">
+                            <span class="icon"><img src="{% static 'img/water_drop.png' %}" alt="Water Drop" class="icon-img"></span>
+                            <span class="menuText">강수량</span>
+                        </button>
+                    </li>
+                    <li class="menuItem">
+                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'waterlevel' %}'">
+                            <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
+                            <span class="menuText">구별 하천 수위</span>
+                        </button>
+                    </li>
+                </ul>
+                <!-- 로그인/회원가입 버튼 및 이미지 -->
+                {% if user.is_authenticated %}
+                    <div class="profile-section">
+                        <img src="{% static 'img/account_circle.png' %}" alt="Profile" class="profile-icon" id="profile-icon">
+                        <p class="username">{{ user.username }}</p>
+                        <div class="profile-buttons" id="profile-buttons" style="display: none;">
+                            <button type="button" class="menuButton" onclick="window.location.href='{% url 'profile' %}'">마이페이지</button>
+                            <button type="button" class="menuButton" id="delete-account-button" data-url="{% url 'delete_account' %}">회원 탈퇴</button>
+                        </div>
+                        <a href="{% url 'logout' %}" class="auth-link">
+                            <img src="{% static 'img/logout.png' %}" alt="Logout" class="auth-icon">
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="auth-buttons">
+                        <a href="{% url 'login' %}" class="auth-link collapsed-only">
+                            <img src="{% static 'img/login.png' %}" alt="Login" class="auth-icon">
+                        </a>
+                        <a href="{% url 'terms' %}" class="auth-link collapsed-only">
+                            <img src="{% static 'img/signup.png' %}" alt="Signup" class="auth-icon">
+                        </a>
+                        <a href="{% url 'login' %}" class="menuButton expanded-only">로그인</a>
+                        <a href="{% url 'terms' %}" class="menuButton expanded-only">회원가입</a>
+                    </div>
+                {% endif %}
+            </div>
+            <!-- //bottom -->
+        </div>
+    </aside>
+
     <script src="{% static 'js/modal.js' %}"></script>
-    {% block extra_script %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const deleteLink = document.querySelector('.delete-account-link');
-            if (deleteLink) {
-                deleteLink.addEventListener('click', function (event) {
-                    const confirmation = confirm('정말 탈퇴하시겠습니까?');
-                    if (!confirmation) {
-                        event.preventDefault();
-                    }
-                });
-            }
-        });
-    </script>
-    {% endblock %}
+    <script src="{% static 'js/sidebar-toggle.js' %}"></script>
+    {% block extra_script %}{% endblock %}
 </body>
 </html>
