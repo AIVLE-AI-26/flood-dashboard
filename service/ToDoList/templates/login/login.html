@@ -1,124 +1,104 @@
-{% extends 'main/navbar.html' %}
-
-{% load static %}
-{% block styles %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
-{% endblock %}
-
-{% block content %}
-<canvas class="background-canvas"></canvas>
-<div class="form-container-login">
-  <div class="login-group">
-    <form method="POST" class="needs-validation" novalidate>
-      {% csrf_token %}
-      <div class="login-group">
-        <div class="input-text">
-          <div class="login-form-field">
-            {{ form.username.label_tag }}
-            {{ form.username }}
-            
-          </div>
-          <div class="login-form-field">
-            {{ form.password.label_tag }}
-            {{ form.password }}
-            
-          </div>
-        </div>
-        <button type="submit" class="login-btn">로그인</button>
-      </div>
-      <div class="not-input">
-      {% if messages %}
-        <div class="login-feedback">
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-        </div>
-        {% endif %} 
-      </div>
-      <div class="form-container-signup">
-      
-        <span class="signup-text">아이디가 없으신가요?</span>
-        <button class="terms-btn" onclick="location.href='/terms/'">회원가입</button>
-      </div>
-    </form>
-  </div>
-</div>
-<script>
-  (function () {
-    'use strict'
-    var forms = document.querySelectorAll('.needs-validation')
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-          form.classList.add('was-validated')
-        }, false)
-      })
-  })()
-</script>
-<script>
-  const canvas = document.querySelector('.background-canvas');
-  const context = canvas.getContext('2d');
-  const drops = [];
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  class Drop {
-    constructor(index, x, y, speed, length) {
-      this.index = index;
-      this.x = x;
-      this.y = y;
-      this.speed = speed;
-      this.length = length;
-      this.draw();
-    }
-
-    draw() {
-      context.beginPath();
-      context.strokeStyle = '#FFFFFF'; // Updated color to blue for visibility
-      context.moveTo(this.x, this.y);
-      context.lineTo(this.x, this.y + this.length);
-      context.stroke();
-      context.closePath();
-    }
-  }
-
-  function render() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    drops.forEach((drop) => {
-      drop.y += drop.speed;
-      if (drop.y > canvas.height) {
-        drop.y = 0;
-        drop.x = Math.random() * canvas.width;
-        drop.speed = Math.random() * 3 + 1;
-        drop.length = Math.random() * 5 + 2;
-      }
-
-      drop.draw();
-    });
-
-    requestAnimationFrame(render); // 반복
-  }
-
-  // Increase the number of drops to 500
-  for (let i = 0; i < 500; i++) {
-    const tempX = Math.random() * canvas.width;
-    const tempY = Math.random() * canvas.height;
-    const tempSpeed = Math.random() * 3 + 1;
-    const tempLength = Math.random() * 5 + 2;
-
-    drops.push(new Drop(i, tempX, tempY, tempSpeed, tempLength));
-  }
-  render();
-</script>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>로그인 - 도시침수 예방 사이트</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: transparent;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #000;
+        }
+        .form-container-login {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .form-container-login h2 {
+            color: #0066cc; /* 파란색 텍스트 */
+            margin-bottom: 30px;
+        }
+        .form-container-login input[type="text"],
+        .form-container-login input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        .form-container-login button {
+            background-color: #0066cc;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .form-container-login button:hover {
+            background-color: #004999;
+        }
+        .form-container-login .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+        .form-container-login .footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .form-container-login .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container-login">
+        <h2>로그인</h2>
+        <form method="POST" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="login-group">
+                <div class="input-text">
+                    <div class="login-form-field">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="login-form-field">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                </div>
+                <button type="submit" class="login-btn">로그인</button>
+            </div>
+            <div class="not-input">
+                {% if messages %}
+                    <div class="login-feedback">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-container-signup">
+                <div class="footer">
+                    <p><a onclick="location.href='/terms/';">회원가입</a> | <a onclick="location.href='/find_id/';">아이디 찾기</a> | <a onclick="location.href='/find_pw/';">비밀번호 찾기</a></p>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
