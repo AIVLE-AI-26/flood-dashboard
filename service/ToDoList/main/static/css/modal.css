@@ -13,18 +13,10 @@
 }
 
 .modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #fefefe;
     width: 60%;
     max-width: 500px;
-    height: 70%;
-    border-radius: 15px;
-    left: -25%;
     transform: translateX(150%);
-    top: 20px;
+    border-radius: 15px;
 }
 
 .modal-content::after,
@@ -38,17 +30,17 @@
     border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
     border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
     bottom: 15px;
-    right: -40px;
+    right: -48px;
 }
 
 .modal-content::before {
     border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
     border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
     bottom: 15px;
-    right: -40px;
+    right: -48px;
 }
 .close {
-    color: #aaa;
+    color: #fefefe;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -56,7 +48,7 @@
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: red;
     text-decoration: none;
     cursor: pointer;
 }
