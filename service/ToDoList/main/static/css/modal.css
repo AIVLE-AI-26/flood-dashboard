@@ -13,12 +13,19 @@
 }
 
 .modal-content {
+    position: absolute; /* 'relative'에서 'absolute'로 변경 */
+    background-color: #fefefe;
+    margin: auto; /* 중앙 배치를 위해 '5% auto'에서 'auto'로 변경 */
+    padding: 20px;
+    border: 1px solid #fefefe;
     width: 60%;
     max-width: 500px;
-    transform: translateX(150%);
+    height: 70%;
     border-radius: 15px;
+    top: 50%; /* 중앙 배치를 위해 'top: 50%'로 변경 */
+    left: 50%; /* 중앙 배치를 위해 'left: 50%'로 변경 */
+    transform: translate(-50%, -50%); /* 중앙 배치를 위해 'translate(-50%, -50%)' 추가 */
 }
-
 .modal-content::after,
 .modal-content::before {
     content: "";
@@ -30,17 +37,17 @@
     border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
     border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
     bottom: 15px;
-    right: -48px;
+    right: -40px;
 }
 
 .modal-content::before {
     border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
     border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
     bottom: 15px;
-    right: -48px;
+    right: -40px;
 }
 .close {
-    color: #fefefe;
+    color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -48,7 +55,7 @@
 
 .close:hover,
 .close:focus {
-    color: red;
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
