@@ -38,37 +38,6 @@
     border: 2px solid white;
 }
 
-#data-container {
-    position: fixed;
-    top: 0;
-    right: -300px; /* Start off-screen */
-    width: 300px;
-    height: 100%;
-    background-color: #f1f1f1;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
-    transition: right 0.3s;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-#data-container.visible {
-    right: 0; /* Move on-screen */
-}
-
-.hidden {
-    display: none;
-}
-
-#infoButton {
-    margin: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-.info-item.highlight {
-    background-color: #ffff99;
-}
-
 .info-container {
     background: #f5f5f5;
     border-radius: 10px;
