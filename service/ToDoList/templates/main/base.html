@@ -2,11 +2,6 @@
 {% load static %}
 {% block title %}Safe City{% endblock %}
 {% block extra_head %}{% endblock %}
-//
-{% block styles %}
-<link rel="stylesheet" href="{% static 'css/waterlevel.css' %}">
-{% endblock %}
-//
 {% block content %}
 <main class="content">
     <div class="map_m">
@@ -28,15 +23,9 @@
                 <button class="region-button" id="bukgu">북구</button>
                 <button class="region-button" id="gwangsangu">광산구</button>
             </div>
-            <button id="waterlevelButton">하천수위</button>
         </div>
     </div>
     <div id="map" style="width: 100%; height: 100vh;"></div>
-    //
-    <div id="data-container" class="grid-container info-container">
-        <div id="waterlevel-info">관측소를 클릭하여 수위 정보를 확인하세요.</div>
-    </div>
-    //
     <!-- 챗봇 아이콘을 추가 -->
     <a onclick="openModal()" class="chatbot-icon-link">
         <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon">
@@ -47,7 +36,4 @@
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <script src="{% static 'js/map.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>
-    {% comment %} waterlevel {% endcomment %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-    <script src="{% static 'js/waterlevel.js' %}" defer></script>
 {% endblock %}
