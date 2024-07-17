@@ -1,178 +1,135 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: transparent;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #000;
-        }
+{% extends 'main/navbar.html' %}
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<title>회원가입</title>
+{% endblock %}
 
-        .form-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            border: 1px solid #888;
-            margin: 0; /* 상하좌우 여백 제거 */
-        }
-
-        .form-container h1 {
-            color: #0066cc;
-            margin-bottom: 10px; /* 줄어든 여백 */
-        }
-
-        .form-container input[type="text"],
-        .form-container input[type="password"],
-        .form-container input[type="email"],
-        .form-container select {
-            width: calc(100% - 30px);
-            padding: 15px;
-            margin: 5px 0; /* 줄어든 여백 */
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-
-        .form-container select {
-            width: 100%;
-            padding: 15px;
-        }
-
-        .form-container button {
-            background-color: #0066cc;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            margin-top: 10px; /* 줄어든 여백 */
-        }
-
-        .form-container button:hover {
-            background-color: #004999;
-        }
-
-        .form-container .footer {
-            margin-top: 10px; /* 줄어든 여백 */
-            font-size: 14px;
-            color: #333;
-        }
-
-        .form-container .footer a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-
-        .form-container .footer a:hover {
-            text-decoration: underline;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="overlay" id="signupModal">
-        <div class="form-container">
-            <h1>회원가입</h1>
-            <form method="POST" class="needs-validation">
-                {% csrf_token %}
-                {{ form.non_field_errors }}
-                <div class="signup-group">
-                    <label class="signup-label" for="{{ form.username.id_for_label }}">아이디</label>
-                    {{ form.username }}
-                    <div class="invalid-feedback d-block">
-                        {{ form.username.errors }}
-                    </div>
+{% block content %}
+<canvas class="background-canvas"></canvas>
+<div class="form-container-signup">
+    <h2>회원가입</h2>
+    <div class="signup-container">
+        <form method="POST" class="needs-validation">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="signup-group">
+                <label class="signup-label" for="{{ form.username.id_for_label }}">아이디</label>
+                {{ form.username }}
+                <div class="invalid-feedback d-block">
+                    {{ form.username.errors }}
                 </div>
-                <div class="signup-group">
-                    <label for="{{ form.password1.id_for_label }}">비밀번호</label>
-                    {{ form.password1 }}
-                    <div class="invalid-feedback d-block">
-                        {{ form.password1.errors }}
-                    </div>
-                </div>
-                <div class="signup-group">
-                    <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
-                    {{ form.password2 }}
-                    <div class="invalid-feedback d-block">
-                        {{ form.password2.errors }}
-                    </div>
-                </div>
-                <div class="signup-group">
-                    <label for="{{ form.email.id_for_label }}">이메일</label>
-                    {{ form.email }}
-                    <div class="invalid-feedback d-block">
-                        {{ form.email.errors }}
-                    </div>
-                </div>
-                <div class="signup-group">
-                    <label for="{{ form.role.id_for_label }}">사용자 유형</label>
-                    {{ form.role }}
-                    <div class="invalid-feedback d-block">
-                        {{ form.role.errors }}
-                    </div>
-                </div>
-                <div class="signup-btn-container">
-                    <button type="submit" class="btn btn-primary login-btn">회원가입</button>
-                </div>
-            </form>
-            <div class="footer">
-                <p>이미 계정이 있으신가요? <a href="/login/">로그인</a></p>
             </div>
-        </div>
+            <div class="signup-group">
+                <label for="{{ form.password1.id_for_label }}">비밀번호</label>
+                {{ form.password1 }}
+                <div class="invalid-feedback d-block">
+                    {{ form.password1.errors }}
+                </div>
+            </div>
+            <div class="signup-group">
+                <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
+                {{ form.password2 }}
+                <div class="invalid-feedback d-block">
+                    {{ form.password2.errors }}
+                </div>
+            </div>
+            <div class="signup-group">
+                <label for="{{ form.email.id_for_label }}">이메일</label>
+                {{ form.email }}
+                <div class="invalid-feedback d-block">
+                    {{ form.email.errors }}
+                </div>
+            </div>
+            <div class="signup-group">
+                <label for="{{ form.role.id_for_label }}">사용자 유형</label>
+                {{ form.role }}
+                <div class="invalid-feedback d-block">
+                    {{ form.role.errors }}
+                </div>
+            </div>
+            <div class="signup-btn-container">
+                <button type="submit" class="btn btn-primary login-btn">회원가입</button>
+            </div>
+        </form>
     </div>
+</div>
+<script>
+    (function () {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+    })();
+</script>
+<script>
+    const canvas = document.querySelector('.background-canvas');
+    const context = canvas.getContext('2d');
+    const drops = [];
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var modal = document.getElementById('signupModal');
-            modal.style.display = 'flex';
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Drop {
+        constructor(index, x, y, speed, length) {
+            this.index = index;
+            this.x = x;
+            this.y = y;
+            this.speed = speed;
+            this.length = length;
+            this.draw();
+        }
+
+        draw() {
+            context.beginPath();
+            context.strokeStyle = '#FFFFFF';
+            context.moveTo(this.x, this.y);
+            context.lineTo(this.x, this.y + this.length);
+            context.stroke();
+            context.closePath();
+        }
+    }
+
+    function render() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        drops.forEach((drop) => {
+            drop.y += drop.speed;
+            if (drop.y > canvas.height) {
+                drop.y = 0;
+                drop.x = Math.random() * canvas.width;
+                drop.speed = Math.random() * 3 + 1;
+                drop.length = Math.random() * 5 + 2;
+            }
+
+            drop.draw();
         });
 
-        function closeSignupModal() {
-            var modal = document.getElementById('signupModal');
-            modal.style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+        requestAnimationFrame(render);
+    }
+
+    for (let i = 0; i < 500; i++) {
+        const tempX = Math.random() * canvas.width;
+        const tempY = Math.random() * canvas.height;
+        const tempSpeed = Math.random() * 3 + 1;
+        const tempLength = Math.random() * 5 + 2;
+
+        drops.push(new Drop(i, tempX, tempY, tempSpeed, tempLength));
+    }
+    render();
+</script>
+{% endblock %}
