@@ -7,6 +7,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     {% block styles %}{% endblock %}
 </head>
 <body>
@@ -19,7 +21,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe>
+            {% comment %} <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe> {% endcomment %}
         </div>
     </div>
 
@@ -61,6 +63,13 @@
                             <span class="menuText">구별 하천 수위</span>
                         </button>
                     </li>
+                    <li class="menuItem">
+                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'detect' %}'">
+                            <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
+                            <span class="menuText">시설물 관리</span>
+                        </button>
+                    </li>
+
                 </ul>
                 <!-- 로그인/회원가입 버튼 및 이미지 -->
                 {% if user.is_authenticated %}

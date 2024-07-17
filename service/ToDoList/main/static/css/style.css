@@ -389,9 +389,13 @@ footer {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    width: calc(100% - 20px);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     font-size: 20px;
+    margin-left: 100px;
+
 }
 
 .notice-box {
@@ -407,17 +411,22 @@ table.notice2 {
     margin: 20px 0;
     font-size: 18px;
     text-align: left;
+    background-color: #f4f4f4; /* 배경을 약간 어둡게 */
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); /* 박스 그림자 추가 */
+    padding: 20px; /* 박스 안쪽 여백 추가 */
+    border-radius: 8px; /* 박스 모서리를 둥글게 */
 }
 
 thead.notice3 {
     background-color: #f4f4f4;
+    border-top: 1px solid black; /* 상단 테두리 두껍게 설정 */
+
 }
 
 thead.notice3 th {
     padding: 12px;
     border-bottom: 2px solid #dddddd;
 }
-
 table,
 tbody,
 th,
@@ -448,6 +457,12 @@ td {
 
 th {
     font-weight: bold;
+}
+
+
+a.post-title {
+    color: #2a7ae2;
+    text-decoration: none;
 }
 
 a.post-title {
@@ -485,10 +500,18 @@ a.post-title:hover {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #f9f9f9;
     justify-content: space-between;
+    align-items: right;
+    margin-top: 10px;
+}
+.button-containern {
+    display: flex;
+    justify-content: flex-end;
 }
 
+.right-align {
+    display: inline-block;
+}
 .button-left {
     display: flex; /* 왼쪽 버튼 그룹을 플렉스로 설정하여 내부 요소들을 수평 정렬 */
     padding-right: 15px;
@@ -779,4 +802,164 @@ input[type="file"] {
     text-align: center;
     width: 100%;
     box-sizing: border-box;
+}
+
+/* 프로필 섹션 스타일 */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.username {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.profile-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.profile-buttons .menuButton {
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+/* 사이드바가 닫힌 상태에서 프로필 섹션 숨기기 */
+.overlay-sidebar.collapsed .profile-section {
+    display: none;
+}
+
+/* 로그인/회원가입 버튼 스타일 조정 */
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-buttons .auth-link {
+    margin: 5px 0;
+}
+
+.auth-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* 사이드바가 열렸을 때 로그인/회원가입 버튼 나란히 배치 */
+.overlay-sidebar:not(.collapsed) .auth-buttons {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* 사이드바가 닫혔을 때 텍스트 숨기기 */
+.overlay-sidebar.collapsed .menuButton.expanded-only {
+    display: none;
+}
+
+.overlay-sidebar.collapsed .auth-link.collapsed-only {
+    display: block;
+}
+
+/* 사이드바가 열렸을 때 이미지 숨기기 */
+.overlay-sidebar:not(.collapsed) .auth-link.collapsed-only {
+    display: none;
+}
+
+.overlay-sidebar:not(.collapsed) .menuButton.expanded-only {
+    display: inline-block;
+}
+
+/* 추가된 스타일 */
+.auth-link.collapsed-only img {
+    border: 1px solid #87CEEB; /* 하늘색 테두리 추가 */
+    border-radius: 5px; /* 둥근 테두리 추가 */
+    background-color: white; /* 배경색 흰색 */
+}
+
+.auth-link.expanded-only {
+    border: 1px solid #87CEEB; /* 하늘색 테두리 추가 */
+    border-radius: 5px; /* 둥근 테두리 추가 */
+    background-color: white; /* 배경색 흰색 */
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.attachment-link {
+    text-align: right;
+    margin-right: 10px; /* 오른쪽 여백 설정 */
+    display: block; /* 링크를 블록 요소로 설정하여 한 줄에 하나씩 표시 */
+}
+/* Form Group Styles */
+.form-group {
+    display: flex; /* Flexbox를 이용하여 가로 정렬 */
+    align-items: center; /* 세로 방향 중앙 정렬 */
+    margin-bottom: 15px; /* 하단 마진 추가 */
+}
+.form-group input {
+    flex: 1; /* 입력 요소가 가능한 최대 크기만큼 채우도록 설정 */
+    height: 30px; /* 입력 요소의 높이를 30px로 설정 */
+    max-width: 100%; /* 최대 너비 100%로 설정하여 부모 요소 내에서 적절히 조절 */
+}
+.form-group label {
+    /* 라벨의 크기를 30px로 설정 */
+    flex: 0 0 100px; /* 고정된 크기 30px */
+    margin-right: 30px; /* 라벨과 입력 요소 사이의 간격 조절 */
+}
+.input{
+    height: 100%;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 400px; /* 고정 너비 설정 */
+    margin-right: 10px; /* 버튼과 간격 추가 */
+    transition: width 0.4s ease-in-out;
+}
+
+.search-container input[type="text"]:focus {
+    width: 500px; /* 포커스 시 너비 확장 */
+    border-color: #2c3e50;
+}
+
+.search-container button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    background-color: #2c3e50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #666666;
 }
