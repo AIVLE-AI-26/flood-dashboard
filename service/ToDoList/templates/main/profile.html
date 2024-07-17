@@ -1,7 +1,113 @@
 {% extends 'main/navbar.html' %}
+{% load static %}
 {% block content %}
-    <h2>내 정보 조회</h2>
-    <p>사용자 이름: {{ user.username }}</p>
-    <p>이메일: {{ user.email }}</p>
-    <a href="{% url 'edit_profile' %}" class="btn">회원 정보 수정</a>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .profile-container {
+            display: flex;
+            width: 800px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 100px; /* Increase the margin-top to move the box down further */
+        }
+        .profile-sidebar {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-sidebar h2 {
+            margin: 0;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .profile-sidebar button {
+            background-color: white;
+            color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .profile-sidebar button:hover {
+            background-color: #e6e6e6;
+        }
+        .profile-content {
+            width: 60%;
+            padding: 40px;
+        }
+        .profile-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <div class="profile-container">
+        <div class="profile-sidebar">
+            <h2>My Profile</h2>
+            <button onclick="location.href='{% url 'edit_profile' %}'">Edit Profile</button>
+            <button onclick="location.href='{% url 'logout' %}'">Logout</button>
+        </div>
+        <div class="profile-content">
+            <h2>회원 정보 조회</h2>
+            <div class="form-group">
+                <label for="username">아이디</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" disabled>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -9,80 +9,177 @@
     {% load static %}
     {% block styles %}
     <link rel="stylesheet" href="{% static 'css/rain.css' %}">
+    <style>
+        /* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* max-width: 600px; */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    z-index: 1000;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    background: #1E90FF;
+    margin-bottom: 5px;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #3b80c6;
+}
+
+.sidebar img {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+    </style>
     {% endblock %}
 </head>
 <body>
+    <div class="sidebar">
+        <a href="#"><img src="{% static 'images/home-icon.png' %}" alt="Home"></a>
+        <a href="#"><img src="{% static 'images/alert-icon.png' %}" alt="Alert"></a>
+        <a href="#"><img src="{% static 'images/rain-icon.png' %}" alt="Rain"></a>
+        <a href="#"><img src="{% static 'images/wave-icon.png' %}" alt="Wave"></a>
+        <a href="#"><img src="{% static 'images/logout-icon.png' %}" alt="Logout"></a>
+    </div>
+    
     {% block content %}
+    <canvas class="background-canvas"></canvas>
     <div id="loading">Loading...</div>
     <div class="chart-wrapper">
         <div class="row">
-            <div class="column">
-                <h2>광주광역시</h2>
-                <div class="chart-container">
-                    <canvas id="rainfallChart1"></canvas>
+            <div class="row">
+                <div class="column" onclick="openModal('광주광역시', '광주광역시')">
+                    <div class="title-box">
+                        <h2>광주광역시</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rainfallChart1"></canvas>
+                    </div>
+                    <div class="current-rainfall">
+                        <p id="current-rainfall-광주광역시"></p>
+                    </div>
                 </div>
-                <div class="current-rainfall">
-                    <p id="current-rainfall-광주광역시"></p>
+                <div class="column" onclick="openModal('동구', '동구')">
+                    <div class="title-box">
+                        <h2>동구</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rainfallChart2"></canvas>
+                    </div>
+                    <div class="current-rainfall">
+                        <p id="current-rainfall-동구"></p>
+                    </div>
                 </div>
-            </div>
-            <div class="column">
-                <h2>동구</h2>
-                <div class="chart-container">
-                    <canvas id="rainfallChart2"></canvas>
-                </div>
-                <div class="current-rainfall">
-                    <p id="current-rainfall-동구"></p>
-                </div>
-            </div>
-            <div class="column">
-                <h2>서구</h2>
-                <div class="chart-container">
-                    <canvas id="rainfallChart3"></canvas>
-                </div>
-                <div class="current-rainfall">
-                    <p id="current-rainfall-서구"></p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-                <h2>남구</h2>
-                <div class="chart-container">
-                    <canvas id="rainfallChart4"></canvas>
-                </div>
-                <div class="current-rainfall">
-                    <p id="current-rainfall-남구"></p>
+                <div class="column" onclick="openModal('서구', '서구')">
+                    <div class="title-box">
+                        <h2>서구</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rainfallChart3"></canvas>
+                    </div>
+                    <div class="current-rainfall">
+                        <p id="current-rainfall-서구"></p>
+                    </div>
                 </div>
             </div>
-            <div class="column">
-                <h2>북구</h2>
-                <div class="chart-container">
-                    <canvas id="rainfallChart5"></canvas>
+            <div class="row">
+                <div class="column" onclick="openModal('남구', '남구')">
+                    <div class="title-box">
+                        <h2>남구</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rainfallChart4"></canvas>
+                    </div>
+                    <div class="current-rainfall">
+                        <p id="current-rainfall-남구"></p>
+                    </div>
                 </div>
-                <div class="current-rainfall">
-                    <p id="current-rainfall-북구"></p>
+                <div class="column" onclick="openModal('북구', '북구')">
+                    <div class="title-box">
+                        <h2>북구</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rainfallChart5"></canvas>
+                    </div>
+                    <div class="current-rainfall">
+                        <p id="current-rainfall-북구"></p>
+                    </div>
                 </div>
-            </div>
-            <div class="column">
-                <h2>광산구</h2>
-                <div class="chart-container">
-                    <canvas id="rainfallChart6"></canvas>
-                </div>
-                <div class="current-rainfall">
-                    <p id="current-rainfall-광산구"></p>
+                <div class="column" onclick="openModal('광산구', '광산구')">
+                    <div class="title-box">
+                        <h2>광산구</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rainfallChart6"></canvas>
+                    </div>
+                    <div class="current-rainfall">
+                        <p id="current-rainfall-광산구"></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="current-rainfall">
-        <p id="current-rainfall-광주광역시"></p>
-        <p id="current-rainfall-동구"></p>
-        <p id="current-rainfall-서구"></p>
-        <p id="current-rainfall-남구"></p>
-        <p id="current-rainfall-북구"></p>
-        <p id="current-rainfall-광산구"></p>
+    
+    <!-- 모달 창 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <canvas id="modal-chart"></canvas>
+        </div>
     </div>
     {% endblock %}
+    
     {% block extra_script %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -90,6 +187,301 @@
         var fetchRainfallDataUrl = '{% url "fetch_rainfall_data" %}';
     </script>
     <script src="{% static 'js/rain.js' %}"></script>
+    <script>
+      const canvas = document.querySelector('.background-canvas');
+      const context = canvas.getContext('2d');
+      const drops = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        context.fillStyle = '#ffffff'; // 배경색을 흰색으로 변경
+        context.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      class Drop {
+        constructor(index, x, y, speed, length) {
+          this.index = index;
+          this.x = x;
+          this.y = y;
+          this.speed = speed;
+          this.length = length;
+          this.draw();
+        }
+
+        draw() {
+          context.beginPath();
+          context.strokeStyle = "#1E90FF"; // 빗방울 색깔
+          context.lineWidth = 2; // 빗방울 두께 설정
+          context.moveTo(this.x, this.y);
+          context.lineTo(this.x, this.y + this.length);
+          context.stroke();
+          context.closePath();
+        }
+      }
+
+      function render() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = '#ffffff'; // 배경색을 흰색으로 변경
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        drops.forEach((drop) => {
+          drop.y += drop.speed;
+          if (drop.y > canvas.height) {
+            drop.y = 0;
+            drop.x = Math.random() * canvas.width;
+            drop.speed = Math.random() * 3 + 1;
+            drop.length = Math.random() * 5 + 2;
+          }
+
+          drop.draw();
+        });
+
+        requestAnimationFrame(render); // 반복
+      }
+
+      for (let i = 0; i < 500; i++) {
+        const tempX = Math.random() * canvas.width;
+        const tempY = Math.random() * canvas.height;
+        const tempSpeed = Math.random() * 3 + 1;
+        const tempLength = Math.random() * 5 + 2;
+
+        drops.push(new Drop(i, tempX, tempY, tempSpeed, tempLength));
+      }
+      render();
+
+      async function fetchRainfallData() {
+        document.getElementById('loading').style.display = 'block';
+        document.querySelector('.chart-wrapper').style.display = 'none';
+        try {
+            const response = await fetch(fetchRainfallDataUrl);
+            const data = await response.json();
+            renderAllCharts(data.all_data);
+            document.getElementById('loading').style.display = 'none';
+            document.querySelector('.chart-wrapper').style.display = 'block';
+            showCurrentRainfall(data.current_data);
+            // 저장 데이터를 전역 변수에 저장
+            window.rainfallData = data.all_data;
+        } catch (error) {
+            console.log('Error:', error);
+            document.getElementById('loading').style.display = 'none';
+        }
+      }
+
+      function renderAllCharts(data) {
+          const locations = ['광주광역시', '동구', '서구', '남구', '북구', '광산구'];
+          locations.forEach((location, index) => {
+              const filteredData = data.filter(row => row.location === location);
+              const labels = filteredData.map(row => formatTime(row.fcst_time));
+              const rainfallData = filteredData.map(row => row.fcst_value);
+              renderChart(labels, rainfallData, `rainfallChart${index + 1}`);
+          });
+      }
+
+      function formatTime(time) {
+          return time.slice(0, 2) + ':' + time.slice(2, 4);
+      }
+
+      function renderChart(labels, data, canvasId) {
+          var ctx = document.getElementById(canvasId).getContext('2d');
+          new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: '강수량 (mm)',
+                      data: data,
+                      fill: false,
+                      borderColor: '#3b80c6',
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      tension: 0.4,
+                      borderWidth: 2,
+                      pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                      pointBorderColor: '#fff',
+                      pointHoverBackgroundColor: '#fff',
+                      pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
+                  }]
+              },
+              options: {
+                  plugins: {
+                      legend: {
+                          display: false
+                      },
+                      tooltip: {
+                          backgroundColor: 'rgba(0,0,0,0.8)',
+                          titleFont: {
+                              size: 16,
+                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                          },
+                          bodyFont: {
+                              size: 14,
+                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                          },
+                          footerFont: {
+                              size: 12,
+                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                          }
+                      }
+                  },
+                  scales: {
+                      x: {
+                          title: {
+                              display: false
+                          },
+                          ticks: {
+                              color: '#666',
+                              callback: function(value, index, values) {
+                                  return value % 3 === 0 ? value : '';
+                              }
+                          },
+                          grid: {
+                              display: true,
+                              drawOnChartArea: false,
+                              drawTicks: false,
+                              color: 'rgba(200, 200, 200, 0.3)'
+                          }
+                      },
+                      y: {
+                          title: {
+                              display: false
+                          },
+                          ticks: {
+                              color: '#666'
+                          },
+                          grid: {
+                              drawBorder: false,
+                              drawOnChartArea: true,
+                              drawTicks: false,
+                              color: 'rgba(200, 200, 200, 0.3)'
+                          }
+                      }
+                  }
+              }
+          });
+      }
+
+      function showCurrentRainfall(currentData) {
+          const locations = ['광주광역시', '동구', '서구', '남구', '북구', '광산구'];
+          locations.forEach(location => {
+              const currentRainfallElement = document.getElementById(`current-rainfall-${location}`);
+              if (currentData[location].length > 0) {
+                  currentRainfallElement.innerHTML = `현재 강수량: ${currentData[location][0].fcst_value} mm`;
+              } else {
+                  currentRainfallElement.innerHTML = `${location} 데이터 없음.`;
+              }
+          });
+      }
+
+      function openModal(title, location) {
+          document.getElementById('modal-title').innerText = title;
+          var modal = document.getElementById("myModal");
+
+          // 모달 창이 열릴 때마다 캔버스를 초기화
+          var modalChartCanvas = document.getElementById("modal-chart");
+          var newCanvas = document.createElement("canvas");
+          newCanvas.id = "modal-chart";
+          modalChartCanvas.parentNode.replaceChild(newCanvas, modalChartCanvas);
+
+          var modalChart = newCanvas.getContext('2d');
+
+          // 필터링된 데이터 가져오기
+          const filteredData = window.rainfallData.filter(row => row.location === location);
+          const labels = filteredData.map(row => formatTime(row.fcst_time));
+          const rainfallData = filteredData.map(row => row.fcst_value);
+
+          modalChartInstance = new Chart(modalChart, {
+              type: 'line',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: '강수량 (mm)',
+                      data: rainfallData,
+                      fill: false,
+                      borderColor: '#3b80c6',
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      tension: 0.4,
+                      borderWidth: 2,
+                      pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                      pointBorderColor: '#fff',
+                      pointHoverBackgroundColor: '#fff',
+                      pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
+                  }]
+              },
+              options: {
+                  plugins: {
+                      legend: {
+                          display: true
+                      },
+                      tooltip: {
+                          backgroundColor: 'rgba(0,0,0,0.8)',
+                          titleFont: {
+                              size: 16,
+                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                          },
+                          bodyFont: {
+                              size: 14,
+                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                          },
+                          footerFont: {
+                              size: 12,
+                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                          }
+                      }
+                  },
+                  scales: {
+                      x: {
+                          title: {
+                              display: false
+                          },
+                          ticks: {
+                              color: '#666'
+                          },
+                          grid: {
+                              display: true,
+                              drawOnChartArea: false,
+                              drawTicks: false,
+                              color: 'rgba(200, 200, 200, 0.3)'
+                          }
+                      },
+                      y: {
+                          title: {
+                              display: false
+                          },
+                          ticks: {
+                              color: '#666'
+                          },
+                          grid: {
+                              drawBorder: false,
+                              drawOnChartArea: true,
+                              drawTicks: false,
+                              color: 'rgba(200, 200, 200, 0.3)'
+                          }
+                      }
+                  }
+              }
+          });
+
+          modal.style.display = "flex";
+      }
+
+      function closeModal() {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+
+          // 차트 객체를 명시적으로 삭제
+          if (modalChartInstance) {
+              modalChartInstance.destroy();
+              modalChartInstance = null;
+          }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+          fetchRainfallData();
+      });
+    </script>
     {% endblock %}
 </body>
 </html>

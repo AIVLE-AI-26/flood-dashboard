@@ -1,135 +1,102 @@
-{% extends 'main/navbar.html' %}
-
 {% load static %}
-{% block styles %}
-<link rel="stylesheet" href="{% static 'css/signup.css' %}">
-<title>회원가입</title>
-{% endblock %}
 
-{% block content %}
-<canvas class="background-canvas"></canvas>
-<div class="form-container-signup">
-    <h2>회원가입</h2>
-    <div class="signup-container">
-        <form method="POST" class="needs-validation">
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-            <div class="signup-group">
-                <label class="signup-label" for="{{ form.username.id_for_label }}">아이디</label>
-                {{ form.username }}
-                <div class="invalid-feedback d-block">
-                    {{ form.username.errors }}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <title>회원가입</title>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-side-bar">
+            <span class="home-icon"><img src="{% static 'img/home0.png' %}" class="home-icon-img" onclick="window.location.href='{% url 'home' %}'"></span>
+            <div class="tab">
+                <button class="tablinks" onclick="location.href='/login/'">Login</button>
+                <button class="tablinks active">Register</button>
+            </div>
+        </div>
+        <div class="form-container-signup">
+            <h2>Register</h2>
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="input-container">
+                    <div class="signup-group">
+                        <label class="signup-label" for="{{ form.username.id_for_label }}">username</label>
+                        {{ form.username }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.username.errors }}</span></span>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.password1.id_for_label }}">password</label>
+                        {{ form.password1 }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.password1.errors }}</span></span>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.password2.id_for_label }}">check password</label>
+                        {{ form.password2 }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.password2.errors }}</span></span>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.email.id_for_label }}">email</label>
+                        {{ form.email }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.email.errors }}</span></span>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.role.id_for_label }}">사용자 유형</label>
+                        <div class="custom-select-wrapper">
+                            {{ form.role }}
+                        </div>
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.role.errors }}</span></span>
+                    </div>
+                    <div class="signup-btn-container">
+                        <button type="submit" class="btn btn-primary signup-btn">Register</button>
+                    </div>
                 </div>
-            </div>
-            <div class="signup-group">
-                <label for="{{ form.password1.id_for_label }}">비밀번호</label>
-                {{ form.password1 }}
-                <div class="invalid-feedback d-block">
-                    {{ form.password1.errors }}
+                <div class="footer">
+                    <p>이미 계정이 있으신가요? <a href="/login/">로그인</a></p>
                 </div>
-            </div>
-            <div class="signup-group">
-                <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
-                {{ form.password2 }}
-                <div class="invalid-feedback d-block">
-                    {{ form.password2.errors }}
-                </div>
-            </div>
-            <div class="signup-group">
-                <label for="{{ form.email.id_for_label }}">이메일</label>
-                {{ form.email }}
-                <div class="invalid-feedback d-block">
-                    {{ form.email.errors }}
-                </div>
-            </div>
-            <div class="signup-group">
-                <label for="{{ form.role.id_for_label }}">사용자 유형</label>
-                {{ form.role }}
-                <div class="invalid-feedback d-block">
-                    {{ form.role.errors }}
-                </div>
-            </div>
-            <div class="signup-btn-container">
-                <button type="submit" class="btn btn-primary login-btn">회원가입</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-<script>
-    (function () {
-        'use strict';
-        var forms = document.querySelectorAll('.needs-validation');
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-    })();
-</script>
-<script>
-    const canvas = document.querySelector('.background-canvas');
-    const context = canvas.getContext('2d');
-    const drops = [];
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Drop {
-        constructor(index, x, y, speed, length) {
-            this.index = index;
-            this.x = x;
-            this.y = y;
-            this.speed = speed;
-            this.length = length;
-            this.draw();
-        }
-
-        draw() {
-            context.beginPath();
-            context.strokeStyle = '#FFFFFF';
-            context.moveTo(this.x, this.y);
-            context.lineTo(this.x, this.y + this.length);
-            context.stroke();
-            context.closePath();
-        }
-    }
-
-    function render() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        drops.forEach((drop) => {
-            drop.y += drop.speed;
-            if (drop.y > canvas.height) {
-                drop.y = 0;
-                drop.x = Math.random() * canvas.width;
-                drop.speed = Math.random() * 3 + 1;
-                drop.length = Math.random() * 5 + 2;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorFields = document.querySelectorAll('.error-tooltip');
+    
+            function hideTooltips() {
+                errorFields.forEach(function(field) {
+                    field.style.visibility = 'hidden';
+                    field.style.opacity = '0';
+                });
             }
-
-            drop.draw();
+    
+            function showFirstTooltip() {
+                for (var i = 0; i < errorFields.length; i++) {
+                    var field = errorFields[i];
+                    var errorText = field.querySelector('.error-text');
+                    if (errorText && errorText.textContent.trim() !== "") {
+                        field.style.display = 'flex';
+                        field.style.visibility = 'visible';
+                        field.style.opacity = '1';
+                        var icon = field.querySelector('.icon');
+                        if (icon) {
+                            icon.style.display = 'inline';
+                        }
+                        break; // 첫 번째 오류 툴팁만 표시하고 루프 종료
+                    }
+                }
+            }
+    
+            showFirstTooltip(); // 페이지 로드 시 첫 번째 오류 툴팁 표시
+    
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.signup-group')) {
+                    hideTooltips();
+                }
+            });
         });
-
-        requestAnimationFrame(render);
-    }
-
-    for (let i = 0; i < 500; i++) {
-        const tempX = Math.random() * canvas.width;
-        const tempY = Math.random() * canvas.height;
-        const tempSpeed = Math.random() * 3 + 1;
-        const tempLength = Math.random() * 5 + 2;
-
-        drops.push(new Drop(i, tempX, tempY, tempSpeed, tempLength));
-    }
-    render();
-</script>
-{% endblock %}
+    </script>
+    
+</body>
+</html>
