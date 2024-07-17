@@ -11,6 +11,8 @@ import joblib
 import json
 from django.conf import settings
 import os
+import numpy as np
+
 
 # 관측소 코드와 이름, 위도 및 경도 매핑
 observatories = {
@@ -20,8 +22,8 @@ observatories = {
     '5001650': {'name': '광주광역시(유촌교)', 'lat': 35.167116, 'lng': 126.856710,'홍수주의보' : 4.0,'홍수경보':5.0},
     '5001655': {'name': '광주광역시(풍영정천2교)', 'lat': 35.171876, 'lng': 126.813981,'홍수주의보' : 4.1,'홍수경보':4.9},
     '5001660': {'name': '광주광역시(어등대교)', 'lat': 35.16, 'lng': 126.82305555555556,'홍수주의보' : 4.7,'홍수경보':5.9},
-    '5001676': {'name': '광주광역시(신운교)', 'lat': 35.16861111111111, 'lng': 126.89083333333333,'홍수주의보' : 7.5,'홍수경보':8.5},
-    '5001669': {'name': '광주광역시(우제교)', 'lat': 35.13138888888889, 'lng': 126.94250000000001,'홍수주의보' : 7.5,'홍수경보':8.5},  # 여기가 어디?
+    # '5001676': {'name': '광주광역시(신운교)', 'lat': 35.16861111111111, 'lng': 126.89083333333333,'홍수주의보' : 7.5,'홍수경보':8.5},
+    # '5001669': {'name': '광주광역시(우제교)', 'lat': 35.13138888888889, 'lng': 126.94250000000001,'홍수주의보' : 7.5,'홍수경보':8.5},  # 여기가 어디?
     '5001670': {'name': '광주광역시(설월교)', 'lat': 35.129444444444445, 'lng': 126.92750000000001,'홍수주의보' : 3.3,'홍수경보':3.8},
     # '5001682': {'name': '광주광역시(벽진동)', 'lat': 35.13, 'lng': 126.845,'홍수주의보' : 7.5,'홍수경보':8.5},  # 금호동
     '5002690': {'name': '광주광역시(장록교)', 'lat': 35.134166666666665, 'lng': 126.785,'홍수주의보' : 5.6,'홍수경보':6.1},  
@@ -124,7 +126,7 @@ def get_waterlevel_data(request):
                     fcst_value = item.find('fcstValue').text if item.find('fcstValue') is not None else '' # fcstValue : 예보 값
                     
                     all_data1.append({
-                        'location': location_name,
+                        # 'location': location_name,
                         # 'base_date': base_date,
                         #'base_time': base_time,
                         'fcst_date': fcst_date,
@@ -137,23 +139,74 @@ def get_waterlevel_data(request):
             print(f"Error: {response.status_code}, location: {location_name}")
 
     # 데이터프레임으로 변환
-    df = pd.DataFrame(all_data1)
-    df['fcst_value'] = df['fcst_value'].apply(clean_fcst_value)
+    rainfall_data = pd.DataFrame(all_data1)
+    # df['fcst_value'] = df['fcst_value'].apply(clean_fcst_value)
     # df[df['fcst_date'] == '20240711']
+    all_df = pd.DataFrame(all_data)
+    all_df['wl'] = all_df['wl'].astype(float)
+    all_df['홍수주의보'] = all_df['홍수주의보'].astype(float)
+    all_df['홍수경보'] = all_df['홍수경보'].astype(float)
+    rainfall_data['date'] = rainfall_data['fcst_date']+ rainfall_data['fcst_time']
+    # merged_data['year'] = merged_data['ymdh'].astype(str).str[:4]
     
-    df['time'] = df['fcst_time'].str[:2]
-    df['date'] = df['fcst_date']+ df['time']
-    df1 = df[['fcst_value',	'date']]
+    # df['time'] = df['fcst_time'].str[:2]
+    
+    df1 = rainfall_data[['fcst_value',	'date']]
     df1 = pd.DataFrame(df1)
     all = pd.DataFrame(all_data)
-    data = pd.merge(all,df1,left_on='ymdh',right_on='date',how='left')
-    data = data[['ymdh',	'wl',	'obscd','홍수주의보'	,'홍수경보','fcst_value']]
-    model_path = os.path.join(settings.DATA_DIR, 'model_wl.pkl')
-    model_info = joblib.load(model_path)
-    model_wl = model_info['model']
-    model_columns = model_info['columns']
-    data = data.rename(columns={'홍수주의보':'주의보초과', '홍수경보':'경보초과', 'fcst_value':'rf'})
-    pred = model_wl.predict(data)
+    merged_data = pd.merge(all,df1,left_on='ymdh',right_on='date',how='left')
+    merged_data = merged_data[['ymdh', 'wl', 'obscd', '홍수주의보', '홍수경보', 'fcst_value']]
+    # model_path = os.path.join(settings.DATA_DIR, 'model_wl.pkl')
+    # model_info = joblib.load(model_path)
+    # model_wl = model_info['model']
+    # model_columns = model_info['columns']
+    # data = data.rename(columns={'홍수주의보':'주의보초과', '홍수경보':'경보초과', 'fcst_value':'rf'})
+    # pred = model_wl.predict(data)
+    def predict_real_time(models, merged_data):
+        merged_data['wl'] = pd.to_numeric(merged_data['wl'], errors='coerce')
+        merged_data['홍수주의보'] = pd.to_numeric(merged_data['홍수주의보'], errors='coerce')
+        merged_data['주의보초과'] = merged_data.apply(lambda row: 1 if row['wl'] > row['홍수주의보'] else 0, axis=1)
+        merged_data['경보초과'] = merged_data.apply(lambda row: 1 if row['wl'] > row['홍수경보'] else 0, axis=1)
+        
+        predictions = {}
+
+        for obscd in observatories.keys():
+            data_for_prediction = merged_data[merged_data['obscd'] == obscd]
+
+            if obscd in models:
+                model = models[obscd]
+
+                X_new = data_for_prediction[['fcst_value','wl' ,'주의보초과', '경보초과']]
+                X_new = pd.DataFrame(X_new)
+                X_new = X_new.rename(columns={'fcst_value':'강수량'})
+                X_new = X_new.fillna(0)
+                y_pred_proba_new = model.predict_proba(X_new)
+                # y_pred_class_new = (y_pred_proba_new > 0.8).astype(int)
+
+                data_for_prediction['홍수확률'] = y_pred_proba_new[:, 1]
+
+                
+                # 각 obscd와 예측 값을 사전에 추가합니다.
+                predictions[obscd] = float(y_pred_proba_new[:, 1])
+
+                # print(f"Predicted Flood Probability for obscd {obscd}: {y_pred_proba_new[0]}")
+                # print(f"Predicted Class for obscd {obscd}: {y_pred_class_new[0]}")
+                # print(data_for_prediction["wl"])
+            else:
+                print(f"No model found for obscd {obscd}")
+
+        return predictions
+    
+    models = {}
+    for obscd in observatories.keys():
+        try:
+            model_path = os.path.join(settings.DATA_DIR, f'./model_wl/model_{obscd}.pkl') 
+            models[obscd] = joblib.load(model_path)
+        except FileNotFoundError:
+            print(f"No model file found for obscd {obscd}")
+
+    # 실시간 데이터 예측
+    predictions = predict_real_time(models, merged_data)
     
     all_data=[]
     i = 0
@@ -168,12 +221,14 @@ def get_waterlevel_data(request):
             latest_data['lng'] = info['lng']  # 관측소의 경도
             latest_data['홍수주의보'] = info['홍수주의보'] 
             latest_data['홍수경보'] = info['홍수경보']
-            latest_data['홍수확률']= pred[i]
+            latest_data['홍수확률']= round(predictions[code] * 100, 2)
             all_data.append(latest_data)
             i +=1
     return JsonResponse(all_data, safe=False)
 
 def clean_fcst_value(value):
+    if np.isnan(value):
+        return 0.0
     # null, '-', '강수없음'인 경우 0.0으로 변환
     if value == '강수없음':
         return 0.0

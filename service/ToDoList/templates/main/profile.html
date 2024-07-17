@@ -1,7 +1,15 @@
 {% extends 'main/navbar.html' %}
+{% load static %}
 {% block content %}
-    <h2>내 정보 조회</h2>
-    <p>사용자 이름: {{ user.username }}</p>
-    <p>이메일: {{ user.email }}</p>
-    <a href="{% url 'edit_profile' %}" class="btn">회원 정보 수정</a>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+    <div class="profile-container">
+        <h2>내 정보 조회</h2>
+        <div class="user-info">
+            <p><strong>사용자 이름:</strong> {{ user.username }}</p>
+            <p><strong>이메일:</strong> {{ user.email }}</p>
+        </div>
+        <div class="actions">
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary">회원 정보 수정</a>
+        </div>
+    </div>
 {% endblock %}
