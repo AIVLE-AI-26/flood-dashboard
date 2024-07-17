@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'terms',
     'detect',
     'find_username',
+    'find_ps',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'terms/static'),
     os.path.join(BASE_DIR, 'detect/static'),
     os.path.join(BASE_DIR, 'find_username/static'),
+    os.path.join(BASE_DIR, 'find_ps/static'),
 ]
 
 DATABASES = {
@@ -114,3 +116,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'myemail@gmail.com'  # 실제 이메일 주소
+EMAIL_HOST_PASSWORD = 'my-email-password'  # 실제 이메일 계정의 비밀번호 또는 앱 비밀번호
+DEFAULT_FROM_EMAIL = 'myemail@gmail.com'  # 실제 이메일 주소
