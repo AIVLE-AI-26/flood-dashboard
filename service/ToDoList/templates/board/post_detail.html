@@ -2,50 +2,43 @@
 
 {% block content %}
 <div class="notice">
-    <h2>제목: {{ post.title }}</h2>
-    <table class="notice2">
-        <thead class="notice3">
-            <tr>
-                <th scope="col">작성자</th>
-                <th scope="col">작성일</th>
-                <th scope="col">조회수</th>
-            </tr>
-        </thead>
+    <h2>[제목]{{ post.title }}</h2>
+    <table id="notice-table" class="notice2">
         <tbody>
-            <tr>
-                <td>{{ post.author }}</td>
-                <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
-                <td>{{ post.views }}</td>
+            <tr style ="background-color:#f4f4f4; border-radius: 10px;">
+                <td style="padding: 0px;padding-left:20px"><i class="material-icons icon">account_circle</i></td>
+                <td>
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="font-size: 25px; font-weight: bold;">{{ post.author }}</div>
+                        <div>{{ post.created_at|date:"Y-m-d H:i" }}</div>
+                    </div>
+                </td>
+                <td>
+                    {% if file_url %}
+                        <a class="attachment-link" href="{% url 'download_file' pk=post.pk %}">첨부파일 이름: {{ file_name }}</a>
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>
-    <div class="post-content">내용: {{ post.content|linebreaks }}</div>
+    <div class="post-content">{{ post.content|linebreaks }}</div>
     {% if is_image %}
-        <img src="{% url 'download_file' post.pk %}" alt="첨부 이미지" style="width: 10%; height: auto;">
-
+        <img src="{% url 'download_file' post.pk %}" alt="첨부 이미지" style="width: 40%; height: auto;">
     {% endif %}
     
-    {% if file_url %}
-        <div class="mt-4">
-            <div class="button-container">
-                <div class='button-left'>
-                    <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-secondary">수정</a>
-                    <a href="{% url 'post_list' %}" class="btn btn-list">목록으로 돌아가기</a>
-                </div>
-                <div class='button-right'>
-                    <a href="{% url 'download_file' pk=post.pk %}">첨부파일이름 : {{ file_name }}</a>
-                </div>
-            </div>
+    <div class="button-container">
+        <div class='button-left'>
+            <a href="{% url 'post_list' %}" class="btn btn-list">목록으로 돌아가기</a>
         </div>
-    {% endif %}
-    
-    <div class='button-right'>
-        <form action="{% url 'post_delete' pk=post.pk %}" method="post" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
-        </form>
+        <div class='button-right'>
+            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-secondary">수정</a>
+            <form action="{% url 'post_delete' pk=post.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+            </form>
+        </div>
     </div>
 </div>
 
-{% endblock %}
 
+{% endblock %}

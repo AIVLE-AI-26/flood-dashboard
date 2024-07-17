@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detect Home</title>
-</head>
-<body>
-    <h1>Welcome to the Detect App</h1>
-    <p><a href="{% url 'upload_image' %}">Upload an Image for Detection</a></p>
-</body>
-</html>
+{% extends 'main/navbar.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/detect.css' %}">
+{% endblock %}
+{% block title %}Detect Home{% endblock %}
+
+{% block content %}
+    <h1 style="display: inline-block;">
+        <i style="font-size: 60px; vertical-align: middle;" class="material-icons icon">report_gmailerrorred</i>
+        <span style="vertical-align: middle;">시설물 관리</span>
+    </h1>
+
+
+    <!-- JavaScript to redirect after 1 second -->
+    <script type="text/javascript">
+        setTimeout(function() {
+            window.location.href = "{% url 'upload_image' %}";
+        }, 1);  // 1000 milliseconds = 1 second
+    </script>
+{% endblock %}
