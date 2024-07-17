@@ -331,25 +331,19 @@ footer {
     justify-content: center; /* 수평 가운데 정렬 */
 }
 
-/* style.css - 수정된 챗봇 아이콘 스타일 */
+/* 챗봇 아이콘 스타일 */
 .chatbot-icon-link {
     position: absolute;
-    bottom: 30px; /* 기존보다 70px 더 아래로 이동 */
-    right: 60px; /* 기존보다 30px 더 왼쪽으로 이동 */
+    bottom: 30px;
+    right: 60px; 
     cursor: pointer;
-    transform: translateX(0); /* 말풍선 꼬리와 정렬 */
 }
 
 .chatbot-icon {
-    width: 90px; /* 적절한 크기로 조정 */
-    height: 90px; /* 적절한 크기로 조정 */
-    background-color: #0080ff; /* 파란색 배경 */
-    border-radius: 50%; /* 원형으로 만듦 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white; /* 아이콘 내부 색상 */
-    font-size: 48px; /* 아이콘 크기 */
+    width: 100px;
+    height: 100px;
+    background-color: #1E90FF;
+    border-radius: 50%;
 }
 
 /* 침수예상지역 버튼 css */
