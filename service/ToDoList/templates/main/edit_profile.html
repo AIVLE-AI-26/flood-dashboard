@@ -1,14 +1,10 @@
 {% extends 'main/navbar.html' %}
-{% load static %}
 {% block content %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/edit_profile.css' %}">
-    <div class="profile-container">
-        <h2>회원 정보 수정</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">수정</button>
-        </form>
-        <a href="{% url 'profile' %}" class="btn btn-secondary">취소</a>
-    </div>
+    <h2>회원 정보 수정</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">수정</button>
+    </form>
+    <a href="{% url 'profile' %}" class="btn btn-secondary">취소</a>
 {% endblock %}
