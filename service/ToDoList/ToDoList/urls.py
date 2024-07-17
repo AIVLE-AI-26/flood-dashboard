@@ -15,6 +15,7 @@ urlpatterns = [
     path('terms/', include('terms.urls')),
     path('detect/', include('detect.urls')),
     path('find_username/', include('find_username.urls')),
+    path('find-password/', include('find_ps.urls')),
 ]
 
 if settings.DEBUG:
