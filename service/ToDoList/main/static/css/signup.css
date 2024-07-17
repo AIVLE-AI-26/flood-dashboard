@@ -3,16 +3,7 @@
 }
 
 .content-container {
-    margin-left: 0px; /* 사이드 바 너비  */ /* W황인태 */
-}
-.background-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(180deg, #2c3e50,#3b536b, #004d52);
+    margin-left: 0px; /* 사이드 바 너비  */
 }
 .form-container-signup{
     width: 40%;

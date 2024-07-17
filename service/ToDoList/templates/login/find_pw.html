@@ -1,0 +1,9 @@
+{% extends 'main/navbar.html' %}
+{% block content %}
+    <h2>비밀번호 찾기</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
+    </form>
+{% endblock %}
