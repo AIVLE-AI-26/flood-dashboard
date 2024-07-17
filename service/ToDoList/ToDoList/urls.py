@@ -14,6 +14,7 @@ urlpatterns = [
     path('waterlevel/', include('waterlevel.urls')),
     path('terms/', include('terms.urls')),
     path('detect/', include('detect.urls')),
+    path('find_username/', include('find_username.urls')),
 ]
 
 if settings.DEBUG:
