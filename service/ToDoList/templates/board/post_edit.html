@@ -2,17 +2,46 @@
 
 {% block content %}
 <div class="notice">
-    <h2>글 수정</h2>
+    <h2>
+        <i class="material-icons icon">construction</i>
+        글 수정
+    </h2>
     <form action="{% url 'post_edit' pk=post.pk %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
-        {{ form.as_p }}
-        <div class = "button-container">
-            <div class ='button-left'>
-                <button type="submit" class="btn btn-secondary">저장</button>
-                <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-secondary">취소</a>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="제목" value ="{{ post.title }}"required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="author">작성자</label>
+                <input type="text" class="form-control" id="author" name="author" placeholder="작성자" value ="{{ post.author }}"required>
             </div>
         </div>
+        
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용" value ="{{ post.content|linebreaks }}"required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="file">파일 업로드</label>
+            <input type="file" class="form-control-file" id="file" name="file">
+        </div>
+        
+        <div class="form-group">
+            <label for="status">상태</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="published">Published</option>
+            </select>
+        </div>
+        
+        <div class="button-container">
+            <button type="submit" class="btn btn-secondary">저장</button>
+            <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-secondary">취소</a>
+        </div>
+        
     </form>
 </div>
 

@@ -12,4 +12,6 @@ urlpatterns = [
     path('delete/', views.delete_account, name='delete_account'),  # 회원 탈퇴 URL
     path('profile/', views.profile, name='profile'), 
     path('edit_profile/', views.edit_profile, name='edit_profile'),# 내 정보 조회 URL
+    path('detect/', views.detect, name='detect'),
+
 ]

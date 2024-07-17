@@ -26,6 +26,9 @@ def contact(request):
 def waterlevel(request):
     return render(request, 'waterlevel/waterlevel.html') 
 
+def detect(request):
+    return render(request, 'detect/home.html') 
+
 def create_geojson(features):
     geojson = {
         "type": "FeatureCollection",
