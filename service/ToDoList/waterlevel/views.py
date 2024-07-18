@@ -66,14 +66,14 @@ def get_waterlevel_data(request):
             latest_data['홍수주의보'] = info['홍수주의보'] 
             latest_data['홍수경보'] = info['홍수경보']
             all_data.append(latest_data)
-    service_key = 'U5TMb2vWz5yYMTnePaPkAUBMk71makHiU1I1SjOcPC6MDSTQpVCygUlka/H5lFS97zg8esXtV6qKoUEPpox3EA=='
+    service_key = 'nz2fwU3ROAjPxqq2gPGhnUPe6+ZWmxvhXIyUBW/qUrPl0T0za05as1fDc4AiuY/6R2jfQE0JQBr4MKDZ7MPC6w=='
 
     # API 엔드포인트
-    url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-
-    base_date = datetime.now() - timedelta(days=1)
-    base_date = base_date.strftime('%Y%m%d') # 어제 23시 기준으로 3일치 강수량 데이터 호출
-
+    url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
+    
+    now = datetime.now() - timedelta(hours=5)
+    base_date = now.strftime('%Y%m%d')
+    base_time = now.strftime('%H00') 
     # Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
     # 요청 파라미터 공통 부분
     common_params = {
@@ -82,7 +82,7 @@ def get_waterlevel_data(request):
         'numOfRows': '1000', 
         'dataType': 'XML', 
         'base_date': base_date, 
-        'base_time': '2300'
+        'base_time': base_time
     }
 
     # 각 지역별 (nx, ny) 좌표
@@ -118,7 +118,7 @@ def get_waterlevel_data(request):
                 category = item.find('category').text if item.find('category') is not None else ''
                 
                 # category가 'PCP'인 경우에만 데이터를 추가 (PCP : 1시간 강수량)
-                if category == 'PCP':
+                if category == 'RN1':
                     # base_date = item.find('baseDate').text if item.find('baseDate') is not None else '' # baseDate : 발표일자
                     # base_time = item.find('baseTime').text if item.find('baseTime') is not None else '' # baseDate : 발표시각
                     fcst_date = item.find('fcstDate').text if item.find('fcstDate') is not None else '' # fcstDate : 예보일자
@@ -151,7 +151,7 @@ def get_waterlevel_data(request):
     
     # df['time'] = df['fcst_time'].str[:2]
     
-    df1 = rainfall_data[['fcst_value',	'date']]
+    df1 = rainfall_data[['fcst_value',   'date']]
     df1 = pd.DataFrame(df1)
     all = pd.DataFrame(all_data)
     merged_data = pd.merge(all,df1,left_on='ymdh',right_on='date',how='left')
