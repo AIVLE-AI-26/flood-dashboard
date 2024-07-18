@@ -43,7 +43,9 @@
     //
     <!-- 챗봇 아이콘을 추가 -->
     <a onclick="openModal()" class="chatbot-icon-link">
-        <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon">
+        <div class="chatbot-icon-container">
+            <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon">
+        </div>
     </a>
 </main>
 {% endblock %}

@@ -4,30 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/find_username.css' %}">
     <title>아이디 찾기</title>
 </head>
 <body>
     <div class="form-container">
-        <h2>Find your username</h2>
-        {% if messages %}
+        <div class="form-side-bar">
+            <span class="home-icon"><img src="{% static 'img/home0.png' %}" class="home-icon-img" onclick="window.location.href='{% url 'home' %}'"></span>
+            <div class="tab">
+                <button class="tablinks active">Username</button>
+                <button class="tablinks" onclick="location.href='/find-password/'">Password</button>
+            </div>
+        </div>
+        <div class="form-container-find">
+            <h2>Find your username</h2>
+            <form method="post" action="{% url 'find_username' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="find-btn">Submit</button>
+                <div class="footer">
+                    <a href="/login/">로그인</a> | <a href="/signup/">회원가입</a>
+                </div>
+            </form>
+            {% if usernames %}
+            <div class="input-container-wrapper">
+                <div class="input-container">
+                    <h3>이메일 정보와 일치하는 아이디입니다.</h3>
+                    <div class="find-container">
+                        <p>아이디: 
+                        {% for username in usernames %}
+                            <span>{{ username }}</span>
+                        {% endfor %}
+                        </p>
+                    </div>
+                    <button class="ok-btn" onclick="location.href='/login/'">OK</button>
+                </div>
+            </div>
+            {% endif %}
+            {% if messages %}
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
-        {% endif %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
-        </form>
-        {% if usernames %}
-            <h3>Your usernames:</h3>
-            <ul>
-                {% for username in usernames %}
-                    <li>{{ username }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector('form').onsubmit = function(event) {
+                // 폼 제출 시 기본 동작 유지
+            };
+
+            // 폼 제출 후 usernames 데이터가 있을 때 결과를 보여주기
+            {% if usernames %}
+                document.querySelector('form').style.display = 'none'; // 폼 숨기기
+                document.querySelector('.input-container-wrapper').style.display = 'flex'; // 결과 보여주기
+            {% endif %}
+        });
+    </script>
 </body>
 </html>
