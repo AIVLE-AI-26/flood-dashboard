@@ -4,6 +4,8 @@ from urllib.parse import quote
 from .models import Post
 from .forms import PostForm
 from mimetypes import guess_type
+from django.contrib.auth.decorators import login_required
+
 import os
 import time
 from django.conf import settings
@@ -56,11 +58,13 @@ def download_file(request, pk):
 
     
 
+@login_required
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            post.author = request.user
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:

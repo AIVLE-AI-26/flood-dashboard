@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Safe City{% endblock %}</title>
     {% load static %}
+    {% load custom_filters %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     {% block styles %}{% endblock %}
 </head>
 <body>
@@ -20,7 +22,6 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            {% comment %} 아래 안쓰면 비활성화 {% endcomment %}
             <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe>
         </div>
     </div>
@@ -58,14 +59,14 @@
                         </button>
                     </li>
                     <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" id="waterlevelButton">
+                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'waterlevel' %}'">
                             <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
                             <span class="menuText">구별 하천 수위</span>
                         </button>
                     </li>
                     <li class="menuItem">
                         <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'detect' %}'">
-                            <i class="material-icons header-icon" style="font-size:25px;margin-left:0px;">report_gmailerrorred</i>
+                            <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
                             <span class="menuText">시설물 관리</span>
                         </button>
                     </li>
@@ -75,15 +76,15 @@
                 {% if user.is_authenticated %}
                     <div class="profile-section">
                         <img src="{% static 'img/account_circle.png' %}" alt="Profile" class="profile-icon" id="profile-icon">
-                        <p class="username">{{ user.username }}</p>
+                        <p class="username">{{ user.last_name }} {{ user.first_name | mask_name }}</p>
                         <div class="profile-buttons" id="profile-buttons" style="display: none;">
                             <button type="button" class="menuButton" onclick="window.location.href='{% url 'profile' %}'">마이페이지</button>
                             <button type="button" class="menuButton" id="delete-account-button" data-url="{% url 'delete_account' %}">회원 탈퇴</button>
-                        </div>
-                        <a href="{% url 'logout' %}" class="auth-link">
-                            <img src="{% static 'img/logout.png' %}" alt="Logout" class="auth-icon">
-                        </a>
                     </div>
+                    <a href="{% url 'logout' %}" class="auth-link">
+                        <img src="{% static 'img/logout.png' %}" alt="Logout" class="auth-icon">
+                </a>
+            </div>
                 {% else %}
                     <div class="auth-buttons">
                         <a href="{% url 'login' %}" class="auth-link collapsed-only">
@@ -106,3 +107,4 @@
     {% block extra_script %}{% endblock %}
 </body>
 </html>
+
