@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    path('chatbot/', include('chatbot.urls')),
+    path('chatbot/', include('chatbot.urls')),  # 챗봇 안쓰면 비활성화
     path('signup/', include('signup.urls')),  # sighup 경로로 수정
     path('login/', include('login.urls')),
     path('board/', include('board.urls')),

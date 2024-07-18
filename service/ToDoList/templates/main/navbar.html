@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     {% block styles %}{% endblock %}
 </head>
 <body>
@@ -21,6 +20,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            {% comment %} 아래 안쓰면 비활성화 {% endcomment %}
             <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe>
         </div>
     </div>
@@ -58,7 +58,7 @@
                         </button>
                     </li>
                     <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'waterlevel' %}'">
+                        <button type="button" class="menuButton" aria-pressed="false" id="waterlevelButton">
                             <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
                             <span class="menuText">구별 하천 수위</span>
                         </button>
