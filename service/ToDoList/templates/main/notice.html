@@ -1,51 +1,56 @@
 {% extends 'main/navbar.html' %}
 
 {% block content %}
-<div class="notice">
-    <h2>    
-        <i class="material-icons icon">notifications</i>
-        공지사항
-    </h2>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="검색어를 입력하세요...">
-        <button id="searchButton">검색</button>
-    </div>
-    <table class="notice2">
-        <thead class="notice3">
-            <tr>
-                <th scope="col">번호</th>
-                <th scope="col">제목</th>
-                <th scope="col">작성자</th>
-                <th scope="col">작성일</th>
-                <th scope="col">조회수</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            {% for post in posts %}
-            <tr>
-                <td scope="row">{{ forloop.counter }}</td>
-                <td>
-                    <a href="{% url 'post_detail' pk=post.pk %}" class="post-title">{{ post.title }}</a>
-                </td>
-                <td>{{ post.author }}</td>
-                <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
-                <td>{{ post.views }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">등록된 게시물이 없습니다.</td>
-            </tr>
-            {% endfor %}
-            
-        </tbody>
-        
-    </table>
-    <div class="button-container">
-        <div class="right-align">
-            {% if user.is_authenticated and user.user_role == 'admin' %}
-                <a href="{% url 'post_new' %}" class="btn btn-secondary">글쓰기</a>
-            {% endif %}
+<div class = "n-back">
+    <div class="notice">
+        <h2>    
+            <i class="material-icons icon">notifications</i>
+            공지사항
+        </h2>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="검색어를 입력하세요...">
+            <button id="searchButton">검색</button>
         </div>
+        <table class="notice2">
+            <thead class="notice3">
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">작성일</th>
+                    <th scope="col">조회수</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for post in posts %}
+                <tr>
+                    <td scope="row">{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{% url 'post_detail' pk=post.pk %}" class="post-title">{{ post.title }}</a>
+                    </td>
+                    <td>{{ post.author }}</td>
+                    <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
+                    <td>{{ post.views }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">등록된 게시물이 없습니다.</td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+            
+        </table>
+        <div class="notice-air"></div>
+        {% if user.is_authenticated and user.user_role == 'admin' %}
+
+        <div class="button-container" style="border-color:white;">
+            <div class="right-align">
+                    <a href="{% url 'post_new' %}" class="btn btn-secondary">글쓰기</a>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 </div>
 

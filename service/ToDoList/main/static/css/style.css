@@ -526,10 +526,10 @@ a.post-title:hover {
     display: flex;
     justify-content: flex-end;
 }
-
 .right-align {
-    display: inline-block;
+    margin-left: auto; /* 왼쪽 정렬을 풀고 오른쪽 정렬을 우선 */
 }
+
 .button-left {
     display: flex; /* 왼쪽 버튼 그룹을 플렉스로 설정하여 내부 요소들을 수평 정렬 */
     padding-right: 15px;
