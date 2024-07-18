@@ -27,6 +27,7 @@ service/ToDoList/find_ps/migrations/__pycache__/
 service/ToDoList/find_username/__pycache__/
 service/ToDoList/find_username/migrations/__pycache__/
 service/ToDoList/login/__pycache__/
+service/ToDoList/login/templatetags/__pycache__/
 service/ToDoList/login/migrations/__pycache__/
 service/ToDoList/main/__pycache__/
 service/ToDoList/main/migrations/__pycache__/
