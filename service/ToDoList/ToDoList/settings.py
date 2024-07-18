@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'chatbot',
+    'chatbot',  # 챗봇 안 쓰면 비활성화
     'signup',
     'login',
     'board',

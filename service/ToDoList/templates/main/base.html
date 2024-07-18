@@ -2,6 +2,11 @@
 {% load static %}
 {% block title %}Safe City{% endblock %}
 {% block extra_head %}{% endblock %}
+//
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/waterlevel.css' %}">
+{% endblock %}
+//
 {% block content %}
 <main class="content">
     <div class="map_m">
@@ -26,6 +31,16 @@
         </div>
     </div>
     <div id="map" style="width: 100%; height: 100vh;"></div>
+    //
+    <div id="data-container" class="grid-container info-container">
+        <div class="waterlevelbar">
+            <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
+            <span class="waterleveltitle"><h3>하천 수위 정보</h3></span>
+            <span class="waterlevelbar-close">&times;</span>
+        </div>
+        <div id="waterlevel-info"></div>
+    </div>
+    //
     <!-- 챗봇 아이콘을 추가 -->
     <a onclick="openModal()" class="chatbot-icon-link">
         <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon">
@@ -36,4 +51,6 @@
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <script src="{% static 'js/map.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="{% static 'js/waterlevel.js' %}" defer></script>
 {% endblock %}

@@ -38,6 +38,37 @@
     border: 2px solid white;
 }
 
+#data-container {
+    position: fixed;
+    top: 10px;
+    right: -280px; /* Start off-screen */
+    width: 280px;
+    height: calc(100% - 160px);
+    background-color: #ffffff;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+    transition: right 0.3s;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#data-container.visible {
+    right: 0; /* Move on-screen */
+}
+
+.hidden {
+    display: none;
+}
+
+#infoButton {
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.info-item.highlight {
+    background-color: #ffff99;
+}
+
 .info-container {
     background: #f5f5f5;
     border-radius: 10px;
@@ -50,10 +81,42 @@
     margin: 0 0 5px 0; /*상 우 하 좌*/
 }
 
+.waterlevelbar {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.waterlevelbar > span {
+    text-align: center;
+}
+
+.waterlevelbar > span > img {
+    height: 40px;
+}
+
+.waterleveltitle {
+    padding-left: 10px;
+}
+
+.waterlevelbar-close {
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.waterlevelbar-close:hover {
+    color: #f00; /* Hover 색상 */
+}
+
 .info-item {
     margin-bottom: 10px;
     padding: 10px;
-    background: #e9ecef;
+    background: #f7f7f7;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
