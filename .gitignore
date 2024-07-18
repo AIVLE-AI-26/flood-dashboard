@@ -22,6 +22,10 @@ service/ToDoList/chatbot/__pycache__/
 service/ToDoList/chatbot/migrations/__pycache__/
 service/ToDoList/detect/__pycache__/
 service/ToDoList/detect/migrations/__pycache__/
+service/ToDoList/find_ps/__pycache__/
+service/ToDoList/find_ps/migrations/__pycache__/
+service/ToDoList/find_username/__pycache__/
+service/ToDoList/find_username/migrations/__pycache__/
 service/ToDoList/login/__pycache__/
 service/ToDoList/login/migrations/__pycache__/
 service/ToDoList/main/__pycache__/
