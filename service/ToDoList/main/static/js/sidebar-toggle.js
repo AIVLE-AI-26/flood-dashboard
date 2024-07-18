@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const profileIcon = document.getElementById('profile-icon');
     const profileButtons = document.getElementById('profile-buttons');
     const deleteAccountButton = document.getElementById('delete-account-button');
+    const weatherInfo = document.querySelector('.weather-info');
 
     // 로컬 스토리지에서 사이드바 상태 불러오기
     const sidebarState = localStorage.getItem('sidebarState');
@@ -11,10 +12,12 @@ document.addEventListener('DOMContentLoaded', function () {
         sidebar.classList.add('collapsed');
         toggleButton.setAttribute('aria-expanded', 'false');
         toggleButton.innerHTML = '&gt;';
+        weatherInfo.style.display = 'none';
     } else {
         sidebar.classList.remove('collapsed');
         toggleButton.setAttribute('aria-expanded', 'true');
         toggleButton.innerHTML = '&lt;';
+        weatherInfo.style.display = 'block';
     }
 
     toggleButton.addEventListener('click', function () {
@@ -27,6 +30,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 사이드바 상태 로컬 스토리지에 저장
         localStorage.setItem('sidebarState', expanded ? 'expanded' : 'collapsed');
+
+        // 날씨 정보 표시 상태 변경
+        if (expanded) {
+            weatherInfo.style.display = 'block';
+            fetchWeatherData(); // 날씨 정보 업데이트
+        } else {
+            weatherInfo.style.display = 'none';
+        }
     });
 
     if (profileIcon) {
@@ -48,3 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Fetch weather data when DOM content is loaded
+document.addEventListener('DOMContentLoaded', fetchWeatherData);

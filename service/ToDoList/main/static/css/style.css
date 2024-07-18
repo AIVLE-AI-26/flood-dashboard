@@ -986,3 +986,11 @@ input[type="file"] {
     width: 100%;
     height: 100%;
 }
+
+.overlay-sidebar .weather-info {
+    display: block; /* 기본 상태에서 날씨 정보 표시 */
+}
+
+.overlay-sidebar.collapsed .weather-info {
+    display: none; /* 사이드바가 닫혔을 때 날씨 정보 숨기기 */
+}
