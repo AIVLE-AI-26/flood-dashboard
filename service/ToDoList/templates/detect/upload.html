@@ -5,39 +5,45 @@
 {% endblock %}
 
 {% block content %}
-<h1 style="display: inline-block;">
-    <i class="material-icons header-icon">report_gmailerrorred</i>
-    <span class="header-title">시설물 관리</span>
-</h1>
+<div class = "n-back">
+    <div class = "notice">
+        <h2 style="display: inline-block;">
+            <i class="material-icons header-icon">report_gmailerrorred</i>
+            <span class="header-title">시설물 관리</span>
+        </h2>
 
-<form id="uploadForm" method="post" enctype="multipart/form-data" action="{% url 'upload_image' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" id="submitBtn"class="submitBtn">탐지 시작</button>
-</form>
+        <form id="uploadForm" method="post" enctype="multipart/form-data" action="{% url 'upload_image' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="submitBtn"class="submitBtn">탐지 시작</button>
+        </form>
 
-<!-- 항상 이미지가 보이도록 설정 -->
+        <!-- 항상 이미지가 보이도록 설정 -->
 
-{% if original_image_url %}
+        {% if original_image_url %}
 
-<h2 style="margin-left:100px;">결과 확인</h2>
-<div class="wrapper">
-    <div class="container">
-        <h2>원본 이미지</h2>
-        <img src="{{ original_image_url|default_if_none:"/static/images/default.jpg" }}" alt="Original Image" style="max-width:100%; height:auto;">
-    </div>
-    <div class="container">
-        <h2 >탐지된 이미지</h2>
-        <img src="{{ result_image_url|default_if_none:"/static/images/default_detected.jpg" }}" alt="Detected Image" style="max-width:100%; height:auto;">
+        <h2 style="margin-left:50px;">결과 확인</h2>
+        <div class="wrapper">
+            <div class="container">
+                <h2>원본 이미지</h2>
+                <img src="{{ original_image_url|default_if_none:"/static/images/default.jpg" }}" alt="Original Image" style="max-width:100%; height:auto;">
+            </div>
+            <div class="container">
+                <h2 >탐지된 이미지</h2>
+                <img src="{{ result_image_url|default_if_none:"/static/images/default_detected.jpg" }}" alt="Detected Image" style="max-width:100%; height:auto;">
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="results-container">
+            {% if detection_result %}
+                <ul class="results-list">
+                    {% for label, confidence in detection_result %}
+                        <li class="results-item">종류 : {{ label }} (Confidence: <span class="confidence">{{ confidence }}</span>)</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
     </div>
 </div>
-{% endif %}
-
-{% if detection_result %}
-    <ul>
-        {% for label, confidence in detection_result %}
-            <li>{{ label }} (Confidence: {{ confidence }})</li>
-        {% endfor %}
-    </ul>
-{% endif %}
 {% endblock %}
