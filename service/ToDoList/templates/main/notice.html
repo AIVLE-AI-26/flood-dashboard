@@ -1,11 +1,9 @@
 {% extends 'main/navbar.html' %}
 
 {% block content %}
-<div class = "n-back">
-
 <div class="notice">
     <h2>    
-        <i class="material-icons icon"style="font-size:30px;">notifications</i>
+        <i class="material-icons icon">notifications</i>
         공지사항
     </h2>
     <div class="search-container">
@@ -42,15 +40,13 @@
         </tbody>
         
     </table>
-    <div class="notice-air"> 
-        
-    </div>
-    <div class="button-containern">
+    <div class="button-container">
         <div class="right-align">
-            <a href="{% url 'post_new' %}" class="btn btn-secondary">글쓰기</a>
-        </div>    
+            {% if user.is_authenticated and user.user_role == 'admin' %}
+                <a href="{% url 'post_new' %}" class="btn btn-secondary">글쓰기</a>
+            {% endif %}
+        </div>
     </div>
-</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
