@@ -108,6 +108,22 @@
                 <label for="email">이메일</label>
                 <input type="email" id="email" name="email" value="{{ user.email }}" disabled>
             </div>
+            <div class="form-group">
+                <label for="role">성</label>
+                <input type="first_name" id="first_name" name="first_name" value="{{ user.first_name }}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="role">이름</label>
+                <input type="last_name" id="last_name" name="last_name" value="{{ user.last_name }}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="role">생년월일</label>
+                <input type="birth_date" id="birth_date" name="birth_date" value="{{ user.birth_date }}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="role">소속</label>
+                <input type="role" id="role" name="role" value="{{ user.user_role }}" disabled>
+            </div>
         </div>
     </div>
 {% endblock %}

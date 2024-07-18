@@ -124,3 +124,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'myemail@gmail.com'  # 실제 이메일 주소
 EMAIL_HOST_PASSWORD = 'my-email-password'  # 실제 이메일 계정의 비밀번호 또는 앱 비밀번호
 DEFAULT_FROM_EMAIL = 'myemail@gmail.com'  # 실제 이메일 주소
+
+AUTHENTICATION_BACKENDS = [
+    'signup.backends.CustomUserBackend',  # CustomUserBackend의 실제 경로로 변경
+    'django.contrib.auth.backends.ModelBackend',  # 기본 인증 백엔드
+]
+
+
+AUTH_USER_MODEL = 'signup.CustomUser'

@@ -43,11 +43,26 @@
                         <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.email.errors }}</span></span>
                     </div>
                     <div class="signup-group">
-                        <label for="{{ form.role.id_for_label }}">사용자 유형</label>
+                        <label for="{{ form.user_role.id_for_label }}">사용자 유형</label>
                         <div class="custom-select-wrapper">
-                            {{ form.role }}
+                            {{ form.user_role }}
                         </div>
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.role.errors }}</span></span>
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.user_role.errors }}</span></span>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.birth_date.id_for_label }}">생년월일</label>
+                        {{ form.birth_date }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.birth_date.errors }}</span></span>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.first_name.id_for_label }}">이름</label>
+                        {{ form.first_name }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.first_name.errors }}</span></span>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.last_name.id_for_label }}">성</label>
+                        {{ form.last_name }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.last_name.errors }}</span></span>
                     </div>
                     <div class="signup-btn-container">
                         <button type="submit" class="btn btn-primary signup-btn">Register</button>
@@ -59,44 +74,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var errorFields = document.querySelectorAll('.error-tooltip');
-    
-            function hideTooltips() {
-                errorFields.forEach(function(field) {
-                    field.style.visibility = 'hidden';
-                    field.style.opacity = '0';
-                });
-            }
-    
-            function showFirstTooltip() {
-                for (var i = 0; i < errorFields.length; i++) {
-                    var field = errorFields[i];
-                    var errorText = field.querySelector('.error-text');
-                    if (errorText && errorText.textContent.trim() !== "") {
-                        field.style.display = 'flex';
-                        field.style.visibility = 'visible';
-                        field.style.opacity = '1';
-                        var icon = field.querySelector('.icon');
-                        if (icon) {
-                            icon.style.display = 'inline';
-                        }
-                        break; // 첫 번째 오류 툴팁만 표시하고 루프 종료
-                    }
-                }
-            }
-    
-            showFirstTooltip(); // 페이지 로드 시 첫 번째 오류 툴팁 표시
-    
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.signup-group')) {
-                    hideTooltips();
-                }
-            });
-        });
-    </script>
-    
 </body>
 </html>
