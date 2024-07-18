@@ -47,12 +47,13 @@
     background-color: #ffffff;
     box-shadow: -2px 0 5px rgba(0,0,0,0.3);
     transition: right 0.3s;
-    padding: 15px;
+    padding: 15px 5px 15px 15px;
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 #data-container.visible {
-    right: 0; /* Move on-screen */
+    right: 8px; /* Move on-screen */
 }
 
 .hidden {

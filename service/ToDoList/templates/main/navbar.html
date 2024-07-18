@@ -22,6 +22,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            {% comment %} 아래 안쓰면 비활성화 {% endcomment %}
             <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe>
         </div>
     </div>
@@ -68,7 +69,7 @@
                         </button>
                     </li>
                     <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'waterlevel' %}'">
+                        <button type="button" class="menuButton" aria-pressed="false" id="waterlevelButton">
                             <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
                             <span class="menuText">구별 하천 수위</span>
                         </button>
@@ -113,6 +114,16 @@
     <script src="{% static 'js/modal.js' %}"></script>
     <script src="{% static 'js/sidebar-toggle.js' %}"></script>
     <script src="{% static 'js/temperature.js' %}"></script>
+    <script>
+        document.getElementById('waterlevelButton').addEventListener('click', function(event) {
+            var currentPath = window.location.pathname;
+            if (currentPath !== '/') {
+                // 'home'이 아닌 경우 'home'으로 이동
+                window.location.href = '/';
+                return; // 페이지가 이동하므로 이후 코드는 실행되지 않음
+            }
+        });
+    </script>
     {% block extra_script %}{% endblock %}
 </body>
 </html>
