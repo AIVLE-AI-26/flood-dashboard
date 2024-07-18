@@ -1,30 +1,34 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-import re
+from django.contrib.auth import get_user_model
+from .models import CustomUser
+
+User = get_user_model()
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='이메일을 입력하세요.', required=True)
-    role = forms.ChoiceField(choices=(('user', '일반사용자'), ('admin', '관리자')), required=True)
+    user_role = forms.ChoiceField(choices=(('user', '일반사용자'), ('admin', '관리자')), required=True)
+    birth_date = forms.DateField(help_text='생년월일을 입력하세요.', required=False)
+    first_name = forms.CharField(max_length=30, required=False, help_text='이름을 입력하세요.')
+    last_name = forms.CharField(max_length=30, required=False, help_text='성을 입력하세요.')
 
     class Meta:
-        model = User
-        fields = ('username', 'email', 'role', 'password1', 'password2')
+        model = CustomUser
+        fields = ('username', 'email', 'user_role', 'password1', 'password2', 'birth_date', 'first_name', 'last_name')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not email:
             raise forms.ValidationError('이메일을 입력해주세요.')
-        email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-        if not re.match(email_regex, email):
-            raise forms.ValidationError('유효한 이메일 주소를 입력해주세요.')
+        if User.objects.filter(email=email).exists():  # 여기서 User 대신 CustomUser를 사용
+            raise forms.ValidationError('이미 등록된 이메일입니다.')
         return email
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if not username:
             raise forms.ValidationError('아이디를 입력해주세요.')
-        if User.objects.filter(username=username).exists():
+        if User.objects.filter(username=username).exists():  # 여기서 User 대신 CustomUser를 사용
             raise forms.ValidationError('이미 존재하는 아이디입니다.')
         if len(username) < 5:
             raise forms.ValidationError('아이디는 최소 5자 이상이어야 합니다.')
@@ -37,3 +41,18 @@ class SignUpForm(UserCreationForm):
         if len(password1) < 8:
             raise forms.ValidationError('비밀번호는 최소 8자 이상이어야 합니다.')
         return password1
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.birth_date = self.cleaned_data['birth_date']
+        user.user_role = self.cleaned_data['user_role']
+        print(f"Saving user: {user.username}, {user.email}, {user.birth_date}, {user.user_role}")
+        
+        if commit:
+            user.save()
+            print(f"User {user.username} saved successfully.")
+        else:
+            print(f"User {user.username} not saved (commit=False).")
+        
+        return user
