@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import weather_view, fetch_weather_data_view
 
 urlpatterns = [
     path('', views.map_view, name='home'),
@@ -13,5 +14,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'), 
     path('edit_profile/', views.edit_profile, name='edit_profile'),# 내 정보 조회 URL
     path('detect/', views.detect, name='detect'),
+    path('weather/', weather_view, name='weather_view'),
+    path('api/weather/', fetch_weather_data_view, name='fetch_weather_data_view'),
 
 ]

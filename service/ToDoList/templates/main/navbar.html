@@ -36,7 +36,16 @@
                 <button type="button" class="btnSidebarToggle" aria-label="열기/닫기" aria-expanded="true">&lt;</button>
             </div>
             <!-- //head -->
-    
+
+            <!-- weather information -->
+            <div class="weather-info">
+                <h2>현재 날씨 정보</h2>
+                <div id="weather-data">
+                    <p>데이터를 불러오는 중...</p>
+                </div>
+            </div>
+            <!-- //weather information -->
+
             <!-- bottom -->
             <div class="bottom">
                 <ul class="menuList">
@@ -70,7 +79,6 @@
                             <span class="menuText">시설물 관리</span>
                         </button>
                     </li>
-
                 </ul>
                 <!-- 로그인/회원가입 버튼 및 이미지 -->
                 {% if user.is_authenticated %}
@@ -80,11 +88,11 @@
                         <div class="profile-buttons" id="profile-buttons" style="display: none;">
                             <button type="button" class="menuButton" onclick="window.location.href='{% url 'profile' %}'">마이페이지</button>
                             <button type="button" class="menuButton" id="delete-account-button" data-url="{% url 'delete_account' %}">회원 탈퇴</button>
+                        </div>
+                        <a href="{% url 'logout' %}" class="auth-link">
+                            <img src="{% static 'img/logout.png' %}" alt="Logout" class="auth-icon">
+                        </a>
                     </div>
-                    <a href="{% url 'logout' %}" class="auth-link">
-                        <img src="{% static 'img/logout.png' %}" alt="Logout" class="auth-icon">
-                </a>
-            </div>
                 {% else %}
                     <div class="auth-buttons">
                         <a href="{% url 'login' %}" class="auth-link collapsed-only">
@@ -104,7 +112,7 @@
 
     <script src="{% static 'js/modal.js' %}"></script>
     <script src="{% static 'js/sidebar-toggle.js' %}"></script>
+    <script src="{% static 'js/temperature.js' %}"></script>
     {% block extra_script %}{% endblock %}
 </body>
 </html>
-
