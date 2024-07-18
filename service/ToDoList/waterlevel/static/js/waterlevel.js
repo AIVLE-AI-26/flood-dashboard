@@ -24,6 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
         {'name': '광주광역시(극락교)', 'lat': 35.13583333333333, 'lng': 126.82583333333334, 'wl': '0.00' ,fl : '0', '홍수주의보' : 7.5,'홍수경보':8.5},
     ];
 
+    function getDataFromUrl() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var data = urlParams.get('button');
+        return data;
+    }
+
+    window.onload = function() {
+        var data = getDataFromUrl();
+        if (data == "wl-button") {
+            waterlevelButton.click();
+        } 
+    };
+
     document.getElementById('waterlevelButton').addEventListener('click', function(event) {
         dataContainer.classList.toggle('visible');
         toggleWaterLevelInfo();
