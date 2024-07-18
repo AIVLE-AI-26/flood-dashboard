@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     item.classList.remove('highlight');
                     if (item.getAttribute('data-name') === obs.name) {
                         item.classList.add('highlight');
+                        // 해당 개체로 스크롤
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 });
                 alert(`${obs.name}\n현재 수위: ${marker.customInfo.wl}m`);
