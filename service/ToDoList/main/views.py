@@ -8,10 +8,9 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserChangeForm
-from .forms import EditProfileForm
+from signup.forms import SignUpForm, EditProfileForm
 from django.contrib.auth import update_session_auth_hash
-
-
+from django.contrib import messages
 
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -191,6 +190,7 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, request.user)  # 비밀번호 변경 후 세션 유지
+            messages.success(request, 'Profile updated successfully')
             return redirect('profile')
     else:
         form = EditProfileForm(instance=request.user)
@@ -206,10 +206,9 @@ async def fetch_weather_data(request):
     
     url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
     
-    # 현재 시간 기준으로 6시간 전의 시간 계산
     now = datetime.now() - timedelta(hours=5)
     base_date = now.strftime('%Y%m%d')
-    base_time = now.strftime('%H00')  # 'HHMM' 형식으로 시간 설정, 분은 00으로 설정
+    base_time = now.strftime('%H00')
 
     common_params = {
         'serviceKey': service_key, 
@@ -218,7 +217,7 @@ async def fetch_weather_data(request):
         'dataType': 'XML', 
         'base_date': base_date, 
         'base_time': base_time,
-        'nx': '58',  # 광주광역시의 좌표
+        'nx': '58',  
         'ny': '74'
     }
 
@@ -233,7 +232,7 @@ async def fetch_weather_data(request):
                     for item in root.findall('.//item'):
                         category = item.find('category').text if item.find('category') is not None else ''
                         
-                        if category in ['RN1', 'T1H']:  # RN1: 강수량, T1H: 기온
+                        if category in ['RN1', 'T1H', 'SKY']: 
                             base_date = item.find('baseDate').text if item.find('baseDate') is not None else ''
                             fcst_date = item.find('fcstDate').text if item.find('fcstDate') is not None else ''
                             fcst_time = item.find('fcstTime').text if item.find('fcstTime') is not None else ''
@@ -272,6 +271,7 @@ async def fetch_weather_data(request):
         if 'mm' in value:
             return float(value.replace('mm', ''))
         return float(value)
+    
     df['fcst_value'] = df['fcst_value'].apply(clean_fcst_value)
     
     today = datetime.now().strftime('%Y%m%d')
@@ -289,6 +289,3 @@ def weather_view(request):
 
 def fetch_weather_data_view(request):
     return asyncio.run(fetch_weather_data(request))
-
-
-
