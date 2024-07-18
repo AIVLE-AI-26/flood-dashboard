@@ -1,9 +1,11 @@
 {% extends 'main/navbar.html' %}
 
 {% block content %}
+<div class = "n-back">
+
 <div class="notice">
-    <h2>
-        <i class="material-icons icon">construction</i>
+    <h2>    
+        <i class="material-icons icon"style="font-size:30px;">construction</i>
         글 수정
     </h2>
     <form action="{% url 'post_edit' pk=post.pk %}" method="post" enctype="multipart/form-data">
@@ -44,7 +46,7 @@
         
     </form>
 </div>
-
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -6,16 +6,20 @@
 {% block title %}Detect Home{% endblock %}
 
 {% block content %}
-    <h1 style="display: inline-block;">
-        <i style="font-size: 60px; vertical-align: middle;" class="material-icons icon">report_gmailerrorred</i>
-        <span style="vertical-align: middle;">시설물 관리</span>
-    </h1>
+<div class = "n-back">
+    <div class = "notice">
+        <h2 style="display: inline-block;">
+            <i class="material-icons header-icon">report_gmailerrorred</i>
+            <span class="header-title">시설물 관리</span>
+        </h2>
 
 
-    <!-- JavaScript to redirect after 1 second -->
-    <script type="text/javascript">
-        setTimeout(function() {
-            window.location.href = "{% url 'upload_image' %}";
-        }, 1);  // 1000 milliseconds = 1 second
-    </script>
+        <!-- JavaScript to redirect after 1 second -->
+        <script type="text/javascript">
+            setTimeout(function() {
+                window.location.href = "{% url 'upload_image' %}";
+            }, 1);  // 1000 milliseconds = 1 second
+        </script>
+    </div>
+</div>
 {% endblock %}
