@@ -1,31 +1,28 @@
+iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+}
+
 .modal {
-    display: none;
+		display: none;
     position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
-    padding-top: 60px;
+    padding-top: 100px;
 }
 
 .modal-content {
-    position: absolute; /* 'relative'에서 'absolute'로 변경 */
-    background-color: #fefefe;
-    margin: auto; /* 중앙 배치를 위해 '5% auto'에서 'auto'로 변경 */
-    padding: 20px;
-    border: 1px solid #fefefe;
-    width: 60%;
-    max-width: 500px;
-    height: 70%;
+    position: absolute; /* Use absolute positioning to place it where you want */
+    right: 220px; /* Align to the right edge */
+    bottom: -180px;
+    width: 100%; /* Fixed width to avoid size changes during zoom */
+    max-width: 450px; /* Ensuring a max-width for larger screens */
+    transform: translateY(-50%); /* Adjust vertically centered */
     border-radius: 15px;
-    top: 50%; /* 중앙 배치를 위해 'top: 50%'로 변경 */
-    left: 50%; /* 중앙 배치를 위해 'left: 50%'로 변경 */
-    transform: translate(-50%, -50%); /* 중앙 배치를 위해 'translate(-50%, -50%)' 추가 */
 }
+
 .modal-content::after,
 .modal-content::before {
     content: "";
@@ -36,18 +33,18 @@
 .modal-content::after {
     border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
     border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
-    bottom: 15px;
-    right: -40px;
+    bottom: 13px;
+    right: -49px;
 }
 
 .modal-content::before {
     border-width: 50px 50px 0 0; /* 오른쪽 아래 방향으로 꼬리 조정 */
     border-color: #fefefe transparent transparent transparent; /* 오른쪽 아래 꼬리 색상 조정 */
-    bottom: 15px;
-    right: -40px;
+    bottom: 13px;
+    right: -49px;
 }
 .close {
-    color: #aaa;
+    color: #fefefe;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -55,13 +52,7 @@
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: red;
     text-decoration: none;
     cursor: pointer;
-}
-
-iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
 }
