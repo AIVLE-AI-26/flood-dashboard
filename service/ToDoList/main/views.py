@@ -11,6 +11,18 @@ from django.contrib.auth.forms import UserChangeForm
 from .forms import EditProfileForm
 from django.contrib.auth import update_session_auth_hash
 
+
+
+from django.shortcuts import render
+from django.http import JsonResponse
+import aiohttp
+import asyncio
+import xml.etree.ElementTree as ET
+import pandas as pd
+from datetime import datetime, timedelta
+from django.core.cache import cache
+import time
+
 def home(request):
     return render(request, 'main/home.html')
 
@@ -183,3 +195,100 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user)
     return render(request, 'main/edit_profile.html', {'form': form})
+
+
+service_key = 'nz2fwU3ROAjPxqq2gPGhnUPe6+ZWmxvhXIyUBW/qUrPl0T0za05as1fDc4AiuY/6R2jfQE0JQBr4MKDZ7MPC6w=='
+
+async def fetch_weather_data(request):
+    cached_data = cache.get('weather_data')
+    if cached_data:
+        return JsonResponse(cached_data, safe=False)
+    
+    url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
+    
+    # 현재 시간 기준으로 6시간 전의 시간 계산
+    now = datetime.now() - timedelta(hours=5)
+    base_date = now.strftime('%Y%m%d')
+    base_time = now.strftime('%H00')  # 'HHMM' 형식으로 시간 설정, 분은 00으로 설정
+
+    common_params = {
+        'serviceKey': service_key, 
+        'pageNo': '1', 
+        'numOfRows': '1000', 
+        'dataType': 'XML', 
+        'base_date': base_date, 
+        'base_time': base_time,
+        'nx': '58',  # 광주광역시의 좌표
+        'ny': '74'
+    }
+
+    async def fetch_data():
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=common_params) as response:
+                if response.status == 200:
+                    print(f"API 요청 성공: 광주광역시")
+                    root = ET.fromstring(await response.text())
+                    data = []
+                    
+                    for item in root.findall('.//item'):
+                        category = item.find('category').text if item.find('category') is not None else ''
+                        
+                        if category in ['RN1', 'T1H']:  # RN1: 강수량, T1H: 기온
+                            base_date = item.find('baseDate').text if item.find('baseDate') is not None else ''
+                            fcst_date = item.find('fcstDate').text if item.find('fcstDate') is not None else ''
+                            fcst_time = item.find('fcstTime').text if item.find('fcstTime') is not None else ''
+                            fcst_value = item.find('fcstValue').text if item.find('fcstValue') is not None else ''
+                            
+                            data.append({
+                                'category': category,
+                                'base_date': base_date,
+                                'fcst_date': fcst_date,
+                                'fcst_time': fcst_time,
+                                'fcst_value': fcst_value
+                            })
+                    return data
+                else:
+                    print(f"Error: {response.status}")
+                    return []
+
+    start_time = time.time()
+    
+    data = await fetch_data()
+
+    end_time = time.time()
+    print(f"비동기 방식 로딩 시간: {end_time - start_time}초")
+
+    df = pd.DataFrame(data)
+
+    def clean_fcst_value(value):
+        if value == '강수없음':
+            return 0.0
+        if value == '1mm 미만':
+            return 1.0
+        if value == '30.0~50.0mm':
+            return 30.0
+        if value == '50.0mm 이상':
+            return 50.0
+        if 'mm' in value:
+            return float(value.replace('mm', ''))
+        return float(value)
+    df['fcst_value'] = df['fcst_value'].apply(clean_fcst_value)
+    
+    today = datetime.now().strftime('%Y%m%d')
+    current_time = datetime.now().strftime('%H00')
+    
+    filtered_data = df[(df['fcst_date'] == today) & (df['fcst_time'] == current_time)]
+    current_data = filtered_data.to_dict(orient='records')
+    
+    cache.set('weather_data', current_data, timeout=600)
+    
+    return JsonResponse(current_data, safe=False)
+
+def weather_view(request):
+    return render(request, 'weather/weather.html')
+
+def fetch_weather_data_view(request):
+    return asyncio.run(fetch_weather_data(request))
+
+
+

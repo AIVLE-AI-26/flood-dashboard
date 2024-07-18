@@ -15,6 +15,10 @@
 # critical data
 service/ToDoList/db.sqlite3
 
+# Test Vitual Env.
+myenv/
+bigenv/
+
 # cache or package
 service/ToDoList/board/__pycache__/
 service/ToDoList/board/migrations/__pycache__/
