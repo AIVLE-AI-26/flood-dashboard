@@ -116,10 +116,11 @@
     <script src="{% static 'js/temperature.js' %}"></script>
     <script>
         document.getElementById('waterlevelButton').addEventListener('click', function(event) {
+            var clickbutton = "wl-button";
             var currentPath = window.location.pathname;
-            if (currentPath !== '/') {
+            if (currentPath !== "/") {
                 // 'home'이 아닌 경우 'home'으로 이동
-                window.location.href = '/';
+                window.location.href = "/?button=" + encodeURIComponent(clickbutton);
                 return; // 페이지가 이동하므로 이후 코드는 실행되지 않음
             }
         });
