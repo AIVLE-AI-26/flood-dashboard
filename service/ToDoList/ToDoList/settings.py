@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -121,9 +121,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'myemail@gmail.com'  # 실제 이메일 주소
-EMAIL_HOST_PASSWORD = 'my-email-password'  # 실제 이메일 계정의 비밀번호 또는 앱 비밀번호
-DEFAULT_FROM_EMAIL = 'myemail@gmail.com'  # 실제 이메일 주소
+EMAIL_HOST_USER = 'wateravle26@gmail.com'  # 실제 이메일 주소
+EMAIL_HOST_PASSWORD = 'ebgi hwfu pppp nshx'  # 실제 이메일 계정의 비밀번호 또는 앱 비밀번호
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 실제 이메일 주소
 
 AUTHENTICATION_BACKENDS = [
     'signup.backends.CustomUserBackend',  # CustomUserBackend의 실제 경로로 변경
@@ -132,3 +132,8 @@ AUTHENTICATION_BACKENDS = [
 
 
 AUTH_USER_MODEL = 'signup.CustomUser'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # 기본값
+SESSION_COOKIE_AGE = 1200  # 세션 쿠키 만료 시간 (초), 필요에 따라 조정
+SESSION_SAVE_EVERY_REQUEST = True  # 매 요청마다 세션 갱신
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 브라우저 닫을 때 세션 만료

@@ -124,7 +124,7 @@ input[type="password"] {
   border-radius: 10px;
   cursor: pointer;
   font-size: 18px;
-  width: 110%;
+  width: 113%;
   margin-top: 20px;
   align-items: center;
 }
@@ -138,6 +138,8 @@ input[type="password"] {
   font-size: 14px;
   color: #333;
   text-align: center;
+  align-items: center;
+  width: 112%;
 }
 
 .footer a {

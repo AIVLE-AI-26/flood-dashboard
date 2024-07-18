@@ -339,11 +339,19 @@ footer {
     cursor: pointer;
 }
 
-.chatbot-icon {
+.chatbot-icon-container {
     width: 100px;
     height: 100px;
     background-color: #1E90FF;
     border-radius: 50%;
+    display: flex; /* flexbox 사용 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 중앙 정렬 */
+}
+
+.chatbot-icon {
+    width: 70px;
+    height: 70px;
 }
 
 /* 침수예상지역 버튼 css */

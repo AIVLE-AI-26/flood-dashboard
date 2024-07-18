@@ -13,10 +13,10 @@ body {
     display: flex;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-    max-width: 1100px;
+    max-width: 1300px;
     width: 100%;
     background-color: #fff;
-    max-height: 700px;
+    max-height: 850px;
     height: 100%;
 }
 
@@ -94,7 +94,7 @@ body {
 
 .form-container-signup h2 {
     color: #0066cc;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     font-size: 30px;
 }
 
@@ -105,11 +105,40 @@ body {
     gap: 10px;
 }
 
+/* Flexbox 컨테이너 */
+.signup-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 각 필드 그룹의 스타일 */
+.signup-group {
+    flex: 1;
+    margin-right: 35px; /* 필드 간 간격을 조정 */
+    margin-bottom: 8px;
+}
+
+/* 마지막 필드 그룹은 오른쪽 마진 제거 */
+.signup-group:last-child {
+    margin-right: 0;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"] {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+/* 성 필드 스타일 */
+.last-name-group input[type="text"],
+.first-name-group input[type="text"]  {
+    width: 85%;
+    padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 10px;

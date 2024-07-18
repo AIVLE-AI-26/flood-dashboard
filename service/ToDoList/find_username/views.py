@@ -1,8 +1,9 @@
-# find_username/views.py
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from .forms import FindUsernameForm
+
+CustomUser = get_user_model()
 
 def find_username(request):
     usernames = []
@@ -10,7 +11,7 @@ def find_username(request):
         form = FindUsernameForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            users = User.objects.filter(email=email)
+            users = CustomUser.objects.filter(email=email)
             if users.exists():
                 usernames = [user.username for user in users]
             else:

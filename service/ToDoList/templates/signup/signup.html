@@ -22,6 +22,23 @@
             <form method="POST" class="needs-validation" novalidate>
                 {% csrf_token %}
                 <div class="input-container">
+                    <div class="signup-row">
+                        <div class="signup-group last-name-group">
+                            <label for="{{ form.last_name.id_for_label }}">성</label>
+                            {{ form.last_name }}
+                            <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.last_name.errors }}</span></span>
+                        </div>
+                        <div class="signup-group first-name-group">
+                            <label for="{{ form.first_name.id_for_label }}">이름</label>
+                            {{ form.first_name }}
+                            <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.first_name.errors }}</span></span>
+                        </div>
+                    </div>
+                    <div class="signup-group">
+                        <label for="{{ form.birth_date.id_for_label }}">생년월일</label>
+                        {{ form.birth_date }}
+                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.birth_date.errors }}</span></span>
+                    </div>
                     <div class="signup-group">
                         <label class="signup-label" for="{{ form.username.id_for_label }}">username</label>
                         {{ form.username }}
@@ -48,21 +65,6 @@
                             {{ form.user_role }}
                         </div>
                         <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.user_role.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.birth_date.id_for_label }}">생년월일</label>
-                        {{ form.birth_date }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.birth_date.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.first_name.id_for_label }}">이름</label>
-                        {{ form.first_name }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.first_name.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.last_name.id_for_label }}">성</label>
-                        {{ form.last_name }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.last_name.errors }}</span></span>
                     </div>
                     <div class="signup-btn-container">
                         <button type="submit" class="btn btn-primary signup-btn">Register</button>
