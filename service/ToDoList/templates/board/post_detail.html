@@ -1,12 +1,14 @@
 {% extends 'main/navbar.html' %}
 
 {% block content %}
+<div class = "n-back">
+
 <div class="notice">
     <h2>[제목]{{ post.title }}</h2>
     <table id="notice-table" class="notice2">
         <tbody>
             <tr style ="background-color:#f4f4f4; border-radius: 10px;">
-                <td style="padding: 0px;padding-left:20px"><i class="material-icons icon">account_circle</i></td>
+                <td style="padding: 0px;padding-left:20px;width:30px;"><i class="material-icons icon">account_circle</i></td>
                 <td>
                     <div style="display: flex; flex-direction: column;">
                         <div style="font-size: 25px; font-weight: bold;">{{ post.author }}</div>
@@ -40,4 +42,7 @@
             {% endif %}
         </div>
     </div>
+</div>
+</div>
+
 {% endblock %}
