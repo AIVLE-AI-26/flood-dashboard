@@ -13,10 +13,10 @@ body {
   display: flex;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-  max-width: 1100px;
+  max-width: 1300px;
   width: 100%;
   background-color: #fff;
-  max-height: 700px;
+  max-height: 850px;
   height: 100%;
 }
 
@@ -95,15 +95,15 @@ body {
 
 .form-container-login h2 {
   color: #0066cc;
-  margin-bottom: 30px;
-  font-size: 30px;
+  margin-bottom: 45px;
+  font-size: 40px;
 }
 
 .input-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 input[type="text"],
@@ -124,9 +124,8 @@ input[type="password"] {
   border-radius: 10px;
   cursor: pointer;
   font-size: 18px;
-  width: 113%;
+  width: 100%;
   margin-top: 20px;
-  align-items: center;
 }
 
 .login-btn:hover {
@@ -138,8 +137,6 @@ input[type="password"] {
   font-size: 14px;
   color: #333;
   text-align: center;
-  align-items: center;
-  width: 112%;
 }
 
 .footer a {

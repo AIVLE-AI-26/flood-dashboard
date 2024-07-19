@@ -95,32 +95,29 @@ body {
 .form-container-signup h2 {
     color: #0066cc;
     margin-bottom: 40px;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 .input-container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
 /* Flexbox 컨테이너 */
 .signup-row {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
 }
 
 /* 각 필드 그룹의 스타일 */
 .signup-group {
     flex: 1;
-    margin-right: 35px; /* 필드 간 간격을 조정 */
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
-/* 마지막 필드 그룹은 오른쪽 마진 제거 */
-.signup-group:last-child {
-    margin-right: 0;
+.signup-group:first-child {
+    margin-right: 10%;
 }
 
 input[type="text"],
@@ -137,7 +134,7 @@ input[type="email"] {
 /* 성 필드 스타일 */
 .last-name-group input[type="text"],
 .first-name-group input[type="text"]  {
-    width: 85%;
+    width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -153,7 +150,7 @@ input[type="email"] {
     border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
-    width: 110%;
+    width: 104%;
     margin-top: 20px;
 }
 
@@ -241,16 +238,11 @@ input[type="email"] {
     position: relative; /* 툴팁 위치 조정을 위해 필요 */
 }
 
-.signup-group label {
-    display: inline-block;
-    margin-right: 10px; /* 레이블과 선택 박스 사이의 간격 */
-    white-space: nowrap; /* 레이블이 한 줄로 표시되도록 함 */
-}
-
 .custom-select-wrapper {
     display: inline-block; /* 인라인 블록 요소로 설정하여 레이블 옆에 위치 */
     width: 35%;
     vertical-align: middle; /* 수직 정렬 가운데로 맞춤 */
+    margin-left: 5px;
 }
 
 .custom-select-wrapper select {
