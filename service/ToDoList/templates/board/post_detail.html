@@ -1,7 +1,12 @@
 {% extends 'main/navbar.html' %}
 
 {% block content %}
-<div class = "n-back">
+<style>
+    body {
+        background-color: #f0f0f0;
+    }
+</style>
+    <div class="n-back">
 
 <div class="notice">
     <h2>[제목]{{ post.title }}</h2>
@@ -44,5 +49,6 @@
     </div>
 </div>
 </div>
+
 
 {% endblock %}

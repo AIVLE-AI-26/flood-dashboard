@@ -13,10 +13,92 @@
     {% block styles %}{% endblock %}
 </head>
 <body>
-    <div class="main-container">
-        <div class="content-container">
-            {% block content %}
-            {% endblock %}
+    <div class="flex-container">
+        <aside id="overlay-sidebar" class="overlay-sidebar active">
+            <div class="inner">
+                <!-- head -->
+                <div class="head">
+                    <div class="logoArea">
+                        <h1>광주광역시<br>침수대응시스템</h1>
+                    </div>
+                    <button type="button" class="btnSidebarToggle" aria-label="열기/닫기" aria-expanded="true">&lt;</button>
+                </div>
+                <!-- //head -->
+                <!-- bottom -->
+                <div class="bottom" >
+                    <!-- weather information -->
+                    <div class="weather-info" style="margin-left:7px;">
+                        <div id="weather-data">
+                            <p>데이터를 불러오는 중...</p>
+                        </div>
+                    </div>
+                    <!-- //weather information -->
+                    <ul class="menuList">
+                        <li class="menuItem">
+                            <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'home' %}'">
+                                <span class="icon"><img src="{% static 'img/home.png' %}" alt="Home" class="icon-img"></span>
+                                <span class="menuText">메인 페이지</span>
+                            </button>
+                        </li>
+                        <li class="menuItem">
+                            <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'post_list' %}'">
+                                <span class="icon"><img src="{% static 'img/campaign.png' %}" alt="Campaign" class="icon-img"></span>
+                                <span class="menuText">공지사항</span>
+                            </button>
+                        </li>
+                        <li class="menuItem">
+                            <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'rain' %}'">
+                                <span class="icon"><img src="{% static 'img/water_drop.png' %}" alt="Water Drop" class="icon-img"></span>
+                                <span class="menuText">강수량</span>
+                            </button>
+                        </li>
+                        <li class="menuItem">
+                            <button type="button" class="menuButton" aria-pressed="false" id="waterlevelButton">
+                                <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
+                                <span class="menuText">구별 하천 수위</span>
+                            </button>
+                        </li>
+                        <li class="menuItem">
+                            <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'detect' %}'">
+                                <i class="material-icons header-icon" style="font-size:25px;margin-left:0px;">report_gmailerrorred</i>
+                                <span class="menuText" style="margin-left:20px;">시설물 관리</span>
+                            </button>
+                        </li>
+                    </ul>
+                    <!-- 로그인/회원가입 버튼 및 이미지 -->
+                    {% if user.is_authenticated %}
+                        <div class="profile-section">
+                            <img src="{% static 'img/account_circle.png' %}" alt="Profile" class="profile-icon" id="profile-icon">
+                            <p class="username">{{ user.last_name }} {{ user.first_name | mask_name }}</p>
+                            <div class="profile-buttons" id="profile-buttons" style="display: none;">
+                                <button type="button" class="menuButton" onclick="window.location.href='{% url 'profile' %}'">마이페이지</button>
+                                <button type="button" class="menuButton" id="delete-account-button" data-url="{% url 'delete_account' %}">회원 탈퇴</button>
+                            </div>
+                            <a href="{% url 'logout' %}" class="auth-link">
+                                <img src="{% static 'img/logout.png' %}" alt="Logout" class="auth-icon">
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="auth-buttons">
+                            <a href="{% url 'login' %}" class="auth-link collapsed-only">
+                                <img src="{% static 'img/login.png' %}" alt="Login" class="auth-icon">
+                            </a>
+                            <a href="{% url 'terms' %}" class="auth-link collapsed-only">
+                                <img src="{% static 'img/signup.png' %}" alt="Signup" class="auth-icon">
+                            </a>
+                            <a href="{% url 'login' %}" class="menuButton expanded-only">로그인</a>
+                            <a href="{% url 'terms' %}" class="menuButton expanded-only">회원가입</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <!-- //bottom -->
+            </div>
+        </aside>
+        <div class="main-container">
+            <div class="content-container">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
     </div>
     <div id="myModal" class="modal">
@@ -26,90 +108,6 @@
             <iframe id="chatbotIframe" src="{% url 'chatbot' %}" title="Chatbot"></iframe>
         </div>
     </div>
-
-    <aside id="overlay-sidebar" class="overlay-sidebar active">
-        <div class="inner">
-            <!-- head -->
-            <div class="head">
-                <div class="logoArea">
-                    <h1>광주광역시<br>침수대응시스템</h1>
-                </div>
-                <button type="button" class="btnSidebarToggle" aria-label="열기/닫기" aria-expanded="true">&lt;</button>
-            </div>
-            <!-- //head -->
-
-            <!-- weather information -->
-            <div class="weather-info">
-                <h2>현재 날씨 정보</h2>
-                <div id="weather-data">
-                    <p>데이터를 불러오는 중...</p>
-                </div>
-            </div>
-            <!-- //weather information -->
-
-            <!-- bottom -->
-            <div class="bottom">
-                <ul class="menuList">
-                    <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'home' %}'">
-                            <span class="icon"><img src="{% static 'img/home.png' %}" alt="Home" class="icon-img"></span>
-                            <span class="menuText">메인 페이지</span>
-                        </button>
-                    </li>
-                    <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'post_list' %}'">
-                            <span class="icon"><img src="{% static 'img/campaign.png' %}" alt="Campaign" class="icon-img"></span>
-                            <span class="menuText">공지사항</span>
-                        </button>
-                    </li>
-                    <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'rain' %}'">
-                            <span class="icon"><img src="{% static 'img/water_drop.png' %}" alt="Water Drop" class="icon-img"></span>
-                            <span class="menuText">강수량</span>
-                        </button>
-                    </li>
-                    <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" id="waterlevelButton">
-                            <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
-                            <span class="menuText">구별 하천 수위</span>
-                        </button>
-                    </li>
-                    <li class="menuItem">
-                        <button type="button" class="menuButton" aria-pressed="false" onclick="window.location.href='{% url 'detect' %}'">
-                            <i class="material-icons header-icon" style="font-size:25px;margin-left:0px;">report_gmailerrorred</i>
-                            <span class="menuText" style="margin-left:20px;">시설물 관리</span>
-                        </button>
-                    </li>
-                </ul>
-                <!-- 로그인/회원가입 버튼 및 이미지 -->
-                {% if user.is_authenticated %}
-                    <div class="profile-section">
-                        <img src="{% static 'img/account_circle.png' %}" alt="Profile" class="profile-icon" id="profile-icon">
-                        <p class="username">{{ user.last_name }} {{ user.first_name | mask_name }}</p>
-                        <div class="profile-buttons" id="profile-buttons" style="display: none;">
-                            <button type="button" class="menuButton" onclick="window.location.href='{% url 'profile' %}'">마이페이지</button>
-                            <button type="button" class="menuButton" id="delete-account-button" data-url="{% url 'delete_account' %}">회원 탈퇴</button>
-                        </div>
-                        <a href="{% url 'logout' %}" class="auth-link">
-                            <img src="{% static 'img/logout.png' %}" alt="Logout" class="auth-icon">
-                        </a>
-                    </div>
-                {% else %}
-                    <div class="auth-buttons">
-                        <a href="{% url 'login' %}" class="auth-link collapsed-only">
-                            <img src="{% static 'img/login.png' %}" alt="Login" class="auth-icon">
-                        </a>
-                        <a href="{% url 'terms' %}" class="auth-link collapsed-only">
-                            <img src="{% static 'img/signup.png' %}" alt="Signup" class="auth-icon">
-                        </a>
-                        <a href="{% url 'login' %}" class="menuButton expanded-only">로그인</a>
-                        <a href="{% url 'terms' %}" class="menuButton expanded-only">회원가입</a>
-                    </div>
-                {% endif %}
-            </div>
-            <!-- //bottom -->
-        </div>
-    </aside>
 
     <script src="{% static 'js/modal.js' %}"></script>
     <script src="{% static 'js/sidebar-toggle.js' %}"></script>
