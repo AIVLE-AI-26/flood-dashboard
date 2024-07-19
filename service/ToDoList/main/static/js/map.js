@@ -282,12 +282,16 @@ function addShelterMarkers(features) {
                     lng: feature.geometry.coordinates[0]
                 },
                 map: null,
-                title: feature.properties.title
+                title: feature.properties.title,
+                icon: {
+                    url: window.shelterIconUrl, // 여기에 원하는 이미지 URL을 넣으세요
+                    scaledSize: new google.maps.Size(32, 32) // 이미지의 크기를 조정하세요 (필요에 따라)
+                }
             });
 
             marker.addListener('click', () => {
                 const contentString = `
-                    <div>
+                    <div style="color: black;">
                         <h2>${feature.properties.title}</h2>
                         <p><strong>주소:</strong> ${feature.properties.address}</p>
                         <p><strong>최대 수용 인원:</strong> ${feature.properties.capacity}</p>
