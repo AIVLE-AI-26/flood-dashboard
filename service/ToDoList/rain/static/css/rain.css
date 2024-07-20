@@ -10,7 +10,7 @@ body {
 }
 
 .content-container {
-    margin-left: 200px; /* 사이드 바 너비 + 여백 */
+    margin-left: 70px; /* 사이드 바 너비 + 여백 */
     flex-grow: 1;
     padding: 20px;
     display: flex;
@@ -26,19 +26,18 @@ body {
     width: 100%;
 }
 
-
-
 .row {
     display: flex;
-    justify-content: space-between; /* 열 사이의 간격을 균등하게 */
-    flex-wrap: wrap; /* 여러 행으로 나눠서 표시 */
-    margin-bottom: 20px; /* 각 행 사이의 간격 */
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    gap: 8px; /* 열 간의 간격을 8px로 설정 */
 }
 
 .column {
     flex: 1;
-    padding: 20px;
-    max-width: 32%; /* 각 열의 최대 너비를 32%로 설정 */
+    padding: 10px; /* padding 값을 줄여 더 많은 열이 보이도록 조정 */
+    max-width: 30%; /* 각 열의 최대 너비를 30%로 설정 */
     box-sizing: border-box; /* 패딩 포함한 박스 모델 설정 */
     display: flex;
     flex-direction: column;
@@ -72,6 +71,7 @@ body {
     text-transform: uppercase; /* 모든 글자를 대문자로 설정 */
     letter-spacing: 1px; /* 글자 간격 조정 */
 }
+
 .background-canvas {
     position: fixed;
     top: 0;
@@ -81,11 +81,9 @@ body {
     z-index: -1; /* canvas를 뒤로 보내기 위해 설정 */
 }
 
-
-
 .chart-container {
     width: 100%;
-    height: 350px; /* 고정된 높이 설정 */
+    height: 300px; /* 높이를 줄여서 더 많은 차트를 화면에 표시 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,7 +111,7 @@ body {
 
 .current-rainfall {
     width: 100%;
-    height: 50px; /* 고정된 높이 설정 */
+    height: 40px; /* 높이를 줄여서 더 많은 차트를 화면에 표시 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,9 +122,10 @@ body {
 }
 
 p {
-    font-size: 18px; /* 글씨 크기 설정 */
+    font-size: 16px; /* 글씨 크기 조정 */
     font-weight: bold; /* 글씨 두께 설정 */
     color: #343a40; /* 텍스트 색상 설정 */
     margin-top: 10px; /* 그래프와의 간격 추가 */
     text-align: center; /* 텍스트 가운데 정렬 */
 }
+

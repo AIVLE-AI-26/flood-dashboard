@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from .forms import SignUpForm
+import re
 
 def signup_view(request):
     if not request.session.get('agreed_to_terms'):
@@ -33,6 +34,12 @@ def signup_view(request):
 
                 return redirect('home')  # 회원가입 성공 시 메인 페이지로 이동
         else:
+            birth_date_error = form.errors.get('birth_date')
+            if birth_date_error:
+                birth_date = request.POST.get('birth_date', '')
+                if not re.match(r'^\d{4}-\d{2}-\d{2}$', birth_date):
+                    form.errors['birth_date'] = form.error_class(['생년월일은 yyyy-mm-dd 형식이어야 합니다.'])
+            
             print("Form is not valid.")  # 디버깅 프린트 추가
             print(f"Form errors: {form.errors}")  # 디버깅 프린트 추가
             return render(request, 'signup/signup.html', {'form': form})
