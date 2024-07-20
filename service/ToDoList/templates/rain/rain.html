@@ -11,74 +11,73 @@
     <link rel="stylesheet" href="{% static 'css/rain.css' %}">
     <style>
         /* 모달 스타일 */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    /* max-width: 600px; */
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 사이드바 스타일 */
-.sidebar {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 10px;
-    z-index: 1000;
-}
-
-.sidebar a {
-    display: block;
-    padding: 10px;
-    background: #1E90FF;
-    margin-bottom: 5px;
-    color: white;
-    text-align: center;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.sidebar a:hover {
-    background: #3b80c6;
-}
-
-.sidebar img {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 5px;
-}
+        .rain-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .rain-modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            /* max-width: 600px; */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .rain-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .rain-close:hover,
+        .rain-close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        /* 사이드바 스타일 */
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            z-index: 1000;
+        }
+        
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            background: #1E90FF;
+            margin-bottom: 5px;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        
+        .sidebar a:hover {
+            background: #3b80c6;
+        }
+        
+        .sidebar img {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 5px;
+        }
 
     </style>
     {% endblock %}
@@ -98,7 +97,7 @@
     <div class="chart-wrapper">
         <div class="row">
             <div class="row">
-                <div class="column" onclick="openModal('광주광역시', '광주광역시')">
+                <div class="column" onclick="openRainModal('광주광역시', '광주광역시')">
                     <div class="title-box">
                         <h2>광주광역시</h2>
                     </div>
@@ -109,7 +108,7 @@
                         <p id="current-rainfall-광주광역시"></p>
                     </div>
                 </div>
-                <div class="column" onclick="openModal('동구', '동구')">
+                <div class="column" onclick="openRainModal('동구', '동구')">
                     <div class="title-box">
                         <h2>동구</h2>
                     </div>
@@ -120,7 +119,7 @@
                         <p id="current-rainfall-동구"></p>
                     </div>
                 </div>
-                <div class="column" onclick="openModal('서구', '서구')">
+                <div class="column" onclick="openRainModal('서구', '서구')">
                     <div class="title-box">
                         <h2>서구</h2>
                     </div>
@@ -133,7 +132,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="column" onclick="openModal('남구', '남구')">
+                <div class="column" onclick="openRainModal('남구', '남구')">
                     <div class="title-box">
                         <h2>남구</h2>
                     </div>
@@ -144,7 +143,7 @@
                         <p id="current-rainfall-남구"></p>
                     </div>
                 </div>
-                <div class="column" onclick="openModal('북구', '북구')">
+                <div class="column" onclick="openRainModal('북구', '북구')">
                     <div class="title-box">
                         <h2>북구</h2>
                     </div>
@@ -155,7 +154,7 @@
                         <p id="current-rainfall-북구"></p>
                     </div>
                 </div>
-                <div class="column" onclick="openModal('광산구', '광산구')">
+                <div class="column" onclick="openRainModal('광산구', '광산구')">
                     <div class="title-box">
                         <h2>광산구</h2>
                     </div>
@@ -171,11 +170,11 @@
     </div>
     
     <!-- 모달 창 -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title"></h2>
-            <canvas id="modal-chart"></canvas>
+    <div id="rainModal" class="rain-modal">
+        <div class="rain-modal-content">
+            <span class="rain-close" onclick="closeRainModal()">&times;</span>
+            <h2 id="rain-modal-title"></h2>
+            <canvas id="rain-modal-chart"></canvas>
         </div>
     </div>
     {% endblock %}
@@ -375,108 +374,108 @@
           });
       }
 
-      function openModal(title, location) {
-          document.getElementById('modal-title').innerText = title;
-          var modal = document.getElementById("myModal");
-
-          // 모달 창이 열릴 때마다 캔버스를 초기화
-          var modalChartCanvas = document.getElementById("modal-chart");
-          var newCanvas = document.createElement("canvas");
-          newCanvas.id = "modal-chart";
-          modalChartCanvas.parentNode.replaceChild(newCanvas, modalChartCanvas);
-
-          var modalChart = newCanvas.getContext('2d');
-
-          // 필터링된 데이터 가져오기
-          const filteredData = window.rainfallData.filter(row => row.location === location);
-          const labels = filteredData.map(row => formatTime(row.fcst_time));
-          const rainfallData = filteredData.map(row => row.fcst_value);
-
-          modalChartInstance = new Chart(modalChart, {
-              type: 'line',
-              data: {
-                  labels: labels,
-                  datasets: [{
-                      label: '강수량 (mm)',
-                      data: rainfallData,
-                      fill: false,
-                      borderColor: '#3b80c6',
-                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                      tension: 0.4,
-                      borderWidth: 2,
-                      pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                      pointBorderColor: '#fff',
-                      pointHoverBackgroundColor: '#fff',
-                      pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
-                  }]
-              },
-              options: {
-                  plugins: {
-                      legend: {
-                          display: true
-                      },
-                      tooltip: {
-                          backgroundColor: 'rgba(0,0,0,0.8)',
-                          titleFont: {
-                              size: 16,
-                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
-                          },
-                          bodyFont: {
-                              size: 14,
-                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
-                          },
-                          footerFont: {
-                              size: 12,
-                              family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
-                          }
-                      }
-                  },
-                  scales: {
-                      x: {
-                          title: {
-                              display: false
-                          },
-                          ticks: {
-                              color: '#666'
-                          },
-                          grid: {
-                              display: true,
-                              drawOnChartArea: false,
-                              drawTicks: false,
-                              color: 'rgba(200, 200, 200, 0.3)'
-                          }
-                      },
-                      y: {
-                          title: {
-                              display: false
-                          },
-                          ticks: {
-                              color: '#666'
-                          },
-                          grid: {
-                              drawBorder: false,
-                              drawOnChartArea: true,
-                              drawTicks: false,
-                              color: 'rgba(200, 200, 200, 0.3)'
-                          }
-                      }
-                  }
-              }
-          });
-
-          modal.style.display = "flex";
-      }
-
-      function closeModal() {
-          var modal = document.getElementById("myModal");
-          modal.style.display = "none";
-
-          // 차트 객체를 명시적으로 삭제
-          if (modalChartInstance) {
-              modalChartInstance.destroy();
-              modalChartInstance = null;
-          }
-      }
+      function openRainModal(title, location) {
+        document.getElementById('rain-modal-title').innerText = title;
+        var modal = document.getElementById("rainModal");
+    
+        // 모달 창이 열릴 때마다 캔버스를 초기화
+        var modalChartCanvas = document.getElementById("rain-modal-chart");
+        var newCanvas = document.createElement("canvas");
+        newCanvas.id = "rain-modal-chart";
+        modalChartCanvas.parentNode.replaceChild(newCanvas, modalChartCanvas);
+    
+        var modalChart = newCanvas.getContext('2d');
+    
+        // 필터링된 데이터 가져오기
+        const filteredData = window.rainfallData.filter(row => row.location === location);
+        const labels = filteredData.map(row => formatTime(row.fcst_time));
+        const rainfallData = filteredData.map(row => row.fcst_value);
+    
+        modalChartInstance = new Chart(modalChart, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '강수량 (mm)',
+                    data: rainfallData,
+                    fill: false,
+                    borderColor: '#3b80c6',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleFont: {
+                            size: 16,
+                            family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                        },
+                        bodyFont: {
+                            size: 14,
+                            family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                        },
+                        footerFont: {
+                            size: 12,
+                            family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#666'
+                        },
+                        grid: {
+                            display: true,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            color: 'rgba(200, 200, 200, 0.3)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#666'
+                        },
+                        grid: {
+                            drawBorder: false,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            color: 'rgba(200, 200, 200, 0.3)'
+                        }
+                    }
+                }
+            }
+        });
+    
+        modal.style.display = "flex";
+    }
+    
+    function closeRainModal() {
+        var modal = document.getElementById("rainModal");
+        modal.style.display = "none";
+    
+        // 차트 객체를 명시적으로 삭제
+        if (modalChartInstance) {
+            modalChartInstance.destroy();
+            modalChartInstance = null;
+        }
+    }
 
       document.addEventListener('DOMContentLoaded', function() {
           fetchRainfallData();

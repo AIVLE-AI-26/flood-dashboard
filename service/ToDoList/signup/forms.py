@@ -8,9 +8,9 @@ User = get_user_model()
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='이메일을 입력하세요.', required=True)
     user_role = forms.ChoiceField(choices=(('user', '일반사용자'), ('admin', '관리자')), required=True)
-    birth_date = forms.DateField(help_text='생년월일을 입력하세요.', required=False)
-    first_name = forms.CharField(max_length=30, required=False, help_text='이름을 입력하세요.')
-    last_name = forms.CharField(max_length=30, required=False, help_text='성을 입력하세요.')
+    birth_date = forms.DateField(help_text='생년월일을 입력하세요.', required=True)
+    first_name = forms.CharField(max_length=30, required=True, help_text='이름을 입력하세요.')
+    last_name = forms.CharField(max_length=30, required=True, help_text='성을 입력하세요.')
 
     class Meta:
         model = CustomUser

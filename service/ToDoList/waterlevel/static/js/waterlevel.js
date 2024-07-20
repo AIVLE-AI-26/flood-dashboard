@@ -93,6 +93,14 @@ document.addEventListener('DOMContentLoaded', function() {
             wlmarkers[obs.name] =  marker;
 
             marker.addListener('click', function() {
+                const waterlevelcontent = 
+                    `<div style="color: black;">
+                        <h2 style="margin: 0;">${obs.name}</h2>
+                        <p><strong>현재 수위:</strong> ${marker.customInfo.wl}m</p>
+                    </div>`;
+                infoWindow.setContent(waterlevelcontent);
+                infoWindow.open(map, marker);
+
                 var items = document.querySelectorAll('.info-item');
                 items.forEach(function(item) {
                     item.classList.remove('highlight');
@@ -102,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 });
-                alert(`${obs.name}\n현재 수위: ${marker.customInfo.wl}m`);
             });
         });
     }

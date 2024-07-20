@@ -122,7 +122,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'wateravle26@gmail.com'  # 실제 이메일 주소
-EMAIL_HOST_PASSWORD = 'ebgi hwfu pppp nshx'  # 실제 이메일 계정의 비밀번호 또는 앱 비밀번호
+EMAIL_HOST_PASSWORD = 'z v q p k x c k j y w s u h s i'  # 실제 이메일 계정의 비밀번호 또는 앱 비밀번호
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 실제 이메일 주소
 
 AUTHENTICATION_BACKENDS = [
