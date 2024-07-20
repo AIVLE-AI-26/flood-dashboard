@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.content-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+.profile-container {
+    display: flex;
+    width: 1200px;
+    height: 700px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.profile-sidebar {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile-sidebar h2 {
+    margin: 0;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.profile-sidebar button {
+    background-color: white;
+    color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+    transition: background-color 0.3s, color 0.3s;
+    width: 40%;
+}
+.profile-sidebar button:hover {
+    background-color: #e6e6e6;
+}
+.profile-content {
+    background-color: white;
+    width: 60%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profile-content h2 {
+    color: #333;
+    margin-bottom: 40px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+    width: 95%;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.profile-content-form h2 {
+    color: #333;
+    margin-bottom: 30px;
+}
+.profile-content-form label {
+    width:30%;
+}
+.profile-content-form input {
+    width: calc(65% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.profile-content-form div {
+    display: flex;
+    padding: 10px;
+}
+textarea, select {
+    width: 65%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
