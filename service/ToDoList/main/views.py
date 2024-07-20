@@ -147,15 +147,17 @@ def map_view(request):
 def handle_button(request):
     button_value = request.GET.get('button_value')
     if button_value is not None:
-        model_path = os.path.join(settings.DATA_DIR, 'model.pkl')
+        model_path = os.path.join(settings.DATA_DIR, 'final_model.pkl')
 
-        road_csv_path = os.path.join(settings.DATA_DIR, '광주_도로명_샘플.csv')
+        road_csv_path = os.path.join(settings.DATA_DIR, '쿠우쿵1.csv')
+        
         model = joblib.load(model_path)
         
         road_csv = pd.read_csv(road_csv_path)
         road_csv['강수량'] = int(button_value)
-        road_csv1 = road_csv.drop(['시도시군구'], axis=1)
-        
+        # road_csv1 = road_csv.drop(['시도시군구'], axis=1)
+        road_csv1 = road_csv[['강수량','Latitude', 'Longitude' ,'elevation' , '펌프대수(대)',  '불투수면 비율(%)',  '불투수면 면적(㎢)',  '행정구역면적(㎢)']]
+        # print(road_csv)
         pred = model.predict(road_csv1)
         y_score = (pred > 0.8).astype(int)
         df = road_csv[['Latitude', 'Longitude']][y_score.astype(bool)]
