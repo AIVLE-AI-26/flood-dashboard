@@ -189,8 +189,8 @@ input[type="email"] {
     position: absolute;
     z-index: 1;
     top: 110%; /* 수직 위치 조정 */
-    left: 60%; /* 수평 위치 조정 */
-    transform: translateY(-50%); /* 수직 가운데 정렬 */
+    left: 0%; /* 수평 위치 조정 */
+    transform: translateY(-0%); /* 수직 가운데 정렬 */
     opacity: 0;
     transition: opacity 0.3s;
     height: auto;
