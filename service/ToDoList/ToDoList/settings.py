@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+# vercel config
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,7 +10,7 @@ SECRET_KEY = "django-insecure-^bdpx&4fa9(pi&1431q$$cq132vorhqc#kga%)%au3%f&6@=)+
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".vercel.app", ".now.sh"]
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
@@ -35,6 +37,8 @@ INSTALLED_APPS = [
     'detect',
     'find_username',
     'find_ps',
+    # vercel config
+    "whitenoise.runserver_nostatic"
 ]
 
 MIDDLEWARE = [
@@ -45,6 +49,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # vercel config
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "ToDoList.urls"
@@ -82,10 +88,16 @@ STATICFILES_DIRS = [
 ]
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # }
+    # vercel config
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -137,3 +149,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # 기본값
 SESSION_COOKIE_AGE = 1200  # 세션 쿠키 만료 시간 (초), 필요에 따라 조정
 SESSION_SAVE_EVERY_REQUEST = True  # 매 요청마다 세션 갱신
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 브라우저 닫을 때 세션 만료
+
+
+# vercel config
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
