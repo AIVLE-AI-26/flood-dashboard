@@ -904,6 +904,7 @@ input[type="file"] {
 
 .overlay-sidebar:not(.collapsed) .menuButton.expanded-only {
     display: inline-block;
+    text-align: center;
 }
 
 /* 추가된 스타일 */

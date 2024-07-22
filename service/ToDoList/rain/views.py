@@ -7,8 +7,9 @@ import pandas as pd
 from datetime import datetime, timedelta
 from django.core.cache import cache
 import time
+from django.conf import settings
 
-service_key = 'nz2fwU3ROAjPxqq2gPGhnUPe6+ZWmxvhXIyUBW/qUrPl0T0za05as1fDc4AiuY/6R2jfQE0JQBr4MKDZ7MPC6w=='
+service_key = settings.RAIN_SERVICE_KEY
 
 async def fetch_rainfall_data(request):
     cached_data = cache.get('rainfall_data')
