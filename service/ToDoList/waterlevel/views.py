@@ -35,7 +35,7 @@ observatories = {
 }
 
 def fetch_water_level_data(obscd):
-    url = "http://www.wamis.go.kr:8080/wamis/openapi/wkw/wl_hrdata"
+    url = settings.WATER_LEVEL_URL
     today = datetime.today().strftime('%Y%m%d')  # 오늘 날짜를 'YYYYMMDD' 형식으로 가져옴
     params = {
         'obscd': obscd,
@@ -66,7 +66,7 @@ def get_waterlevel_data(request):
             latest_data['홍수주의보'] = info['홍수주의보'] 
             latest_data['홍수경보'] = info['홍수경보']
             all_data.append(latest_data)
-    service_key = 'nz2fwU3ROAjPxqq2gPGhnUPe6+ZWmxvhXIyUBW/qUrPl0T0za05as1fDc4AiuY/6R2jfQE0JQBr4MKDZ7MPC6w=='
+    service_key = settings.RAIN_SERVICE_KEY
 
     # API 엔드포인트
     url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'

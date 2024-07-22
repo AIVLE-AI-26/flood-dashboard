@@ -1,9 +1,19 @@
+
 document.addEventListener('DOMContentLoaded', (event) => {
-    const apiKey = 'AIzaSyD2WVmbg5rwpXUBfhH3CYLWQv8STSAKAW0';  // Google Maps API 키를 여기에 직접 삽입
-    const mapScript = document.createElement('script');
-    mapScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
-    mapScript.async = true;
-    document.head.appendChild(mapScript);
+    fetch('/my_view/')
+        .then(response => response.json())
+        .then(data => {
+            const apiKey = data.api_key;
+            if (apiKey) {
+                // Initialize the map
+                const mapScript = document.createElement('script');
+                mapScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+                mapScript.defer = true;
+                document.head.appendChild(mapScript);
+            }
+        })
+    
+    // const apiKey = 'AIzaSyD2WVmbg5rwpXUBfhH3CYLWQv8STSAKAW0';  // Google Maps API 키를 여기에 직접 삽
 
     const markerClustererScript = document.createElement('script');
     markerClustererScript.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';

@@ -1,10 +1,25 @@
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
-
+import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = "django-insecure-^bdpx&4fa9(pi&1431q$$cq132vorhqc#kga%)%au3%f&6@=)+"
+# environ 초기화
+env = environ.Env(
+    # 기본값 및 유형 설정
+    DEBUG=(bool, False)
+)
+
+# 이제 .env 파일의 변수를 settings.py에서 사용할 수 있습니다.
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+EMAIL_HOST_USER=env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
+RAIN_SERVICE_KEY=env('RAIN_SERVICE_KEY')
+MAPS_SERVICE_KEY=env('MAPS_SERVICE_KEY')
+WATER_LEVEL_URL=env('WATER_LEVEL_URL')
+OPEN_API_KEY=env('OPEN_API_KEY')
 
 DEBUG = True
 

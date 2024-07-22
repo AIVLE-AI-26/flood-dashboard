@@ -1,6 +1,6 @@
 import pandas as pd
 import json
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseServerError
 from django.shortcuts import render, redirect
 from django.conf import settings
 import joblib
@@ -46,7 +46,16 @@ def create_geojson(features):
         "features": features
     }
     return geojson
-
+def my_view(request):
+    try:
+        api_key = settings.MAPS_SERVICE_KEY
+        if not api_key:
+            raise ValueError("API key is not set.")
+        return JsonResponse({'api_key': api_key})
+    except AttributeError:
+        return HttpResponseServerError("MAPS_SERVICE_KEY is not defined in settings.")
+    except Exception as e:
+        return HttpResponseServerError(str(e))
 def create_polygon_feature(lat, lng, fill_color, fill_opacity=0.2, stroke_color=None, stroke_opacity=0, stroke_weight=2):
     if stroke_color is None:
         stroke_color = fill_color
@@ -199,7 +208,7 @@ def edit_profile(request):
     return render(request, 'main/edit_profile.html', {'form': form})
 
 
-service_key = 'nz2fwU3ROAjPxqq2gPGhnUPe6+ZWmxvhXIyUBW/qUrPl0T0za05as1fDc4AiuY/6R2jfQE0JQBr4MKDZ7MPC6w=='
+service_key = settings.RAIN_SERVICE_KEY
 
 async def fetch_weather_data(request):
     cached_data = cache.get('weather_data')
