@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.onload = function() {
         var data = getDataFromUrl();
         if (data == "wl-button") {
-            waterlevelButton.click();
+            setTimeout(() => waterlevelButton.click(), 500)
         } 
     };
 
