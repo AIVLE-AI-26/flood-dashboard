@@ -71,10 +71,7 @@
 
 ## 기술 스택
 
-- Backend: Django
-- AI 모델: Logistic Regression, RandomForest, yolov9
-- AI 툴: langchain, vectorstores, ChromaDB, OpenAI 임베딩
-- 가상환경: myvenv
+<img src="./img/architecture.png">
 
 ## Dependencies
 
