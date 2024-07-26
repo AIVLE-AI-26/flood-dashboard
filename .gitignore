@@ -3,6 +3,7 @@
 .config/
 .local/
 .ssh/
+.conda/
 
 # hidden file
 .DS_Store
@@ -47,3 +48,15 @@ service/ToDoList/terms/migrations/__pycache__/
 service/ToDoList/ToDoList/__pycache__/
 service/ToDoList/waterlevel/__pycache__/
 service/ToDoList/waterlevel/migrations/__pycache__/
+
+# need to hide
+service/myvenv/
+service/ToDoList/광주_도로명.csv
+service/ToDoList/db.json
+service/ToDoList/db.sqlite3
+service/ToDoList/df.csv
+service/ToDoList/board_data/
+service/ToDoList/data/
+service/ToDoList/uploads/
+service/ToDoList/images/
+service/ToDoList/media/
