@@ -118,5 +118,5 @@ flood-dashboard@1.0.0
 | [김수빈](https://github.com/subin16)      | $\cdot$ Frontend(Login/Signup, MyPage) <br/> $\cdot$ Backend(과거침수 지역, 대피소, 강수량) <br/> $\cdot$ Design                                                                          |
 | [박경민](https://github.com/PNamju)       | $\cdot$ Frontend(NavBar, Notice, 도로 파손 탐지) <br/> $\cdot$ Design                                                                                                                     |
 | [정유리](https://github.com/jeongYuri)    | $\cdot$ Backend(Notice/User Data CRUD, SignIn, MyPage) <br/> $\cdot$ DBA <br/> $\cdot$ Design                                                                                             |
-| [황인태](https://github.com/dlsxodlsghks) | $\cdot$ Frontend(구별 하천 수위) <br/> $\cdot$ Backend(구별 하천 수위) <br/> $\cdot$ Code Formatting                                                                                      |
+| [황인태](https://github.com/dlsxodlsghks) | $\cdot$ Frontend(구별 하천 수위) <br/> $\cdot$ Backend(구별 하천 수위)                                                                                   |
 | [홍기원](https://github.com/Hongwon123)   | $\cdot$ Backend(구별 하천 수위, 챗봇, Login/Signin, 아이디/비밀번호 찾기, MainPage) <br/> $\cdot$ Frontend(MainPage)                                                                      |
