@@ -1,95 +1,93 @@
 <!-- notice.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지사항</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
     <div class="top-bar">
-        <div class="logo">
-            <h1><a href="" class="title-logo-link">광주광역시</a></h1>
-        </div>
-        <div class="auth-links">
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">로그아웃</a>
-            {% else %}
-                <a href="{% url 'login' %}">로그인</a>
-                <a href="{% url 'signup' %}">회원가입</a>
-            {% endif %}
-        </div>
+      <div class="logo">
+        <h1><a href="" class="title-logo-link">광주광역시</a></h1>
+      </div>
+      <div class="auth-links">
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">로그아웃</a>
+        {% else %}
+        <a href="{% url 'login' %}">로그인</a>
+        <a href="{% url 'signup' %}">회원가입</a>
+        {% endif %}
+      </div>
     </div>
     <div class="main-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>광주광역시</h2>
-                <h3>도시침수 통합정보시스템</h3>
-                <input type="text" placeholder="검색...">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">메인 페이지</a></li>
-                    <li><a href="{% url 'post_list' %}">공지사항</a></li>
-                    <li><a href="{% url 'rain' %}">강수량</a></li>
-                    <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
-                    <li><a href="{% url 'chatbot' %}">챗봇</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <div class="content-container">
-            <main class="content">
-                <h2>공지사항</h2>
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">제목</th>
-                                    <th scope="col">내용</th>
-                                    <th scope="col">첨부 파일</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for post in posts %}
-                                <tr>
-                                    <th scope="row">{{ forloop.counter }}</th>
-                                    <td>{{ post.title }}</td>
-                                    <td>{{ post.content }}</td>
-                                    <td>
-                                        {% if post.file_name %}
-                                            <a href="{{ post.file_path }}">{{ post.file_name }}</a>
-                                        {% else %}
-                                            없음
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="4">등록된 게시물이 없습니다.</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <!-- 글쓰기 버튼 -->
-                        <a href="{% url 'board_write' %}" class="btn btn-primary">글쓰기</a>
-                        <!-- 홈으로 돌아가는 링크 -->
-                        <a href="{% url 'home' %}">home</a>
-                    </div>
-                </div>
-            </main>
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>광주광역시</h2>
+          <h3>도시침수 통합정보시스템</h3>
+          <input type="text" placeholder="검색..." />
         </div>
+        <nav>
+          <ul>
+            <li><a href="{% url 'home' %}">메인 페이지</a></li>
+            <li><a href="{% url 'post_list' %}">공지사항</a></li>
+            <li><a href="{% url 'rain' %}">강수량</a></li>
+            <li><a href="{% url 'waterlevel' %}">구별 하천 수위</a></li>
+            <li><a href="{% url 'chatbot' %}">챗봇</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <div class="content-container">
+        <main class="content">
+          <h2>공지사항</h2>
+          <div class="row mt-5">
+            <div class="col-12">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">내용</th>
+                    <th scope="col">첨부 파일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for post in posts %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.content }}</td>
+                    <td>
+                      {% if post.file_name %}
+                      <a href="{{ post.file_path }}">{{ post.file_name }}</a>
+                      {% else %} 없음 {% endif %}
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="4">등록된 게시물이 없습니다.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <!-- 글쓰기 버튼 -->
+              <a href="{% url 'board_write' %}" class="btn btn-primary">글쓰기</a>
+              <!-- 홈으로 돌아가는 링크 -->
+              <a href="{% url 'home' %}">home</a>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
     <footer>
-        <p>&copy; 2024 Safe City. All rights reserved.</p>
+      <p>&copy; 2024 Safe City. All rights reserved.</p>
     </footer>
-</body>
+  </body>
 </html>

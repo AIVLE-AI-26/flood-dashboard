@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detection Result</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Detection Result</h1>
     <h2>Original Image</h2>
-    <img src="{{ original_image_url }}" alt="Original Image">
+    <img src="{{ original_image_url }}" alt="Original Image" />
     <h2>Detected Image</h2>
-    <img src="{{ result_image_url }}" alt="Detected Image">
+    <img src="{{ result_image_url }}" alt="Detected Image" />
     <ul>
-        {% for label, confidence in detection_result %}
-            <li>{{ label }} (Confidence: {{ confidence }})</li>
-        {% endfor %}
+      {% for label, confidence in detection_result %}
+      <li>{{ label }} (Confidence: {{ confidence }})</li>
+      {% endfor %}
     </ul>
-</body>
+  </body>
 </html>

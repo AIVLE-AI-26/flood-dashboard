@@ -9,17 +9,16 @@
 <div class = "n-back">
     <div class = "notice">
         <h2 style="display: inline-block;">
-            <i class="material-icons header-icon">report_gmailerrorred</i>
-            <span class="header-title">시설물 관리</span>
-        </h2>
+      <i class="material-icons header-icon">report_gmailerrorred</i>
+      <span class="header-title">시설물 관리</span>
+    </h2>
 
-
-        <!-- JavaScript to redirect after 1 second -->
-        <script type="text/javascript">
-            setTimeout(function() {
-                window.location.href = "{% url 'upload_image' %}";
-            }, 1);  // 1000 milliseconds = 1 second
-        </script>
-    </div>
+    <!-- JavaScript to redirect after 1 second -->
+    <script type="text/javascript">
+      setTimeout(function () {
+        window.location.href = "{% url 'upload_image' %}"
+      }, 1) // 1000 milliseconds = 1 second
+    </script>
+  </div>
 </div>
 {% endblock %}

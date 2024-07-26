@@ -2,59 +2,59 @@
 {% load static %}
 {% block title %}Safe City{% endblock %}
 {% block extra_head %}{% endblock %}
-//
+
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/waterlevel.css' %}">
 {% endblock %}
-//
+
 {% block content %}
 <main class="content">
-    <div class="map_m">
-        <div class="map-controls">
-            <button id="past-flooding">과거침수 지역</button>
-            <button id="toggleButton">침수예상 지역</button>
-            <div id="rainfall-buttons" class="RainfallButtons">
-                <button class="rainfall-button" data-value="0">0mm</button>
-                <button class="rainfall-button" data-value="50">50mm</button>
-                <button class="rainfall-button" data-value="100">100mm</button>
-                <button class="rainfall-button" data-value="150">150mm</button>
-            </div>
-            <button id="shelterButton">대피소</button>
-            <div id="regionSelection" class="region-selection">
-                <button class="region-button" id="all">광주 전체</button>
-                <button class="region-button" id="donggu">동구</button>
-                <button class="region-button" id="seogu">서구</button>
-                <button class="region-button" id="namgu">남구</button>
-                <button class="region-button" id="bukgu">북구</button>
-                <button class="region-button" id="gwangsangu">광산구</button>
-            </div>
-        </div>
+  <div class="map_m">
+    <div class="map-controls">
+      <button id="past-flooding">과거침수 지역</button>
+      <button id="toggleButton">침수예상 지역</button>
+      <div id="rainfall-buttons" class="RainfallButtons">
+        <button class="rainfall-button" data-value="0">0mm</button>
+        <button class="rainfall-button" data-value="50">50mm</button>
+        <button class="rainfall-button" data-value="100">100mm</button>
+        <button class="rainfall-button" data-value="150">150mm</button>
+      </div>
+      <button id="shelterButton">대피소</button>
+      <div id="regionSelection" class="region-selection">
+        <button class="region-button" id="all">광주 전체</button>
+        <button class="region-button" id="donggu">동구</button>
+        <button class="region-button" id="seogu">서구</button>
+        <button class="region-button" id="namgu">남구</button>
+        <button class="region-button" id="bukgu">북구</button>
+        <button class="region-button" id="gwangsangu">광산구</button>
+      </div>
     </div>
-    <div id="map" style="width: 100%; height: 100vh;"></div>
-    <div id="data-container" class="grid-container info-container">
-        <div class="waterlevelbar">
-            <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img"></span>
-            <span class="waterleveltitle"><h3>하천 수위 정보</h3></span>
-            <span class="waterlevelbar-close">&times;</span>
-        </div>
-        <div id="waterlevel-info"></div>
+  </div>
+  <div id="map" style="width: 100%; height: 100vh"></div>
+  <div id="data-container" class="grid-container info-container">
+    <div class="waterlevelbar">
+      <span class="icon"><img src="{% static 'img/water.png' %}" alt="Water" class="icon-img" /></span>
+      <span class="waterleveltitle"><h3>하천 수위 정보</h3></span>
+      <span class="waterlevelbar-close">&times;</span>
     </div>
-    <!-- 챗봇 아이콘을 추가 -->
-    <a onclick="openModal()" class="chatbot-icon-link">
-        <div class="chatbot-icon-container">
-            <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon">
-        </div>
-    </a>
+    <div id="waterlevel-info"></div>
+  </div>
+  <!-- 챗봇 아이콘을 추가 -->
+  <a onclick="openModal()" class="chatbot-icon-link">
+    <div class="chatbot-icon-container">
+      <img src="{% static 'img/chatbot.png' %}" alt="Chatbot Icon" class="chatbot-icon" />
+    </div>
+  </a>
 </main>
 {% endblock %}
 {% block extra_script %}
-    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
-    <script src="{% static 'js/map.js' %}"></script>
-    <script src="{% static 'js/dropdown.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-    <script src="{% static 'js/waterlevel.js' %}" defer></script>
+<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+<script src="{% static 'js/map.js' %}"></script>
+<script src="{% static 'js/dropdown.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src="{% static 'js/waterlevel.js' %}" defer></script>
 
-    <script>
-        window.shelterIconUrl = "{% static 'img/shelter.png' %}";
-    </script>
+<script>
+  window.shelterIconUrl = "{% static 'img/shelter.png' %}"
+</script>
 {% endblock %}

@@ -6,21 +6,21 @@
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
 
-    <div class="profile-container">
-        <div class="profile-sidebar">
-            <h2>My Profile</h2>
-            <button onclick="location.href='{% url 'profile' %}'">View Profile</button>
-            <button onclick="location.href='{% url 'logout' %}'">Logout</button>
-        </div>
-        <div class="profile-content">
-            <div class="profile-content-form">
-                <h2>회원 정보 수정</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_div }}
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </form>
-            <div>
-        </div>
+<div class="profile-container">
+  <div class="profile-sidebar">
+    <h2>My Profile</h2>
+    <button onclick="location.href='{% url 'profile' %}'">View Profile</button>
+    <button onclick="location.href='{% url 'logout' %}'">Logout</button>
+  </div>
+  <div class="profile-content">
+    <div class="profile-content-form">
+      <h2>회원 정보 수정</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </form>
     </div>
+  </div>
+</div>
 {% endblock %}
