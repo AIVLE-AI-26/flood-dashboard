@@ -99,10 +99,10 @@ flood-dashboard@1.0.0
 
 | 성명                                      | 역할                                                                                                                   |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| [소부승](https://github.com/bootkorea)    | PM, 도로 파손 탐지(모델 설계, 모델 고도화), 홍수 예측(모델 설계, 데이터 전처리), 챗봇(모델 설계), 관련 Backend 구현    |
+| [소부승](https://github.com/bootkorea)    | Product Manager <br/> 도로 파손 탐지(모델 설계, 모델 고도화), 홍수 예측(모델 설계, 데이터 전처리), 챗봇(모델 설계) <br/> 관련 Backend 구현    |
 | [고병진](https://github.com/gobyeongjin)  | 홍수 예측(모델 고도화), 침수 지역 예측(모델 설계, 데이터 전처리), 챗봇(모델 고도화), 관련 Frontend 구현                |
 | [윤서연](https://github.com/syu357)       | 침수 지역 예측(데이터 전처리), 챗봇(데이터 전처리), 도로 파손 탐지(모델 설계), 관련 Frontend 구현                      |
-| [이주헌](https://github.com/leejugwi)     | 침수 지역 예측(AI 모델 설계, 데이터 전처리), 홍수 예측 (모델 고도화), 챗봇(모델 설계, 데이터 전처리), 관련 프론트 구현 |
+| [이주헌](https://github.com/leejugwi)     | 침수 지역 예측(AI 모델 설계, 데이터 전처리), 홍수 예측 (모델 고도화), 챗봇(모델 설계, 데이터 전처리) <br/> 관련 프론트 구현 |
 | [김수빈](https://github.com/subin16)      | Frontend(Login/Signup, MyPage) 프론트엔드, Backend(과거침수 지역, 대피소, 강수량), Design                              |
 | [박경민](https://github.com/PNamju)       | Frontend(NavBar, Notice, 도로 파손 탐지), Design                                                                       |
 | [정유리](https://github.com/jeongYuri)    | Backend(Notice/User Data CRUD, SignIn, MyPage), DBA, 마이페이지 백엔드 구현, Design                                    |
