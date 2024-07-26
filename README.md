@@ -44,31 +44,30 @@
 
 ```
 /Service
-|-- /ToDoList         # Client-side code
-|   |-- /ToDoList       # Django Setting files
-|   |-- /board         #
-|   |-- /board_data         #
-|   |-- /chatbot         #
-|   |-- /data        #
-|   |-- /detect        #
-|   |-- /find_ps        #
-|   |-- /find_username        #
-|   |-- /images        #
-|   |-- /login        #
-|   |-- /main        #
-|   |-- /media        #
-|   |-- /rain        #
-|   |-- /signup        #
-|   |-- /templates        #
-|   |-- /terms        #
-|   |-- /uploads        #
-|   |-- /waterlevel        #
-|   |-- package.json  #
-|-- /myvenv           # Virtual-Environment
-|   |-- 이건 안 넣어도 되지 않나?     # Server setup and endpoints
-|-- .gitignore        # Specifies intentionally untracked files to ignore
-|-- requirements.txt  # Script to install client dependencies
-|-- README.md         # This file
+|-- /ToDoList            # Client-side code
+|   |-- /ToDoList        # Django Setting files
+|   |-- /board           # Notice files
+|   |-- /board_data      # Notice data storage
+|   |-- /chatbot         # AI Chatbot files
+|   |-- /data            # Service .csv storage
+|   |-- /detect          # AI Damaged facility Detection files
+|   |-- /find_ps         # find-userPW files
+|   |-- /find_username   # find-userID files
+|   |-- /images          # AI Damaged facility Detection Image storage
+|   |-- /login           # Login files
+|   |-- /main            # MAINPAGE files
+|   |-- /media           # Service data storage
+|   |-- /rain            # AI - amount of precipitation files
+|   |-- /signup          # Signup files
+|   |-- /templates       # Service Web view side 
+|   |-- /terms           # Terms of service files
+|   |-- /uploads         # Service Image storage
+|   |-- /waterlevel      # AI - Water level files
+|-- /myvenv              # Virtual-Environment
+|-- /img                 # README Image storage
+|-- .gitignore           # Specifies intentionally untracked files to ignore
+|-- requirements.txt     # Script to install client dependencies
+|-- README.md            # This file
 ```
 
 ## 기술 스택
@@ -103,7 +102,7 @@ flood-dashboard@1.0.0
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [소부승](https://github.com/bootkorea)    | $\cdot$ Product Manager <br/> $\cdot$ 도로 파손 탐지(모델 설계, 모델 고도화), 홍수 예측(모델 설계, 데이터 전처리), 챗봇(모델 설계) <br/> $\cdot$ Backend(도로 파손 탐지, 홍수 예측, 챗봇) |
 | [고병진](https://github.com/gobyeongjin)  | $\cdot$ 홍수 예측(모델 고도화), 침수 지역 예측(모델 설계, 데이터 전처리), 챗봇(모델 고도화) <br/> $\cdot$ Frontend(홍수 예측, 침수 지역 예측, 챗봇)                                       |
-| [윤서연](https://github.com/syu357)       | $\cdot$ 침수 지역 예측(데이터 전처리), 챗봇(데이터 전처리), 도로 파손 탐지(모델 설계), <br/> $\cdot$ 관련 Frontend(침수 지역 예측, 챗봇, 도로 파손 탐지)                                  |
+| [윤서연](https://github.com/syu357)       | $\cdot$ 침수 지역 예측(데이터 전처리), 챗봇(데이터 전처리), 도로 파손 탐지(모델 설계), <br/> $\cdot$ Frontend(침수 지역 예측, 챗봇, 도로 파손 탐지)                                  |
 | [이주헌](https://github.com/leejugwi)     | $\cdot$ 홍수 예측 (모델 고도화), 침수 지역 예측(AI 모델 설계, 데이터 전처리), 챗봇(모델 설계, 데이터 전처리) <br/> $\cdot$ Frontend(홍수 예측, 침수 지역 예측, 챗봇)                      |
 | [김수빈](https://github.com/subin16)      | $\cdot$ Frontend(Login/Signup, MyPage) <br/> $\cdot$ Backend(과거침수 지역, 대피소, 강수량) <br/> $\cdot$ Design                                                                          |
 | [박경민](https://github.com/PNamju)       | $\cdot$ Frontend(NavBar, Notice, 도로 파손 탐지) <br/> $\cdot$ Design                                                                                                                     |
