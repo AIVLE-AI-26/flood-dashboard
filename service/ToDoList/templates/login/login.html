@@ -1,35 +1,41 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
     <title>로그인 - 도시침수 예방 사이트</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="form-container">
-        <div class="form-side-bar">
-            <span class="home-icon"><img src="{% static 'img/home0.png' %}" class="home-icon-img" onclick="window.location.href='{% url 'home' %}'"></span>
-            <div class="tab">
-                <button class="tablinks active">Login</button>
-                <button class="tablinks" onclick="location.href='/signup/'">Register</button>
-            </div>
+      <div class="form-side-bar">
+        <span class="home-icon"
+          ><img
+            src="{% static 'img/home0.png' %}"
+            class="home-icon-img"
+            onclick="window.location.href='{% url 'home' %}'"
+        /></span>
+        <div class="tab">
+          <button class="tablinks active">Login</button>
+          <button class="tablinks" onclick="location.href='/signup/'">Register</button>
         </div>
-        <div class="form-container-login">
-            <h2>Login</h2>
-            <form method="POST" class="needs-validation" novalidate>
-                {% csrf_token %}
-                <div class="input-container">
-                    <input type="text" name="username" placeholder="username" required>
-                    <input type="password" name="password" placeholder="password" required>
-                </div>
-                <button type="submit" class="login-btn">Login</button>
-                <div class="footer">
-                    <a href="/terms/">회원가입</a> | <a href="{% url 'find_username' %}">아이디 찾기</a> | <a href="{% url 'password_reset_request' %}">비밀번호 찾기</a>
-                </div>
-            </form>
-        </div>
+      </div>
+      <div class="form-container-login">
+        <h2>Login</h2>
+        <form method="POST" class="needs-validation" novalidate>
+          {% csrf_token %}
+          <div class="input-container">
+            <input type="text" name="username" placeholder="username" required />
+            <input type="password" name="password" placeholder="password" required />
+          </div>
+          <button type="submit" class="login-btn">Login</button>
+          <div class="footer">
+            <a href="/terms/">회원가입</a> | <a href="{% url 'find_username' %}">아이디 찾기</a> |
+            <a href="{% url 'password_reset_request' %}">비밀번호 찾기</a>
+          </div>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>

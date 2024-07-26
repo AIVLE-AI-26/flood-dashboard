@@ -1,82 +1,101 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
     <title>회원가입</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="form-container">
-        <div class="form-side-bar">
-            <span class="home-icon"><img src="{% static 'img/home0.png' %}" class="home-icon-img" onclick="window.location.href='{% url 'home' %}'"></span>
-            <div class="tab">
-                <button class="tablinks" onclick="location.href='/login/'">Login</button>
-                <button class="tablinks active">Register</button>
+      <div class="form-side-bar">
+        <span class="home-icon"
+          ><img
+            src="{% static 'img/home0.png' %}"
+            class="home-icon-img"
+            onclick="window.location.href='{% url 'home' %}'"
+        /></span>
+        <div class="tab">
+          <button class="tablinks" onclick="location.href='/login/'">Login</button>
+          <button class="tablinks active">Register</button>
+        </div>
+      </div>
+      <div class="form-container-signup">
+        <h2>Register</h2>
+        <form method="POST" class="needs-validation" novalidate>
+          {% csrf_token %}
+          <div class="input-container">
+            <div class="signup-row">
+              <div class="signup-group last-name-group">
+                <label for="{{ form.last_name.id_for_label }}">성</label>
+                {{ form.last_name }}
+                <span class="error-tooltip" style="display: none"
+                  ><span class="icon">⚠️</span><span class="error-text">{{ form.last_name.errors }}</span></span
+                >
+              </div>
+              <div class="signup-group first-name-group">
+                <label for="{{ form.first_name.id_for_label }}">이름</label>
+                {{ form.first_name }}
+                <span class="error-tooltip" style="display: none"
+                  ><span class="icon">⚠️</span><span class="error-text">{{ form.first_name.errors }}</span></span
+                >
+              </div>
             </div>
-        </div>
-        <div class="form-container-signup">
-            <h2>Register</h2>
-            <form method="POST" class="needs-validation" novalidate>
-                {% csrf_token %}
-                <div class="input-container">
-                    <div class="signup-row">
-                        <div class="signup-group last-name-group">
-                            <label for="{{ form.last_name.id_for_label }}">성</label>
-                            {{ form.last_name }}
-                            <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.last_name.errors }}</span></span>
-                        </div>
-                        <div class="signup-group first-name-group">
-                            <label for="{{ form.first_name.id_for_label }}">이름</label>
-                            {{ form.first_name }}
-                            <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.first_name.errors }}</span></span>
-                        </div>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.birth_date.id_for_label }}">생년월일</label>
-                        {{ form.birth_date }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.birth_date.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label class="signup-label" for="{{ form.username.id_for_label }}">아이디</label>
-                        {{ form.username }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.username.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.password1.id_for_label }}">비밀번호</label>
-                        {{ form.password1 }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.password1.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
-                        {{ form.password2 }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.password2.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.email.id_for_label }}">이메일</label>
-                        {{ form.email }}
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.email.errors }}</span></span>
-                    </div>
-                    <div class="signup-group">
-                        <label for="{{ form.user_role.id_for_label }}">사용자 유형</label>
-                        <div class="custom-select-wrapper">
-                            {{ form.user_role }}
-                        </div>
-                        <span class="error-tooltip" style="display:none;"><span class="icon">⚠️</span><span class="error-text">{{ form.user_role.errors }}</span></span>
-                    </div>
-                    <div class="signup-btn-container">
-                        <button type="submit" class="btn btn-primary signup-btn">Register</button>
-                    </div>
-                </div>
-                <div class="footer">
-                    <p>이미 계정이 있으신가요? <a href="/login/">로그인</a></p>
-                </div>
-            </form>
-        </div>
+            <div class="signup-group">
+              <label for="{{ form.birth_date.id_for_label }}">생년월일</label>
+              {{ form.birth_date }}
+              <span class="error-tooltip" style="display: none"
+                ><span class="icon">⚠️</span><span class="error-text">{{ form.birth_date.errors }}</span></span
+              >
+            </div>
+            <div class="signup-group">
+              <label class="signup-label" for="{{ form.username.id_for_label }}">아이디</label>
+              {{ form.username }}
+              <span class="error-tooltip" style="display: none"
+                ><span class="icon">⚠️</span><span class="error-text">{{ form.username.errors }}</span></span
+              >
+            </div>
+            <div class="signup-group">
+              <label for="{{ form.password1.id_for_label }}">비밀번호</label>
+              {{ form.password1 }}
+              <span class="error-tooltip" style="display: none"
+                ><span class="icon">⚠️</span><span class="error-text">{{ form.password1.errors }}</span></span
+              >
+            </div>
+            <div class="signup-group">
+              <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
+              {{ form.password2 }}
+              <span class="error-tooltip" style="display: none"
+                ><span class="icon">⚠️</span><span class="error-text">{{ form.password2.errors }}</span></span
+              >
+            </div>
+            <div class="signup-group">
+              <label for="{{ form.email.id_for_label }}">이메일</label>
+              {{ form.email }}
+              <span class="error-tooltip" style="display: none"
+                ><span class="icon">⚠️</span><span class="error-text">{{ form.email.errors }}</span></span
+              >
+            </div>
+            <div class="signup-group">
+              <label for="{{ form.user_role.id_for_label }}">사용자 유형</label>
+              <div class="custom-select-wrapper">{{ form.user_role }}</div>
+              <span class="error-tooltip" style="display: none"
+                ><span class="icon">⚠️</span><span class="error-text">{{ form.user_role.errors }}</span></span
+              >
+            </div>
+            <div class="signup-btn-container">
+              <button type="submit" class="btn btn-primary signup-btn">Register</button>
+            </div>
+          </div>
+          <div class="footer">
+            <p>이미 계정이 있으신가요? <a href="/login/">로그인</a></p>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script src="{% static 'js/signup.js' %}"></script>
-</body>
+  </body>
 </html>

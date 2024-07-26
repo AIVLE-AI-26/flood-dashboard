@@ -1,131 +1,130 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #f8f9fa; /* 배경색을 밝게 설정 */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: #f8f9fa; /* 배경색을 밝게 설정 */
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
 .content-container {
-    margin-left: 70px; /* 사이드 바 너비 + 여백 */
-    flex-grow: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 콘텐츠를 중앙 정렬 */
-    position: relative;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center; /* 콘텐츠를 중앙 정렬 */
+  margin-left: 70px; /* 사이드 바 너비 + 여백 */
+  padding: 20px;
 }
 
 .chart-wrapper {
-    display: none; /* 초기에는 숨김 */
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  display: none; /* 초기에는 숨김 */
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-    gap: 8px; /* 열 간의 간격을 8px로 설정 */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px; /* 열 간의 간격을 8px로 설정 */
+  margin-bottom: 16px;
 }
 
 .column {
-    flex: 1;
-    padding: 10px; /* padding 값을 줄여 더 많은 열이 보이도록 조정 */
-    max-width: 30%; /* 각 열의 최대 너비를 30%로 설정 */
-    box-sizing: border-box; /* 패딩 포함한 박스 모델 설정 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #5dadfe; /* 박스 배경 색상 */
-    border: 1px solid #1E90FF; /* 박스 테두리 색상 */
-    border-radius: 8px; /* 박스 모서리 둥글게 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
-    margin-bottom: 20px; /* 박스와 아래 요소 간격 */
-    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
-    pointer-events: all; /* 클릭 이벤트가 적용되도록 설정 */
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  box-sizing: border-box; /* 패딩 포함한 박스 모델 설정 */
+  margin-bottom: 20px; /* 박스와 아래 요소 간격 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+  border: 1px solid #1e90ff; /* 박스 테두리 색상 */
+  border-radius: 8px; /* 박스 모서리 둥글게 */
+  background-color: #5dadfe; /* 박스 배경 색상 */
+  padding: 10px; /* padding 값을 줄여 더 많은 열이 보이도록 조정 */
+  max-width: 30%; /* 각 열의 최대 너비를 30%로 설정 */
+  pointer-events: all; /* 클릭 이벤트가 적용되도록 설정 */
 }
 
 .title-box {
-    background-color: #1E90FF; /* 박스 배경 색상 */
-    border: 1px solid #3297fc; /* 박스 테두리 색상 */
-    padding: 10px 20px; /* 박스 안쪽 여백 */
-    border-radius: 8px; /* 박스 모서리 둥글게 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
-    margin-bottom: 20px; /* 박스와 아래 요소 간격 */
-    text-align: center; /* 제목 가운데 정렬 */
-    pointer-events: none; /* 내부 요소가 클릭 이벤트를 방해하지 않도록 설정 */
+  margin-bottom: 20px; /* 박스와 아래 요소 간격 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+  border: 1px solid #3297fc; /* 박스 테두리 색상 */
+  border-radius: 8px; /* 박스 모서리 둥글게 */
+  background-color: #1e90ff; /* 박스 배경 색상 */
+  padding: 10px 20px; /* 박스 안쪽 여백 */
+  pointer-events: none; /* 내부 요소가 클릭 이벤트를 방해하지 않도록 설정 */
+  text-align: center; /* 제목 가운데 정렬 */
 }
 
 .title-box h2 {
-    margin: 0; /* 제목의 기본 마진 제거 */
-    color: #e3e7eb; /* 텍스트 색상을 어둡게 설정 */
-    font-size: 24px; /* 폰트 크기 설정 */
-    font-family: 'Arial', sans-serif; /* 폰트 패밀리 설정 */
-    font-weight: bold; /* 폰트 굵기 설정 */
-    text-transform: uppercase; /* 모든 글자를 대문자로 설정 */
-    letter-spacing: 1px; /* 글자 간격 조정 */
+  margin: 0; /* 제목의 기본 마진 제거 */
+  color: #e3e7eb; /* 텍스트 색상을 어둡게 설정 */
+  font-weight: bold; /* 폰트 굵기 설정 */
+  font-size: 24px; /* 폰트 크기 설정 */
+  font-family: 'Arial', sans-serif; /* 폰트 패밀리 설정 */
+  letter-spacing: 1px; /* 글자 간격 조정 */
+  text-transform: uppercase; /* 모든 글자를 대문자로 설정 */
 }
 
 .background-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* canvas를 뒤로 보내기 위해 설정 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1; /* canvas를 뒤로 보내기 위해 설정 */
+  width: 100%;
+  height: 100%;
 }
 
 .chart-container {
-    width: 100%;
-    height: 300px; /* 높이를 줄여서 더 많은 차트를 화면에 표시 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ffffff; /* 배경색을 흰색으로 설정 */
-    border: 1px solid #dee2e6; /* 테두리 설정 */
-    border-radius: 8px; /* 둥근 테두리 설정 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
-    pointer-events: none; /* 내부 요소가 클릭 이벤트를 방해하지 않도록 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+  border: 1px solid #dee2e6; /* 테두리 설정 */
+  border-radius: 8px; /* 둥근 테두리 설정 */
+  background: #ffffff; /* 배경색을 흰색으로 설정 */
+  width: 100%;
+  height: 300px; /* 높이를 줄여서 더 많은 차트를 화면에 표시 */
+  pointer-events: none; /* 내부 요소가 클릭 이벤트를 방해하지 않도록 설정 */
 }
 
 .chart-container canvas {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 8px; /* 그래프의 둥근 테두리 설정 */
+  border-radius: 8px; /* 그래프의 둥근 테두리 설정 */
+  width: 100% !important;
+  height: 100% !important;
 }
 
 #loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 40px;
-    font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 40px;
 }
 
 .current-rainfall {
-    width: 100%;
-    height: 40px; /* 높이를 줄여서 더 많은 차트를 화면에 표시 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ffffff; /* 배경색을 흰색으로 설정 */
-    border: 1px solid #dee2e6; /* 테두리 설정 */
-    border-radius: 8px; /* 둥근 테두리 설정 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+  border: 1px solid #dee2e6; /* 테두리 설정 */
+  border-radius: 8px; /* 둥근 테두리 설정 */
+  background: #ffffff; /* 배경색을 흰색으로 설정 */
+  width: 100%;
+  height: 40px; /* 높이를 줄여서 더 많은 차트를 화면에 표시 */
 }
 
 p {
-    font-size: 16px; /* 글씨 크기 조정 */
-    font-weight: bold; /* 글씨 두께 설정 */
-    color: #343a40; /* 텍스트 색상 설정 */
-    margin-top: 10px; /* 그래프와의 간격 추가 */
-    text-align: center; /* 텍스트 가운데 정렬 */
+  margin-top: 10px; /* 그래프와의 간격 추가 */
+  color: #343a40; /* 텍스트 색상 설정 */
+  font-weight: bold; /* 글씨 두께 설정 */
+  font-size: 16px; /* 글씨 크기 조정 */
+  text-align: center; /* 텍스트 가운데 정렬 */
 }
-

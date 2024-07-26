@@ -1,194 +1,193 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal overflow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-color: #f4f4f9;
+  padding: 0;
+  height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  font-family: 'Arial', sans-serif;
 }
 
 .top-bar {
-    background-color: #2c3e50;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 98vw; /* 변경된 부분: 전체 viewport 너비로 설정 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: #2c3e50;
+  padding: 10px 20px;
+  width: 98vw; /* 변경된 부분: 전체 viewport 너비로 설정 */
+  color: white;
 }
 .logo h1 {
-    margin: 0;
+  margin: 0;
 }
 
 .auth-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
+  margin-left: 15px;
+  color: white;
+  text-decoration: none;
 }
 
 .auth-links a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 .form-container-signup {
-    max-width: 500px;
-    width: 80%; /* 화면 너비의 80%로 조정 */
-    height: 80%;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-    margin: auto; /* 중앙 정렬 */
-    margin-top: 60px; /* 상단 여백 설정 */
-    position: relative; /* 부모 요소로 설정 */
-    bottom: 0; /* 화면 하단으로 고정 */
+  position: relative; /* 부모 요소로 설정 */
+  bottom: 0; /* 화면 하단으로 고정 */
+  margin: auto; /* 중앙 정렬 */
+  margin-top: 60px; /* 상단 여백 설정 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
+  padding: 20px;
+  width: 80%; /* 화면 너비의 80%로 조정 */
+  max-width: 500px;
+  height: 80%;
+  text-align: center;
 }
 .form-container-signup form {
-    text-align: left; /* 폼 내부 요소 왼쪽 정렬 */
+  text-align: left; /* 폼 내부 요소 왼쪽 정렬 */
 }
 
 .signup-group {
-    margin-bottom: 20px; /* 입력 그룹 간격을 크게 설정 */
+  margin-bottom: 20px; /* 입력 그룹 간격을 크게 설정 */
 }
 
 .signup-group label {
-    display: block;
-    margin-bottom: 8px; /* 라벨 간격을 줄임 */
-    font-weight: bold;
+  display: block;
+  margin-bottom: 8px; /* 라벨 간격을 줄임 */
+  font-weight: bold;
 }
 
 .signup-group .form-control {
-    width: 100%;
-    padding: 12px; /* 패딩을 늘려 더 크게 만듦 */
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    margin-bottom: 10px; /* 입력 필드 간격을 더 크게 설정 */
+  box-sizing: border-box;
+  margin-bottom: 10px; /* 입력 필드 간격을 더 크게 설정 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 12px; /* 패딩을 늘려 더 크게 만듦 */
+  width: 100%;
 }
 
 .signup-group .invalid-feedback {
-    color: #dc3545;
-    margin-top: 10px;
+  margin-top: 10px;
+  color: #dc3545;
 }
 
 .form-container-signup {
-    text-align: center;
+  text-align: center;
 }
 
 .signup-btn {
-    background-color: #007bff; /* Blue color */
-    color: white;
-    border: none;
-    padding: 10px 16px; /* 버튼 크기를 더 작게 설정 */
-    font-size: 16px; /* 폰트 사이즈를 작게 설정 */
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: auto; /* 버튼 너비를 내용에 맞게 자동 조정 */
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Blue color */
+  padding: 10px 16px; /* 버튼 크기를 더 작게 설정 */
+  width: auto; /* 버튼 너비를 내용에 맞게 자동 조정 */
+  color: white;
+  font-size: 16px; /* 폰트 사이즈를 작게 설정 */
 }
 
 .signup-btn:hover {
-    background-color: #c82333; /* Darker red on hover */
+  background-color: #c82333; /* Darker red on hover */
 }
 
 .signup-group .form-control {
-    width: 100%;
-    padding: 8px; /* Reduced padding for a more compact look */
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    margin: 0 auto; /* Center align the input fields */
+  box-sizing: border-box;
+  margin: 0 auto; /* Center align the input fields */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px; /* Reduced padding for a more compact look */
+  width: 100%;
 }
 
 .signup-group .invalid-feedback {
-    color: #dc3545;
-    margin-top: 5px;
-    display: none; /* 기본적으로 오류 메시지를 숨김 */
+  display: none; /* 기본적으로 오류 메시지를 숨김 */
+  margin-top: 5px;
+  color: #dc3545;
 }
 
 .form-control:invalid {
-    border-color: #dc3545; /* 입력 필드가 유효하지 않을 때 빨간 테두리 설정 */
+  border-color: #dc3545; /* 입력 필드가 유효하지 않을 때 빨간 테두리 설정 */
 }
 
 .form-control:invalid + .invalid-feedback {
-    display: block; /* 입력 필드가 유효하지 않을 때 오류 메시지 표시 */
+  display: block; /* 입력 필드가 유효하지 않을 때 오류 메시지 표시 */
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    padding: 20px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .top-bar {
-    background-color: #343a40;
-    color: #ffffff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #343a40;
+  padding: 10px 20px;
+  color: #ffffff;
 }
 
 .auth-links a {
-    color: #ffffff;
-    text-decoration: none;
-    margin-left: 10px;
+  margin-left: 10px;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .auth-links a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .form-container-signup {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 0 auto;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 20px;
+  max-width: 400px;
 }
 
 .signup-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .signup-group label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .signup-group .form-control {
-    width: 100%;
-    padding: 8px; /* Reduced padding for a more compact look */
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    margin: 0 auto; /* Center align the input fields */
+  box-sizing: border-box;
+  margin: 0 auto; /* Center align the input fields */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px; /* Reduced padding for a more compact look */
+  width: 100%;
 }
 
 .signup-group .invalid-feedback {
-    color: #dc3545;
-    margin-top: 5px;
-    display: none; /* 기본적으로 오류 메시지를 숨김 */
+  display: none; /* 기본적으로 오류 메시지를 숨김 */
+  margin-top: 5px;
+  color: #dc3545;
 }
 
 .signup-btn {
-    width: 100%;
+  width: 100%;
 }
 
 .signup-btn .select {
-    width: 91%;
-    height: 40px;
-    padding: 1px 2px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 1px 2px;
+  width: 91%;
+  height: 40px;
 }
-

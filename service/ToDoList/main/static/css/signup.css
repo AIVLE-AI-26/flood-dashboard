@@ -1,261 +1,262 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-color: #f4f4f4;
+  height: 100vh;
+  color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .form-container {
-    display: flex;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-    max-width: 1300px;
-    width: 100%;
-    background-color: #fff;
-    max-height: 850px;
-    height: 100%;
+  display: flex;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  background-color: #fff;
+  width: 100%;
+  max-width: 1300px;
+  height: 100%;
+  max-height: 850px;
 }
 
 .form-side-bar {
-    position: relative; /* 자식 요소의 위치를 상대적으로 설정 */
-    background-color: #0066cc;
-    border-radius: 15px 0 0 15px;
-    padding: 40px 0px;
-    width: 45%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
+  display: flex;
+  position: relative; /* 자식 요소의 위치를 상대적으로 설정 */
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  border-radius: 15px 0 0 15px;
+  background-color: #0066cc;
+  padding: 40px 0px;
+  width: 45%;
 }
 
 .home-icon {
-    position: absolute; /* 부모 요소인 .form-side-bar를 기준으로 절대 위치 설정 */
-    top: 18px; /* 상단에서 약간의 간격 */
-    left: 18px; /* 왼쪽에서 약간의 간격 */
-    width: 35px; /* 원하는 아이콘의 크기 설정 */
-    height: 35px; /* 원하는 아이콘의 크기 설정 */
-    cursor: pointer;
+  position: absolute; /* 부모 요소인 .form-side-bar를 기준으로 절대 위치 설정 */
+  top: 18px; /* 상단에서 약간의 간격 */
+  left: 18px; /* 왼쪽에서 약간의 간격 */
+  cursor: pointer;
+  width: 35px; /* 원하는 아이콘의 크기 설정 */
+  height: 35px; /* 원하는 아이콘의 크기 설정 */
 }
 
 .home-icon-img {
-    width: 100%; /* 원하는 아이콘의 크기 설정 */
-    height: 100%; /* 원하는 아이콘의 크기 설정 */
+  width: 100%; /* 원하는 아이콘의 크기 설정 */
+  height: 100%; /* 원하는 아이콘의 크기 설정 */
 }
 
 .tab {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* 오른쪽 정렬 */
-    margin-bottom: auto; /* 위쪽으로 배치 */
-    margin-top: 100px; /* 약간 아래쪽에 배치 */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* 오른쪽 정렬 */
+  margin-top: 100px; /* 약간 아래쪽에 배치 */
+  margin-bottom: auto; /* 위쪽으로 배치 */
+  width: 35%;
 }
 
 .tab button {
-    background-color: #0066cc;
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    cursor: pointer;
-    width: 100%;
-    transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  border: none;
+  background-color: #0066cc;
+  padding: 20px;
+  width: 100%;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
 }
 
 .tab button:hover {
-    background-color: #004999;
-    border-radius: 15px 15px 15px 15px;
+  border-radius: 15px 15px 15px 15px;
+  background-color: #004999;
 }
 
 .tab button.active {
-    background-color: #ffffff;
-    color: #0066cc;
-    border: none;
-    justify-content: flex-end;
-    align-items: center;
-    border-radius: 20px 0px 0px 20px;
+  justify-content: flex-end;
+  align-items: center;
+  border: none;
+  border-radius: 20px 0px 0px 20px;
+  background-color: #ffffff;
+  color: #0066cc;
 }
 
 .form-container-signup {
-    padding: 20px;
-    width: 55%;
-    border-radius: 0 15px 15px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 15px 15px 0;
+  padding: 20px;
+  width: 55%;
 }
 
 .form-container-signup h2 {
-    color: #0066cc;
-    margin-bottom: 40px;
-    font-size: 35px;
+  margin-bottom: 40px;
+  color: #0066cc;
+  font-size: 35px;
 }
 
 .input-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* Flexbox 컨테이너 */
 .signup-row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 /* 각 필드 그룹의 스타일 */
 .signup-group {
-    flex: 1;
-    margin-bottom: 5px;
+  flex: 1;
+  margin-bottom: 5px;
 }
 
 .signup-group:first-child {
-    margin-right: 10%;
+  margin-right: 10%;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
 }
 
 /* 성 필드 스타일 */
-.last-name-group input[type="text"],
-.first-name-group input[type="text"]  {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
+.last-name-group input[type='text'],
+.first-name-group input[type='text'] {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
 }
 
 .signup-btn {
-    background-color: #0066cc;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    width: 104%;
-    margin-top: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0066cc;
+  padding: 12px;
+  width: 104%;
+  color: white;
+  font-size: 18px;
 }
 
 .signup-btn:hover {
-    background-color: #004999;
+  background-color: #004999;
 }
 
 .footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #333;
-    text-align: center;
+  margin-top: 20px;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
 }
 
 .footer a {
-    color: #0066cc;
-    text-decoration: none;
+  color: #0066cc;
+  text-decoration: none;
 }
 
 .footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .signup-group {
-    position: relative; /* 툴팁 위치 조정을 위해 필요 */
+  position: relative; /* 툴팁 위치 조정을 위해 필요 */
 }
 
 .error-tooltip {
-    visibility: hidden;
-    background-color: white;
-    border: 1px solid #000;
-    color: #000; /* 텍스트 색상 */
-    text-align: left;
-    border-radius: 5px;
-    padding: 3px 8px; /* 패딩을 줄여서 세로 길이 감소 */
-    position: absolute;
-    z-index: 1;
-    top: 110%; /* 수직 위치 조정 */
-    left: 0%; /* 수평 위치 조정 */
-    transform: translateY(-0%); /* 수직 가운데 정렬 */
-    opacity: 0;
-    transition: opacity 0.3s;
-    height: auto;
-    width: auto;
-    white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 약간의 그림자 추가 */
-    display: flex;
-    align-items: center; /* 텍스트를 수직 가운데 정렬 */
+  display: flex;
+  position: absolute;
+  top: 110%; /* 수직 위치 조정 */
+  left: 0%; /* 수평 위치 조정 */
+  align-items: center; /* 텍스트를 수직 가운데 정렬 */
+  transform: translateY(-0%); /* 수직 가운데 정렬 */
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 약간의 그림자 추가 */
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: white;
+  padding: 3px 8px; /* 패딩을 줄여서 세로 길이 감소 */
+  width: auto;
+  height: auto;
+  color: #000; /* 텍스트 색상 */
+  text-align: left;
+  white-space: nowrap;
 }
 
 .signup-group .error-tooltip::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 25%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #000 transparent;
+  position: absolute;
+  top: -10px;
+  left: 25%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #000 transparent;
+  content: '';
 }
 
 .signup-group:hover .error-tooltip {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* 추가된 스타일: ul과 li 요소의 기본 스타일 제거 */
-.error-tooltip ul, .error-tooltip li {
-    list-style: none;
-    margin: 2px;
-    padding: 2px;
+.error-tooltip ul,
+.error-tooltip li {
+  margin: 2px;
+  padding: 2px;
+  list-style: none;
 }
 
 .error-tooltip .icon {
-    margin-right: 2px; /* 아이콘과 텍스트 사이의 간격 조정 */
-    align-items: center;
-    font-size: 1.2em;
+  align-items: center;
+  margin-right: 2px; /* 아이콘과 텍스트 사이의 간격 조정 */
+  font-size: 1.2em;
 }
 
 .error-text {
-    display: inline;
+  display: inline;
 }
 
 .signup-group {
-    position: relative; /* 툴팁 위치 조정을 위해 필요 */
+  position: relative; /* 툴팁 위치 조정을 위해 필요 */
 }
 
 .custom-select-wrapper {
-    display: inline-block; /* 인라인 블록 요소로 설정하여 레이블 옆에 위치 */
-    width: 35%;
-    vertical-align: middle; /* 수직 정렬 가운데로 맞춤 */
-    margin-left: 5px;
+  display: inline-block; /* 인라인 블록 요소로 설정하여 레이블 옆에 위치 */
+  vertical-align: middle; /* 수직 정렬 가운데로 맞춤 */
+  margin-left: 5px;
+  width: 35%;
 }
 
 .custom-select-wrapper select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    appearance: none; /* 기본 브라우저 스타일 제거 */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    cursor: pointer;
-    width: 100%;
+  appearance: none; /* 기본 브라우저 스타일 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  padding: 10px;
+  width: 100%;
 }

@@ -1,127 +1,127 @@
 .waterlevel-container {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .title-waterlevel {
-    text-align: center;
+  text-align: center;
 }
 
-.title-waterlevel > h1{
-    height: 41px;
-    margin: 0px;
-    margin-top: 8px;
+.title-waterlevel > h1 {
+  margin: 0px;
+  margin-top: 8px;
+  height: 41px;
 }
 
 .horizontal-container {
-    display: flex;
-    flex: 1;
-    align-items: flex-start;
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
 }
 
 #map {
-    /* background: url("../img/waterlevelimg.jpg") no-repeat center center;
+  /* background: url("../img/waterlevelimg.jpg") no-repeat center center;
     background-size: contain; */
-    color: #f5f5f5;
+  color: #f5f5f5;
 }
 
 .map-marker {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 0, 0, 0.7); /* Red color */
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid white;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: rgba(255, 0, 0, 0.7); /* Red color */
+  width: 12px;
+  height: 12px;
 }
 
 #data-container {
-    position: fixed;
-    top: 10px;
-    right: -280px; /* Start off-screen */
-    width: 280px;
-    height: calc(100% - 160px);
-    background-color: #ffffff;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
-    transition: right 0.3s;
-    padding: 15px 5px 15px 15px;
-    box-sizing: border-box;
-    overflow-y: auto;
+  position: fixed;
+  top: 10px;
+  right: -280px; /* Start off-screen */
+  transition: right 0.3s;
+  box-sizing: border-box;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  padding: 15px 5px 15px 15px;
+  width: 280px;
+  height: calc(100% - 160px);
+  overflow-y: auto;
 }
 
 #data-container.visible {
-    right: 8px; /* Move on-screen */
+  right: 8px; /* Move on-screen */
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 #infoButton {
-    margin: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
 }
 
 .info-item.highlight {
-    background-color: #aad4fe;
+  background-color: #aad4fe;
 }
 
 .info-container {
-    background: #f5f5f5;
-    border-radius: 10px;
-    overflow-y: auto;
-    width: 300px;
-    max-height: 600px;
+  border-radius: 10px;
+  background: #f5f5f5;
+  width: 300px;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .info-container h3 {
-    margin: 0 0 5px 0; /*상 우 하 좌*/
+  margin: 0 0 5px 0; /*상 우 하 좌*/
 }
 
 .waterlevelbar {
-    height: 40px;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  height: 40px;
 }
 
 .waterlevelbar > span {
-    text-align: center;
+  text-align: center;
 }
 
 .waterlevelbar > span > img {
-    height: 40px;
+  height: 40px;
 }
 
 .waterleveltitle {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 .waterlevelbar-close {
-    cursor: pointer;
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .waterlevelbar-close:hover {
-    color: #f00; /* Hover 색상 */
+  color: #f00; /* Hover 색상 */
 }
 
 .info-item {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #f7f7f7;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #f7f7f7;
+  padding: 10px;
 }
 
 .highlight {
-    background-color: #aad4fe;
+  background-color: #aad4fe;
 }

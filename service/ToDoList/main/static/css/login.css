@@ -1,44 +1,44 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  background-color: #f4f4f4;
   height: 100vh;
   color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .form-container {
   display: flex;
-  border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-  max-width: 1300px;
-  width: 100%;
+  border-radius: 15px;
   background-color: #fff;
-  max-height: 850px;
+  width: 100%;
+  max-width: 1300px;
   height: 100%;
+  max-height: 850px;
 }
 
 .form-side-bar {
+  display: flex;
   position: relative;
-  background-color: #0066cc;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
   border-radius: 15px 0 0 15px;
+  background-color: #0066cc;
   padding: 40px 0px;
   width: 45%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
 }
 
 .home-icon {
   position: absolute; /* 부모 요소인 .form-side-bar를 기준으로 절대 위치 설정 */
   top: 18px; /* 상단에서 약간의 간격 */
   left: 18px; /* 왼쪽에서 약간의 간격 */
+  cursor: pointer;
   width: 35px; /* 원하는 아이콘의 크기 설정 */
   height: 35px; /* 원하는 아이콘의 크기 설정 */
-  cursor: pointer;
 }
 
 .home-icon-img {
@@ -47,85 +47,85 @@ body {
 }
 
 .tab {
-  width: 35%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   align-items: flex-end; /* 오른쪽 정렬 */
-  margin-bottom: auto; /* 위쪽으로 배치 */
   margin-top: 100px; /* 약간 아래쪽에 배치 */
+  margin-bottom: auto; /* 위쪽으로 배치 */
+  width: 35%;
 }
 
 .tab button {
-  background-color: #0066cc;
+  transition: 0.3s;
+  cursor: pointer;
   border: none;
-  color: white;
+  background-color: #0066cc;
   padding: 20px;
+  width: 100%;
+  color: white;
+  font-size: 18px;
   text-align: center;
   text-decoration: none;
-  font-size: 18px;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.3s;
 }
 
 .tab button:hover {
-  background-color: #004999;
   border-radius: 15px 15px 15px 15px;
+  background-color: #004999;
 }
 
 .tab button.active {
+  justify-content: flex-end;
+  align-items: center;
+  border: none;
+  border-radius: 20px 0px 0px 20px;
   background-color: #ffffff;
   color: #0066cc;
-  border: none;
-  justify-content: flex-end;
-  align-items: center; 
-  border-radius: 20px 0px 0px 20px;
 }
 
 .form-container-login {
-  padding: 20px;
-  width: 55%;
-  border-radius: 0 15px 15px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 0 15px 15px 0;
+  padding: 20px;
+  width: 55%;
 }
 
 .form-container-login h2 {
-  color: #0066cc;
   margin-bottom: 45px;
+  color: #0066cc;
   font-size: 40px;
 }
 
 .input-container {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+  width: 100%;
 }
 
-input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: 15px;
+input[type='text'],
+input[type='password'] {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 10px;
+  padding: 15px;
+  width: 100%;
   font-size: 16px;
 }
 
 .login-btn {
-  background-color: #0066cc;
-  color: white;
-  padding: 15px;
+  cursor: pointer;
+  margin-top: 20px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
-  font-size: 18px;
+  background-color: #0066cc;
+  padding: 15px;
   width: 100%;
-  margin-top: 20px;
+  color: white;
+  font-size: 18px;
 }
 
 .login-btn:hover {
@@ -134,8 +134,8 @@ input[type="password"] {
 
 .footer {
   margin-top: 20px;
-  font-size: 14px;
   color: #333;
+  font-size: 14px;
   text-align: center;
 }
 
