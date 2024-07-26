@@ -97,14 +97,14 @@ flood-dashboard@1.0.0
 
 ## Developer Info.
 
-| 성명                                      | 역할                                                                                                                   |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| [소부승](https://github.com/bootkorea)    | $\cdot$ Product Manager <br/> $\cdot$ 도로 파손 탐지(모델 설계, 모델 고도화), 홍수 예측(모델 설계, 데이터 전처리), 챗봇(모델 설계) <br/> $\cdot$ 관련 Backend 구현    |
-| [고병진](https://github.com/gobyeongjin)  | $\cdot$ 홍수 예측(모델 고도화), 침수 지역 예측(모델 설계, 데이터 전처리), 챗봇(모델 고도화) <br/> $\cdot$ 관련 Frontend 구현                |
-| [윤서연](https://github.com/syu357)       | $\cdot$ 침수 지역 예측(데이터 전처리), 챗봇(데이터 전처리), 도로 파손 탐지(모델 설계), <br/> $\cdot$ 관련 Frontend 구현                      |
-| [이주헌](https://github.com/leejugwi)     | $\cdot$ 침수 지역 예측(AI 모델 설계, 데이터 전처리), 홍수 예측 (모델 고도화), 챗봇(모델 설계, 데이터 전처리) <br/> $\cdot$ 관련 프론트 구현 |
-| [김수빈](https://github.com/subin16)      | $\cdot$ Frontend(Login/Signup, MyPage) 프론트엔드, Backend(과거침수 지역, 대피소, 강수량) <br/> $\cdot$ Design                              |
-| [박경민](https://github.com/PNamju)       | $\cdot$ Frontend(NavBar, Notice, 도로 파손 탐지) <br/> $\cdot$ Design                                                                       |
-| [정유리](https://github.com/jeongYuri)    | $\cdot$ Backend(Notice/User Data CRUD, SignIn, MyPage) <br/> $\cdot$ DBA <br/> $\cdot$ Design                                    |
-| [황인태](https://github.com/dlsxodlsghks) | $\cdot$ Frontend(구별 하천 수위), Backend(구별 하천 수위) <br/> $\cdot$ Code Formatting                                                     |
-| [홍기원](https://github.com/Hongwon123)   | $\cdot$ Backend(구별 하천 수위, 챗봇, Login/Signin, 아이디/비밀번호 찾기, MainPage), Frontend(MainPage)                        |
+| 성명                                      | 역할                                                                                                                                                                                      |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [소부승](https://github.com/bootkorea)    | $\cdot$ Product Manager <br/> $\cdot$ 도로 파손 탐지(모델 설계, 모델 고도화), 홍수 예측(모델 설계, 데이터 전처리), 챗봇(모델 설계) <br/> $\cdot$ Backend(도로 파손 탐지, 홍수 예측, 챗봇) |
+| [고병진](https://github.com/gobyeongjin)  | $\cdot$ 홍수 예측(모델 고도화), 침수 지역 예측(모델 설계, 데이터 전처리), 챗봇(모델 고도화) <br/> $\cdot$ Frontend(홍수 예측, 침수 지역 예측, 챗봇)                                       |
+| [윤서연](https://github.com/syu357)       | $\cdot$ 침수 지역 예측(데이터 전처리), 챗봇(데이터 전처리), 도로 파손 탐지(모델 설계), <br/> $\cdot$ 관련 Frontend(침수 지역 예측, 챗봇, 도로 파손 탐지)                                  |
+| [이주헌](https://github.com/leejugwi)     | $\cdot$ 홍수 예측 (모델 고도화), 침수 지역 예측(AI 모델 설계, 데이터 전처리), 챗봇(모델 설계, 데이터 전처리) <br/> $\cdot$ Frontend(홍수 예측, 침수 지역 예측, 챗봇)                      |
+| [김수빈](https://github.com/subin16)      | $\cdot$ Frontend(Login/Signup, MyPage) <br/> $\cdot$ Backend(과거침수 지역, 대피소, 강수량) <br/> $\cdot$ Design                                                                          |
+| [박경민](https://github.com/PNamju)       | $\cdot$ Frontend(NavBar, Notice, 도로 파손 탐지) <br/> $\cdot$ Design                                                                                                                     |
+| [정유리](https://github.com/jeongYuri)    | $\cdot$ Backend(Notice/User Data CRUD, SignIn, MyPage) <br/> $\cdot$ DBA <br/> $\cdot$ Design                                                                                             |
+| [황인태](https://github.com/dlsxodlsghks) | $\cdot$ Frontend(구별 하천 수위) <br/> $\cdot$ Backend(구별 하천 수위) <br/> $\cdot$ Code Formatting                                                                                      |
+| [홍기원](https://github.com/Hongwon123)   | $\cdot$ Backend(구별 하천 수위, 챗봇, Login/Signin, 아이디/비밀번호 찾기, MainPage) <br/> $\cdot$ Frontend(MainPage)                                                                      |
