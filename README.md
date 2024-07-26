@@ -8,6 +8,17 @@
 
 **광주광역시 도시 침수 대응 시스템**은 도시침수 및 홍수와 같은 현실적인 수해로 인한 피해를 최소화하고, 피해 해결을 돕기 위한 서비스입니다. <br/> 실제 침수 피해 발생 시, 지자체의 대응 시스템이 현업 부서별로 각각 운영되고, 국가 하천과 지방 하천의 관리 주체가 달라 신속한 대응이 어려운 상황을 해결하기 위해 수행한 프로젝트이며, 이를 활용하여 담당 공무원부터 일반 사용자까지 하나의 플랫폼을 통해 침수 대응 및 후속 대응에 기여합니다.
 
+## 구동 가이드
+
+```
+cd service
+python -m venv {가상환경_이름} # Python 가상 환경 사용하는 경우 (1)
+. {가상환경_이름}/Scripts/activate # Python 가상 환경 사용하는 경우 (2)
+cd ToDoList
+pip install -r requirements.txt
+python manage.py runserver
+```
+
 ## 주요특징
 
 ### Logistic Regression 기반 "홍수 확률 제공" 및 "실시간 하천 수위" 확인
@@ -59,7 +70,7 @@
 |   |-- /media           # Service data storage
 |   |-- /rain            # AI - amount of precipitation files
 |   |-- /signup          # Signup files
-|   |-- /templates       # Service Web view side 
+|   |-- /templates       # Service Web view side
 |   |-- /terms           # Terms of service files
 |   |-- /uploads         # Service Image storage
 |   |-- /waterlevel      # AI - Water level files
@@ -102,7 +113,7 @@ flood-dashboard@1.0.0
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [소부승](https://github.com/bootkorea)    | $\cdot$ Product Manager <br/> $\cdot$ 도로 파손 탐지(모델 설계, 모델 고도화), 홍수 예측(모델 설계, 데이터 전처리), 챗봇(모델 설계) <br/> $\cdot$ Backend(도로 파손 탐지, 홍수 예측, 챗봇) |
 | [고병진](https://github.com/gobyeongjin)  | $\cdot$ 홍수 예측(모델 고도화), 침수 지역 예측(모델 설계, 데이터 전처리), 챗봇(모델 고도화) <br/> $\cdot$ Frontend(홍수 예측, 침수 지역 예측, 챗봇)                                       |
-| [윤서연](https://github.com/syu357)       | $\cdot$ 침수 지역 예측(데이터 전처리), 챗봇(데이터 전처리), 도로 파손 탐지(모델 설계), <br/> $\cdot$ Frontend(침수 지역 예측, 챗봇, 도로 파손 탐지)                                  |
+| [윤서연](https://github.com/syu357)       | $\cdot$ 침수 지역 예측(데이터 전처리), 챗봇(데이터 전처리), 도로 파손 탐지(모델 설계), <br/> $\cdot$ Frontend(침수 지역 예측, 챗봇, 도로 파손 탐지)                                       |
 | [이주헌](https://github.com/leejugwi)     | $\cdot$ 홍수 예측 (모델 고도화), 침수 지역 예측(AI 모델 설계, 데이터 전처리), 챗봇(모델 설계, 데이터 전처리) <br/> $\cdot$ Frontend(홍수 예측, 침수 지역 예측, 챗봇)                      |
 | [김수빈](https://github.com/subin16)      | $\cdot$ Frontend(Login/Signup, MyPage) <br/> $\cdot$ Backend(과거침수 지역, 대피소, 강수량) <br/> $\cdot$ Design                                                                          |
 | [박경민](https://github.com/PNamju)       | $\cdot$ Frontend(NavBar, Notice, 도로 파손 탐지) <br/> $\cdot$ Design                                                                                                                     |
