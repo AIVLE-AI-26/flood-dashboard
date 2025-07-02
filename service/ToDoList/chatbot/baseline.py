@@ -13,21 +13,21 @@ from django.conf import settings
 
 # 환경 변수 설정
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-os.environ["GOOGLE_API_KEY"] = settings.MAPS_SERVICE_KEY  # 여기에 실제 Google API 키를 입력하세요.
-os.environ["OPENAI_API_KEY"] = settings.OPEN_API_KEY  # 여기에 실제 OpenAI API 키를 입력하세요.
+os.environ["GOOGLE_API_KEY"] = settings.MAPS_SERVICE_KEY 
+os.environ["OPENAI_API_KEY"] = settings.OPEN_API_KEY 
 
-# 프로젝트의 루트 디렉토리 경로를 가져옵니다.
+# 프로젝트의 루트 디렉토리 경로
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# shelters.json 및 qa_document.json 파일의 절대 경로를 생성합니다.
+# JSON 파일 처리
 shelters_file_path = os.path.join(BASE_DIR, 'chatbot', 'data', 'shelters.json')
 qa_document_file_path = os.path.join(BASE_DIR, 'chatbot', 'data', 'qa_document.json')
 
-# Load the shelter document
+
 with open(shelters_file_path, "r", encoding="utf-8") as file:
     shelters_data = json.load(file)
 
-# Load QA document data
+
 with open(qa_document_file_path, "r", encoding="utf-8") as file:
     qa_document = json.load(file)
 
